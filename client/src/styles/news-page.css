@@ -371,7 +371,7 @@ input, select {
   min-width: 0;
 }
 
-.stat-number {
+.stat-item .stat-number {
   font-family: var(--font-num);
   font-size: 2rem;
   font-weight: 700;
@@ -379,7 +379,7 @@ input, select {
   display: block;
 }
 
-.stat-label {
+.stat-item .stat-label {
   font-size: 0.825rem;
   opacity: 0.88;
   font-weight: 500;
@@ -534,7 +534,7 @@ input, select {
   margin-bottom: 3.5rem;
 }
 
-.featured-card {
+.featured-section .featured-card {
   background: var(--bg-surface);
   border-radius: var(--radius-card);
   border: 1px solid var(--border-light);
@@ -546,30 +546,30 @@ input, select {
   position: relative;
 }
 
-.featured-card:hover {
+.featured-section .featured-card:hover {
   transform: translateY(-6px);
   box-shadow: var(--shadow-hover);
   border-color: rgba(37, 99, 235, 0.3);
 }
 
-.featured-image-container {
+.featured-section .featured-image-container {
   position: relative;
   min-height: 320px;
   overflow: hidden;
 }
 
-.featured-image {
+.featured-section .featured-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
   transition: transform 0.5s ease;
 }
 
-.featured-card:hover .featured-image {
+.featured-section .featured-card:hover .featured-image {
   transform: scale(1.04);
 }
 
-.featured-badge-overlay {
+.featured-section .featured-badge-overlay {
   position: absolute;
   top: 1.25rem;
   left: 1.25rem;
@@ -584,7 +584,7 @@ input, select {
   box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
 }
 
-.featured-content {
+.featured-section .featured-content {
   padding: 2.5rem;
   display: flex;
   flex-direction: column;
@@ -1218,7 +1218,7 @@ input, select {
    Responsive Adaptations
    ========================================================================== */
 @media (max-width: 992px) {
-  .featured-card {
+  .featured-section .featured-card {
     grid-template-columns: 1fr;
   }
   
@@ -1291,7 +1291,7 @@ html.ei-dark .featured-title,
 html.ei-dark .footer-title,
 html.ei-dark h1, html.ei-dark h2, html.ei-dark h3, html.ei-dark h4,
 html.ei-dark .sort-box label,
-html.ei-dark .stat-number {
+html.ei-dark .stat-item .stat-number {
   color: #f8fafc !important;
 }
 html.ei-dark .controls-section,

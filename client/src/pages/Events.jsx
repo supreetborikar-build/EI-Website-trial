@@ -297,29 +297,28 @@ export default function Events() {
       </section>
 
       {/* MEGA FEATURED CAROUSEL */}
-      <section className="featured-event" style={{ position: 'relative', overflow: 'hidden' }}>
+      <section className="featured-event">
         <div className="container">
-          <div className="mega-carousel">
+          <div className="featured-card mega-event-card events-featured-card">
             <div className="mega-carousel-track">
               {MEGA_SLIDES.map((slide, idx) => (
-                <div
+                <article
                   key={idx}
                   className={`mega-slide ${idx === currentMegaSlide ? 'active' : ''}`}
-                  style={{ display: idx === currentMegaSlide ? 'grid' : 'none' }}
                 >
-                  <div className="mega-content">
-                    <span className="mega-badge">{slide.tag}</span>
-                    <h2 className="mega-title">{slide.title}</h2>
-                    <p className="mega-description">{slide.description}</p>
-                    <div className="mega-meta">
-                      <span>
+                  <div className="featured-content">
+                    <div className="event-label">🔥 {slide.tag}</div>
+                    <h2>{slide.title}</h2>
+                    <p>{slide.description}</p>
+                    <div className="featured-info">
+                      <div>
                         <i className="fa-solid fa-calendar"></i> {slide.date}
-                      </span>
-                      <span>
+                      </div>
+                      <div>
                         <i className="fa-solid fa-location-dot"></i> {slide.location}
-                      </span>
+                      </div>
                     </div>
-                    <div className="mega-buttons">
+                    <div className="featured-buttons">
                       <button
                         onClick={() => handleRegisterClick({ id: `mega-${idx}`, title: slide.title, date: slide.date, location: slide.location, badge: slide.tag })}
                         className="btn primary"
@@ -331,26 +330,27 @@ export default function Events() {
                       </button>
                     </div>
                   </div>
-                  <div className="mega-image">
+                  <div className="featured-image">
                     <img src={slide.image} alt={slide.title} />
+                    <div className="mega-status">🔥 Featured</div>
                   </div>
-                </div>
+                </article>
               ))}
             </div>
 
             <button
-              className="mega-btn mega-prev"
+              className="mega-arrow mega-prev"
               onClick={() => setCurrentMegaSlide((currentMegaSlide - 1 + MEGA_SLIDES.length) % MEGA_SLIDES.length)}
               aria-label="Previous mega slide"
             >
-              ‹
+              <i className="fa-solid fa-chevron-left"></i>
             </button>
             <button
-              className="mega-btn mega-next"
+              className="mega-arrow mega-next"
               onClick={() => setCurrentMegaSlide((currentMegaSlide + 1) % MEGA_SLIDES.length)}
               aria-label="Next mega slide"
             >
-              ›
+              <i className="fa-solid fa-chevron-right"></i>
             </button>
 
             <div className="mega-dots">
@@ -370,25 +370,28 @@ export default function Events() {
       {/* LIVE COUNTDOWN SECTION */}
       <section className="countdown-section" data-reveal="fade-up">
         <div className="container">
-          <div className="countdown-wrapper">
-            <span className="countdown-tag">COUNTDOWN TO MEGA TECH FEST</span>
-            <h2 className="countdown-title">Next Major Summit Starts In</h2>
-            <div className="countdown-timer">
+          <div className="countdown-card countdown-wrapper">
+            <div className="countdown-text">
+              <span className="countdown-tag">COUNTDOWN TO MEGA TECH FEST</span>
+              <h2 className="countdown-title">Next Major Summit Starts In</h2>
+              <p>Featured event countdown — get ready to learn, connect and create.</p>
+            </div>
+            <div className="countdown countdown-timer">
               <div className="time-box">
-                <span className="number" id="days">{countdown.days}</span>
-                <span className="label">Days</span>
+                <h2 className="number" id="days">{countdown.days}</h2>
+                <p className="label">Days</p>
               </div>
               <div className="time-box">
-                <span className="number" id="hours">{countdown.hours}</span>
-                <span className="label">Hours</span>
+                <h2 className="number" id="hours">{countdown.hours}</h2>
+                <p className="label">Hours</p>
               </div>
               <div className="time-box">
-                <span className="number" id="minutes">{countdown.minutes}</span>
-                <span className="label">Minutes</span>
+                <h2 className="number" id="minutes">{countdown.minutes}</h2>
+                <p className="label">Minutes</p>
               </div>
               <div className="time-box">
-                <span className="number" id="seconds">{countdown.seconds}</span>
-                <span className="label">Seconds</span>
+                <h2 className="number" id="seconds">{countdown.seconds}</h2>
+                <p className="label">Seconds</p>
               </div>
             </div>
           </div>
@@ -400,19 +403,23 @@ export default function Events() {
         <div className="container">
           <div className="stats-grid">
             <TiltCard className="stat-card">
-              <span className="stat-number">1,500+</span>
+              <i className="fa-solid fa-users"></i>
+              <h2 className="stat-number">1,500+</h2>
               <p className="stat-label">Active Members</p>
             </TiltCard>
             <TiltCard className="stat-card">
-              <span className="stat-number">45+</span>
+              <i className="fa-solid fa-calendar-check"></i>
+              <h2 className="stat-number">45+</h2>
               <p className="stat-label">Events Hosted</p>
             </TiltCard>
             <TiltCard className="stat-card">
-              <span className="stat-number">120+</span>
+              <i className="fa-solid fa-laptop-code"></i>
+              <h2 className="stat-number">120+</h2>
               <p className="stat-label">Hands-on Workshops</p>
             </TiltCard>
             <TiltCard className="stat-card">
-              <span className="stat-number">12+</span>
+              <i className="fa-solid fa-trophy"></i>
+              <h2 className="stat-number">12+</h2>
               <p className="stat-label">National Hackathons</p>
             </TiltCard>
           </div>
