@@ -1,0 +1,24 @@
+{
+  "name": "engineering-india-integrated",
+  "version": "1.0.0",
+  "description": "Engineering India college club integrated web platform with React frontend and Express/SQLite database backend",
+  "scripts": {
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "cd server && npm start",
+    "client": "cd client && npm run dev",
+    "build": "cd client && npm run build",
+    "install:all": "npm install && cd server && npm install && cd ../client && npm install"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  },
+  "keywords": [
+    "college-club",
+    "engineering-india",
+    "react",
+    "express",
+    "sqlite"
+  ],
+  "author": "Engineering India",
+  "license": "ISC"
+}

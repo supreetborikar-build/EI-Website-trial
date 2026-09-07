@@ -1,0 +1,245 @@
+/* =====================================================
+   ENGINEERING INDIA DESIGN SYSTEM
+   Version : 1.0
+   ===================================================== */
+
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap');
+
+:root{
+
+/* =====================================================
+   COLORS
+===================================================== */
+
+/* =====================================================
+   LIVING BLUEPRINT CORE PALETTE & TOKENS
+===================================================== */
+--blueprint-blue: #155EEF;
+--deep-blue: #0B1F3A;
+--graphite: #111315;
+--paper: #F3F1EA;
+--paper-surface: #FAFAF7;
+--paper-card: #FFFFFF;
+--cad-line: rgba(21, 94, 239, 0.18);
+--cad-border: rgba(21, 94, 239, 0.35);
+--cad-border-subtle: rgba(17, 19, 21, 0.14);
+--cad-amber: #F97316;
+--cad-green: #10B981;
+
+--bg: #F3F1EA;
+--surface: #FAFAF7;
+--surface-card: #FFFFFF;
+
+--primary: #155EEF;
+--primary-light: #38BDF8;
+--primary-dark: #0B1F3A;
+
+--secondary: #10B981;
+--secondary-light: #34D399;
+
+--accent: #F97316;
+
+--heading: #111315;
+--body: #334155;
+--light-text: #64748B;
+
+--border: rgba(17, 19, 21, 0.14);
+
+--success: #10B981;
+--warning: #F97316;
+--danger: #EF4444;
+
+
+
+/* =====================================================
+   GRADIENTS
+===================================================== */
+
+--hero-gradient:
+linear-gradient(
+135deg,
+#2563EB 0%,
+#10B981 100%
+);
+
+--button-gradient:
+linear-gradient(
+135deg,
+#2563EB 0%,
+#3B82F6 100%
+);
+
+--highlight-gradient:
+linear-gradient(
+135deg,
+#10B981 0%,
+#34D399 100%
+);
+
+--glass-gradient:
+linear-gradient(
+135deg,
+rgba(255,255,255,.75),
+rgba(255,255,255,.45)
+);
+
+
+/* =====================================================
+   TYPOGRAPHY
+===================================================== */
+
+--font-heading: "Outfit", "Plus Jakarta Sans", "Poppins", sans-serif;
+--font-display: "Outfit", "Plus Jakarta Sans", "Poppins", sans-serif;
+--font-body: "Inter", sans-serif;
+--font-number: "Space Grotesk", sans-serif;
+--font-mono: "Space Grotesk", monospace, ui-monospace;
+
+
+/* =====================================================
+   FONT SIZES
+===================================================== */
+
+--fs-hero: 72px;
+
+--fs-h1: 56px;
+
+--fs-h2: 46px;
+
+--fs-h3: 30px;
+
+--fs-title: 24px;
+
+--fs-body-lg: 20px;
+
+--fs-body: 16px;
+
+--fs-small: 14px;
+
+
+/* =====================================================
+   FONT WEIGHTS
+===================================================== */
+
+--fw-regular: 400;
+--fw-medium: 500;
+--fw-semibold: 600;
+--fw-bold: 700;
+--fw-extrabold: 800;
+
+
+/* =====================================================
+   SPACING
+===================================================== */
+
+--section-padding: 120px;
+--container-width: 1250px;
+
+--space-xs: 8px;
+--space-sm: 16px;
+--space-md: 24px;
+--space-lg: 32px;
+--space-xl: 48px;
+--space-2xl: 64px;
+--space-3xl: 80px;
+
+
+/* =====================================================
+   BORDER RADIUS
+===================================================== */
+
+--radius-xs: 8px;
+--radius-sm: 12px;
+--radius-md: 18px;
+--radius-lg: 24px;
+--radius-xl: 32px;
+--radius-round: 999px;
+
+
+/* =====================================================
+   SHADOWS
+===================================================== */
+
+--shadow-sm:
+0 8px 24px rgba(15,23,42,.06);
+
+--shadow-md:
+0 18px 45px rgba(37,99,235,.15);
+
+--shadow-lg:
+0 30px 80px rgba(15,23,42,.12);
+
+--shadow-glass:
+0 8px 32px rgba(31,38,135,.12);
+
+
+/* =====================================================
+   GLASSMORPHISM
+===================================================== */
+
+--glass-bg:
+rgba(255,255,255,.60);
+
+--glass-border:
+1px solid rgba(255,255,255,.45);
+
+--glass-blur: blur(24px);
+
+
+/* =====================================================
+   TRANSITIONS
+===================================================== */
+
+--transition-fast: .25s ease;
+
+--transition:
+.35s cubic-bezier(.4,0,.2,1);
+
+--transition-slow:
+.6s cubic-bezier(.4,0,.2,1);
+
+
+/* =====================================================
+   Z INDEX
+===================================================== */
+
+--z-navbar:1000;
+--z-dropdown:900;
+--z-overlay:800;
+--z-modal:2000;
+
+}
+
+/* =====================================================
+   DARK THEME VARIABLES
+===================================================== */
+:root[data-theme="dark"],
+html[data-theme="dark"] {
+  --bg: #090D16;
+  --surface: #0F172A;
+  --surface-card: #131B2E;
+
+  --paper: #090D16;
+  --paper-surface: #0B0E14;
+  --paper-card: #111726;
+  --graphite: #F8FAFC;
+
+  --heading: #F8FAFC;
+  --body: #94A3B8;
+  --light-text: #64748B;
+
+  --cad-line: rgba(56, 189, 248, 0.16);
+  --cad-border: rgba(56, 189, 248, 0.35);
+  --cad-border-subtle: rgba(255, 255, 255, 0.12);
+
+  --border: rgba(255, 255, 255, 0.09);
+
+  --shadow-sm: 0 8px 24px rgba(0, 0, 0, 0.35);
+  --shadow-md: 0 18px 45px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 30px 80px rgba(0, 0, 0, 0.65);
+
+  --glass-bg: rgba(15, 23, 42, 0.75);
+  --glass-border: 1px solid rgba(255, 255, 255, 0.08);
+
+  --card-bg: #0F172A;
+}

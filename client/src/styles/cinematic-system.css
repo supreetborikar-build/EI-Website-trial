@@ -1,0 +1,1140 @@
+/* ==========================================================================
+   ENGINEERING INDIA — CINEMATIC INTERACTION & EDITORIAL DESIGN SYSTEM
+   High-end, experimental, scroll-driven visual and motion architecture.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. EDITORIAL & BRUTALIST TYPOGRAPHY
+   -------------------------------------------------------------------------- */
+.editorial-hero-title {
+  font-family: "Outfit", "Plus Jakarta Sans", "Poppins", sans-serif;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.045em;
+  line-height: 0.86;
+  margin: 0;
+  user-select: none;
+  font-size: clamp(3.75rem, 11vw, 12.5rem);
+  color: var(--heading, #0F172A);
+}
+
+.outline-text,
+.editorial-hero-title .outline-text,
+.editorial-section-title .outline-text {
+  color: transparent !important;
+  -webkit-text-stroke: 1.5px var(--heading, #0F172A);
+  transition: -webkit-text-stroke 0.35s ease;
+}
+
+[data-theme="dark"] .outline-text,
+[data-theme="dark"] .editorial-hero-title .outline-text,
+[data-theme="dark"] .editorial-section-title .outline-text {
+  -webkit-text-stroke: 1.5px rgba(248, 250, 252, 0.85);
+}
+
+.editorial-section-title {
+  font-family: "Outfit", "Plus Jakarta Sans", "Poppins", sans-serif;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.035em;
+  line-height: 0.95;
+  font-size: clamp(2.4rem, 5.5vw, 5.2rem);
+  margin: 0 0 1rem 0;
+  color: var(--heading, #0F172A);
+}
+
+.editorial-lead {
+  font-size: clamp(1.1rem, 1.8vw, 1.4rem);
+  line-height: 1.65;
+  color: var(--body, #475569);
+  max-width: 68ch;
+  margin: 0;
+}
+
+/* Monospace Telemetry & Metadata */
+.telemetry-tag,
+.mono-label {
+  font-family: "Space Grotesk", monospace, ui-monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--primary, #2563EB);
+}
+
+.telemetry-tag::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 8px currentColor;
+  animation: pulseBeacon 2s infinite;
+}
+
+@keyframes pulseBeacon {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+.chapter-badge {
+  font-family: "Space Grotesk", monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border: 1px solid var(--border, #E2E8F0);
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(8px);
+  border-radius: 4px;
+  color: var(--light-text, #64748B);
+}
+
+[data-theme="dark"] .chapter-badge {
+  background: rgba(15, 23, 42, 0.6);
+  border-color: rgba(255, 255, 255, 0.12);
+  color: #94A3B8;
+}
+
+/* --------------------------------------------------------------------------
+   2. BLUEPRINT GRID & ARCHITECTURAL ACCENTS
+   -------------------------------------------------------------------------- */
+.blueprint-grid-bg {
+  background-image: 
+    linear-gradient(to right, rgba(37, 99, 235, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(37, 99, 235, 0.05) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+[data-theme="dark"] .blueprint-grid-bg {
+  background-image: 
+    linear-gradient(to right, rgba(56, 189, 248, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(56, 189, 248, 0.05) 1px, transparent 1px);
+}
+
+.crosshair-corner {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.crosshair-corner::before,
+.crosshair-corner::after {
+  content: '';
+  position: absolute;
+  background: currentColor;
+}
+
+.crosshair-corner.top-left { top: 12px; left: 12px; }
+.crosshair-corner.top-left::before { width: 100%; height: 1.5px; top: 0; left: 0; }
+.crosshair-corner.top-left::after { width: 1.5px; height: 100%; top: 0; left: 0; }
+
+.crosshair-corner.top-right { top: 12px; right: 12px; }
+.crosshair-corner.top-right::before { width: 100%; height: 1.5px; top: 0; right: 0; }
+.crosshair-corner.top-right::after { width: 1.5px; height: 100%; top: 0; right: 0; }
+
+.crosshair-corner.bottom-left { bottom: 12px; left: 12px; }
+.crosshair-corner.bottom-left::before { width: 100%; height: 1.5px; bottom: 0; left: 0; }
+.crosshair-corner.bottom-left::after { width: 1.5px; height: 100%; bottom: 0; left: 0; }
+
+.crosshair-corner.bottom-right { bottom: 12px; right: 12px; }
+.crosshair-corner.bottom-right::before { width: 100%; height: 1.5px; bottom: 0; right: 0; }
+.crosshair-corner.bottom-right::after { width: 1.5px; height: 100%; bottom: 0; right: 0; }
+
+/* --------------------------------------------------------------------------
+   3. CUSTOM CURSOR (DESKTOP PRECISION)
+   -------------------------------------------------------------------------- */
+.custom-cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #2563EB;
+  pointer-events: none;
+  z-index: 100001;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.2s ease, transform 0.05s ease-out;
+}
+
+[data-theme="dark"] .custom-cursor-dot {
+  background: #38BDF8;
+}
+
+.custom-cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(37, 99, 235, 0.45);
+  pointer-events: none;
+  z-index: 100000;
+  transform: translate(-50%, -50%);
+  transition: width 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+              height 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.28s ease,
+              background-color 0.28s ease,
+              opacity 0.2s ease;
+}
+
+[data-theme="dark"] .custom-cursor-ring {
+  border-color: rgba(56, 189, 248, 0.5);
+}
+
+.custom-cursor-ring.active-hover {
+  width: 58px;
+  height: 58px;
+  border-color: #2563EB;
+  background-color: rgba(37, 99, 235, 0.08);
+}
+
+[data-theme="dark"] .custom-cursor-ring.active-hover {
+  border-color: #38BDF8;
+  background-color: rgba(56, 189, 248, 0.12);
+}
+
+/* Hide custom cursor on touch and reduced motion */
+@media (pointer: coarse), (prefers-reduced-motion: reduce) {
+  .custom-cursor-dot,
+  .custom-cursor-ring {
+    display: none !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   4. MAGNETIC BUTTONS & CINEMATIC ACTIONS
+   -------------------------------------------------------------------------- */
+.magnetic-wrap {
+  display: inline-block;
+  position: relative;
+  will-change: transform;
+}
+
+.btn-cinematic-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem 1.85rem;
+  background: #0F172A;
+  color: #FFFFFF !important;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.92rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.15);
+  text-decoration: none;
+}
+
+[data-theme="dark"] .btn-cinematic-primary {
+  background: #2563EB;
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 10px 30px rgba(37, 99, 235, 0.3);
+}
+
+.btn-cinematic-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.22), transparent);
+  transition: left 0.6s ease;
+}
+
+.btn-cinematic-primary:hover::before {
+  left: 100%;
+}
+
+.btn-cinematic-primary:hover {
+  transform: translateY(-2px);
+  background: #1E293B;
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.25);
+}
+
+[data-theme="dark"] .btn-cinematic-primary:hover {
+  background: #1D4ED8;
+  box-shadow: 0 16px 40px rgba(37, 99, 235, 0.45);
+}
+
+.btn-cinematic-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem 1.85rem;
+  background: transparent;
+  color: var(--heading, #0F172A) !important;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.92rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border: 1.5px solid var(--border, #CBD5E1);
+  border-radius: 4px;
+  position: relative;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none;
+}
+
+.btn-cinematic-outline:hover {
+  border-color: var(--primary, #2563EB);
+  color: var(--primary, #2563EB) !important;
+  background: rgba(37, 99, 235, 0.05);
+  transform: translateY(-2px);
+}
+
+/* --------------------------------------------------------------------------
+   5. PINNED HORIZONTAL SCROLL EXHIBITION
+   -------------------------------------------------------------------------- */
+.h-scroll-section {
+  position: relative;
+  width: 100%;
+  padding: 100px 0 60px;
+  background: var(--bg, #F8FAFC);
+}
+
+.h-scroll-header {
+  padding: 0 5vw 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  border-bottom: 1px solid var(--border, #E2E8F0);
+  background: var(--bg, #F8FAFC);
+  z-index: 10;
+}
+
+[data-theme="dark"] .h-scroll-header {
+  background: #090D16;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.h-scroll-track-window {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 2.5rem 0;
+  position: relative;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.h-scroll-track-window::-webkit-scrollbar {
+  display: none;
+}
+
+.h-scroll-track {
+  display: flex;
+  gap: 2.5rem;
+  padding: 0 5vw;
+  width: max-content;
+}
+
+.h-scroll-card {
+  flex: 0 0 520px;
+  max-width: 85vw;
+  height: 520px;
+  background: var(--surface, #FFFFFF);
+  border: 1px solid var(--border, #E2E8F0);
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 15px 45px rgba(15, 23, 42, 0.06);
+}
+
+[data-theme="dark"] .h-scroll-card {
+  background: #0F172A;
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.3);
+}
+
+.h-scroll-card:hover {
+  border-color: var(--primary, #2563EB);
+  box-shadow: 0 25px 60px rgba(37, 99, 235, 0.15);
+}
+
+.h-scroll-card-image {
+  width: 100%;
+  height: 260px;
+  position: relative;
+  overflow: hidden;
+  background: #0F172A;
+}
+
+.h-scroll-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.h-scroll-card:hover .h-scroll-card-image img {
+  transform: scale(1.06);
+}
+
+.h-scroll-card-body {
+  padding: 1.75rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.h-scroll-card-index {
+  position: absolute;
+  top: 1rem;
+  right: 1.25rem;
+  font-family: "Space Grotesk", monospace;
+  font-size: 2.2rem;
+  font-weight: 800;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.75);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  z-index: 2;
+}
+
+.h-scroll-hud-footer {
+  padding: 1rem 5vw 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: "Space Grotesk", monospace;
+  font-size: 0.8rem;
+  color: var(--light-text, #64748B);
+  border-top: 1px solid var(--border, #E2E8F0);
+  background: var(--bg, #F8FAFC);
+}
+
+[data-theme="dark"] .h-scroll-hud-footer {
+  background: #090D16;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+/* --------------------------------------------------------------------------
+   6. DARK CINEMATIC SECTION ("BUILD WHAT MATTERS")
+   -------------------------------------------------------------------------- */
+.dark-cinematic-scene {
+  background: #060910;
+  color: #F8FAFC;
+  position: relative;
+  padding: 120px 0;
+  overflow: hidden;
+}
+
+.dark-cinematic-scene::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: 
+    radial-gradient(circle at 20% 30%, rgba(37, 99, 235, 0.12) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(16, 185, 129, 0.08) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.dark-cinematic-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 5vw;
+}
+
+.dark-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  margin-top: 4rem;
+  padding-top: 3rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+@media (max-width: 992px) {
+  .dark-stat-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 540px) {
+  .dark-stat-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.dark-stat-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.dark-stat-num {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(3rem, 5vw, 4.5rem);
+  font-weight: 800;
+  line-height: 1;
+  color: #FFFFFF;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.03em;
+}
+
+.dark-stat-label {
+  font-family: "Space Grotesk", monospace;
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #94A3B8;
+}
+
+/* --------------------------------------------------------------------------
+   7. MARQUEE TECHNICAL TICKER
+   -------------------------------------------------------------------------- */
+.marquee-container {
+  width: 100%;
+  overflow: hidden;
+  user-select: none;
+  display: flex;
+  position: relative;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 1.25rem 0;
+  background: rgba(0, 0, 0, 0.25);
+}
+
+.marquee-content {
+  display: flex;
+  gap: 3rem;
+  animation: marqueeScroll 28s linear infinite;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+@keyframes marqueeScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.marquee-item {
+  font-family: "Space Grotesk", monospace;
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+  display: inline-flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.marquee-item span.dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #38BDF8;
+}
+
+/* --------------------------------------------------------------------------
+   8. SECTION SCENE HUD (INTEGRATED SCROLL PROGRESS)
+   -------------------------------------------------------------------------- */
+.scene-hud-indicator {
+  position: fixed;
+  bottom: 24px;
+  left: 28px;
+  z-index: 9999;
+  font-family: "Space Grotesk", monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  background: rgba(15, 23, 42, 0.85);
+  color: #F8FAFC;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  border-radius: 4px;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  transition: opacity 0.3s ease;
+}
+
+.scene-hud-indicator .active-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #10B981;
+  box-shadow: 0 0 8px #10B981;
+}
+
+@media (max-width: 768px) {
+  .scene-hud-indicator {
+    display: none;
+  }
+}
+
+@keyframes pageCinematicIn {
+  0% {
+    opacity: 0;
+    transform: translateY(16px) scale(0.996);
+    filter: blur(3px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   9. HOME SCENE SPECIFIC ARCHITECTURE
+   -------------------------------------------------------------------------- */
+.cinematic-hero-section {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 100px 0 40px;
+  overflow: hidden;
+  background: var(--bg, #F8FAFC);
+}
+
+.hero-telemetry-hud {
+  padding: 0 5vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: "Space Grotesk", monospace;
+  font-size: 0.76rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--light-text, #64748B);
+  border-bottom: 1px solid var(--border, #E2E8F0);
+  padding-bottom: 1rem;
+}
+
+[data-theme="dark"] .hero-telemetry-hud {
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.hero-monument-wrap {
+  position: relative;
+  padding: 2rem 5vw;
+  text-align: center;
+  overflow: hidden;
+}
+
+.hero-portal-window {
+  position: relative;
+  width: 90%;
+  max-width: 1080px;
+  height: clamp(340px, 45vw, 560px);
+  margin: 1.5rem auto 0;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--border, #E2E8F0);
+  background: #090D16;
+  box-shadow: 0 25px 80px rgba(15, 23, 42, 0.12);
+}
+
+[data-theme="dark"] .hero-portal-window {
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5);
+}
+
+.hero-portal-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: scale(1.05);
+}
+
+.hero-portal-slide.active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.hero-portal-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-portal-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1.5rem 2rem;
+  background: linear-gradient(to top, rgba(9, 13, 22, 0.9) 0%, transparent 100%);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  color: #FFFFFF;
+}
+
+/* Manifesto & Pillars */
+.manifesto-statement {
+  font-family: "Outfit", "Plus Jakarta Sans", "Poppins", sans-serif;
+  font-size: clamp(2.2rem, 4.8vw, 4.4rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  color: var(--heading, #0F172A);
+  margin: 0 0 1.5rem 0;
+}
+
+.pillar-grid-architectural {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin-top: 3.5rem;
+}
+
+@media (max-width: 1024px) {
+  .pillar-grid-architectural {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .pillar-grid-architectural {
+    grid-template-columns: 1fr;
+  }
+}
+
+.pillar-architectural-card {
+  background: var(--surface, #FFFFFF);
+  border: 1px solid var(--border, #E2E8F0);
+  border-radius: 6px;
+  padding: 2.2rem 1.75rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 280px;
+  position: relative;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+[data-theme="dark"] .pillar-architectural-card {
+  background: #0F172A;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.pillar-architectural-card:hover {
+  border-color: var(--primary, #2563EB);
+  box-shadow: 0 20px 50px rgba(37, 99, 235, 0.12);
+}
+
+.pillar-num {
+  font-family: "Space Grotesk", monospace;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--primary, #2563EB);
+  margin-bottom: 1.5rem;
+}
+
+/* Editorial News Spread */
+.editorial-news-spread {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  gap: 2.5rem;
+  margin-top: 3rem;
+}
+
+@media (max-width: 960px) {
+  .editorial-news-spread {
+    grid-template-columns: 1fr;
+  }
+}
+
+.featured-editorial-card {
+  background: var(--surface, #FFFFFF);
+  border: 1px solid var(--border, #E2E8F0);
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 15px 45px rgba(15, 23, 42, 0.06);
+}
+
+[data-theme="dark"] .featured-editorial-card {
+  background: #0F172A;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.secondary-dispatch-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.dispatch-item {
+  background: var(--surface, #FFFFFF);
+  border: 1px solid var(--border, #E2E8F0);
+  border-radius: 6px;
+  padding: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.28s ease;
+  cursor: pointer;
+}
+
+[data-theme="dark"] .dispatch-item {
+  background: #0F172A;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.dispatch-item:hover {
+  border-color: var(--primary, #2563EB);
+  transform: translateX(6px);
+  box-shadow: 0 10px 30px rgba(37, 99, 235, 0.1);
+}
+
+/* ==========================================================================
+   MEMBER RISE-UP & PROFILE KEYFRAME ANIMATIONS
+   ========================================================================== */
+@keyframes memberCardRise {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes profileRiseUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.member-roster-card:hover {
+  transform: translateY(-4px) scale(1.02) !important;
+  box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.18) !important;
+  border-color: var(--primary, #2563EB) !important;
+}
+
+.member-roster-card:hover img {
+  transform: scale(1.08);
+  transition: transform 0.25s ease;
+}
+
+/* ==========================================================================
+   10. LIVING BLUEPRINT ARCHITECTURAL SYSTEM
+   ========================================================================== */
+
+/* Warm Paper Architectural Canvas */
+.blueprint-paper-canvas {
+  background-color: var(--paper, #F3F1EA);
+  color: var(--graphite, #111315);
+  position: relative;
+  overflow: hidden;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+[data-theme="dark"] .blueprint-paper-canvas {
+  background-color: var(--paper, #090D16);
+  color: var(--graphite, #F8FAFC);
+}
+
+/* Moving Blueprint Coordinate Grid */
+.blueprint-grid-mesh {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, rgba(21, 94, 239, 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(21, 94, 239, 0.08) 1px, transparent 1px),
+    linear-gradient(to right, rgba(17, 19, 21, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(17, 19, 21, 0.04) 1px, transparent 1px);
+  background-size: 80px 80px, 80px 80px, 16px 16px, 16px 16px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+[data-theme="dark"] .blueprint-grid-mesh {
+  background-image:
+    linear-gradient(to right, rgba(56, 189, 248, 0.09) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(56, 189, 248, 0.09) 1px, transparent 1px),
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+}
+
+/* Architectural Edge Rulers & Telemetry */
+.blueprint-ruler-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 24px;
+  border-bottom: 1px solid var(--cad-border-subtle, rgba(17, 19, 21, 0.12));
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 24px;
+  font-family: "Space Grotesk", monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  color: var(--light-text, #64748B);
+  pointer-events: none;
+  z-index: 10;
+  text-transform: uppercase;
+}
+
+/* CAD Corner Framing Markers */
+.cad-frame-wrap {
+  position: relative;
+  border: 1px solid var(--cad-border-subtle, rgba(17, 19, 21, 0.14));
+}
+
+.cad-corner-marker {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.cad-corner-marker.tl {
+  top: -1px;
+  left: -1px;
+  border-top: 2px solid var(--blueprint-blue, #155EEF);
+  border-left: 2px solid var(--blueprint-blue, #155EEF);
+}
+
+.cad-corner-marker.tr {
+  top: -1px;
+  right: -1px;
+  border-top: 2px solid var(--blueprint-blue, #155EEF);
+  border-right: 2px solid var(--blueprint-blue, #155EEF);
+}
+
+.cad-corner-marker.bl {
+  bottom: -1px;
+  left: -1px;
+  border-bottom: 2px solid var(--blueprint-blue, #155EEF);
+  border-left: 2px solid var(--blueprint-blue, #155EEF);
+}
+
+.cad-corner-marker.br {
+  bottom: -1px;
+  right: -1px;
+  border-bottom: 2px solid var(--blueprint-blue, #155EEF);
+  border-right: 2px solid var(--blueprint-blue, #155EEF);
+}
+
+/* Signature Image Inside Typography */
+.typography-image-portal {
+  font-family: "Outfit", "Space Grotesk", sans-serif;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.05em;
+  line-height: 0.85;
+  background-size: cover;
+  background-position: center;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  display: inline-block;
+  user-select: none;
+  will-change: transform, background-size;
+}
+
+/* Architectural Project Sheet Card */
+.blueprint-sheet-card {
+  background: var(--paper-card, #FFFFFF);
+  border: 1px solid var(--cad-border-subtle, rgba(17, 19, 21, 0.14));
+  box-shadow: 0 12px 36px rgba(17, 19, 21, 0.05);
+  position: relative;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+[data-theme="dark"] .blueprint-sheet-card {
+  background: #0F172A;
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.4);
+}
+
+.blueprint-sheet-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--blueprint-blue, #155EEF);
+  box-shadow: 0 20px 50px rgba(21, 94, 239, 0.12);
+}
+
+/* Technical Specification Header & Stamp */
+.blueprint-spec-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 18px;
+  border-bottom: 1px solid var(--cad-border-subtle, rgba(17, 19, 21, 0.1));
+  font-family: "Space Grotesk", monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--blueprint-blue, #155EEF);
+  background: rgba(21, 94, 239, 0.03);
+}
+
+/* Night Lab Major Dark Section */
+.night-lab-section {
+  background: #0B0E14 !important;
+  color: #F8FAFC !important;
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid rgba(21, 94, 239, 0.3);
+  border-bottom: 1px solid rgba(21, 94, 239, 0.3);
+}
+
+.night-lab-grid {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(to right, rgba(21, 94, 239, 0.1) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(21, 94, 239, 0.1) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+}
+
+.night-lab-glow {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -20%);
+  width: 70vw;
+  height: 500px;
+  background: radial-gradient(circle, rgba(21, 94, 239, 0.18) 0%, transparent 70%);
+  pointer-events: none;
+  filter: blur(80px);
+}
+
+/* Architectural Pinned Principles Reel */
+.pinned-principles-wrap {
+  position: relative;
+}
+
+.principles-step-pill {
+  font-family: "Space Grotesk", monospace;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* Architectural CAD Drafting Input Styling */
+.cad-input-box {
+  width: 100%;
+  padding: 12px 16px;
+  background: var(--paper-surface, #FAFAF7);
+  border: 1px solid var(--cad-border-subtle, rgba(17, 19, 21, 0.16));
+  border-radius: 4px;
+  font-family: "Space Grotesk", "Inter", sans-serif;
+  font-size: 0.92rem;
+  color: var(--heading, #111315);
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.cad-input-box:focus {
+  border-color: var(--blueprint-blue, #155EEF);
+  background: #FFFFFF;
+  box-shadow: 0 0 0 3px rgba(21, 94, 239, 0.12);
+}
+
+[data-theme="dark"] .cad-input-box {
+  background: #111726;
+  border-color: rgba(255, 255, 255, 0.14);
+  color: #F8FAFC;
+}
+
+[data-theme="dark"] .cad-input-box:focus {
+  border-color: #38BDF8;
+  background: #0F172A;
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
+}
+
+/* CAD Architectural Drawing Sheet Title Block */
+.cad-title-block {
+  background: var(--paper-card, #FFFFFF);
+  border: 2px solid var(--cad-border, rgba(21, 94, 239, 0.35));
+  position: relative;
+}
+
+[data-theme="dark"] .cad-title-block {
+  background: #0F172A;
+  border-color: rgba(21, 94, 239, 0.4);
+}
+
+.cad-tb-row {
+  display: flex;
+  border-bottom: 1px solid var(--cad-border-subtle, rgba(17, 19, 21, 0.12));
+}
+
+[data-theme="dark"] .cad-tb-row {
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.cad-tb-cell {
+  padding: 8px 14px;
+  font-family: "JetBrains Mono", "Space Grotesk", monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  border-right: 1px solid var(--cad-border-subtle, rgba(17, 19, 21, 0.12));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+[data-theme="dark"] .cad-tb-cell {
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.cad-tb-cell:last-child {
+  border-right: none;
+}
+
+.cad-tb-label {
+  font-size: 0.6rem;
+  opacity: 0.65;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+.cad-tb-val {
+  font-weight: 700;
+  color: var(--blueprint-blue, #155EEF);
+}
+
+[data-theme="dark"] .cad-tb-val {
+  color: #38BDF8;
+}
+
+

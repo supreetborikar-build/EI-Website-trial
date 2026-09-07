@@ -1,0 +1,80 @@
+/* =====================================================
+   GLOBAL RESPONSIVE OVERRIDES
+===================================================== */
+
+@media(max-width:1200px){
+
+    :root{
+
+        --fs-h1: 48px;
+
+        --fs-h2: 40px;
+
+        --fs-h3: 26px;
+
+        --fs-title: 22px;
+
+        --section-padding: 100px;
+    }
+
+}
+
+@media(max-width:992px){
+
+    :root{
+
+        --fs-h1: 42px;
+
+        --fs-h2: 36px;
+
+        --fs-h3: 24px;
+
+        --fs-title: 20px;
+
+        --fs-body-lg: 18px;
+    }
+
+}
+
+@media(max-width:768px){
+
+    :root{
+
+        --fs-h1: 36px;
+
+        --fs-h2: 32px;
+
+        --fs-h3: 22px;
+
+        --fs-title: 18px;
+
+        --section-padding: 80px;
+
+        --container-width: 100%;
+    }
+    
+    .container{
+        width: 90%;
+    }
+
+}
+
+@media(max-width:480px){
+
+    :root{
+
+        --fs-h1: 32px;
+
+        --fs-h2: 28px;
+
+        --fs-h3: 20px;
+
+        --section-padding: 60px;
+    }
+    
+    /* Ensure no overflow on very small devices */
+    body {
+        overflow-x: hidden;
+    }
+
+}
