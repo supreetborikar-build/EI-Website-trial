@@ -1,0 +1,871 @@
+/* ======================================================
+              RESPONSIVE BOX SIZING
+====================================================== */
+
+.hero,
+.hero *,
+.hero *::before,
+.hero *::after {
+    box-sizing: border-box;
+}
+
+/* ======================================================
+                    HERO SECTION
+====================================================== */
+
+.hero {
+
+    position: relative;
+
+    display: flex;
+    align-items: center;
+
+    min-height: 100vh;
+
+    overflow: hidden;
+
+    background: var(--bg);
+
+    isolation: isolate;
+}
+
+
+/* ======================================================
+                ANIMATED BACKGROUND
+====================================================== */
+
+.hero::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        radial-gradient(circle at 15% 20%, rgba(37, 99, 235, .10), transparent 30%),
+        radial-gradient(circle at 85% 80%, rgba(16, 185, 129, .10), transparent 35%);
+
+    animation: gradientMove 16s ease-in-out infinite alternate;
+
+    z-index: 0;
+}
+
+
+.hero::after {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background-image:
+
+        linear-gradient(rgba(37, 99, 235, .04) 1px, transparent 1px),
+
+        linear-gradient(90deg, rgba(37, 99, 235, .04) 1px, transparent 1px);
+
+    background-size: 55px 55px;
+
+    mask-image: linear-gradient(to bottom,
+            transparent,
+            rgba(0, 0, 0, .7),
+            transparent);
+
+    opacity: .45;
+
+    animation: gridMove 18s linear infinite;
+
+    z-index: 0;
+}
+
+
+/* ======================================================
+                FLOATING BLOBS
+====================================================== */
+
+.hero-bg {
+
+    position: absolute;
+
+    border-radius: 50%;
+
+    filter: blur(120px);
+
+    pointer-events: none;
+
+    opacity: .9;
+
+    z-index: 1;
+}
+
+
+.hero-bg-1 {
+
+    width: 520px;
+
+    height: 520px;
+
+    background: rgba(37, 99, 235, .20);
+
+    top: -180px;
+
+    left: -180px;
+
+    animation: blobOne 12s ease-in-out infinite;
+}
+
+
+.hero-bg-2 {
+
+    width: 470px;
+
+    height: 470px;
+
+    background: rgba(16, 185, 129, .20);
+
+    bottom: -170px;
+
+    right: -170px;
+
+    animation: blobTwo 14s ease-in-out infinite;
+}
+
+
+/* ======================================================
+                  HERO CONTAINER
+        RESPONSIVE / CENTERED DESKTOP LAYOUT
+====================================================== */
+
+.home-page .hero-container {
+    position: relative;
+    z-index: 3;
+
+    width: 100%;
+    max-width: 1500px;
+    margin-inline: auto;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    gap: clamp(32px, 5vw, 80px);
+
+    padding:
+        clamp(110px, 10vw, 150px) clamp(20px, 4vw, 48px) clamp(70px, 8vw, 120px);
+
+    box-sizing: border-box;
+}
+
+/* ======================================================
+                    LEFT CONTENT
+====================================================== */
+
+.home-page .hero-content {
+    flex: 1 1 0;
+    min-width: 0;
+    max-width: 680px;
+
+    text-align: left;
+
+    animation: fadeLeft .9s ease forwards;
+}
+
+
+.hero-tag {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 12px 24px;
+
+    border-radius: 999px;
+
+    background: rgba(37, 99, 235, .08);
+
+    color: var(--primary);
+
+    border: 1px solid rgba(37, 99, 235, .12);
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    letter-spacing: 2px;
+
+    backdrop-filter: blur(12px);
+
+    margin-bottom: 30px;
+}
+
+
+.hero h1 {
+
+    font-size: clamp(3.5rem, 8vw, 5.5rem);
+
+    line-height: 1.05;
+
+    letter-spacing: -3px;
+
+    margin-bottom: 30px;
+
+    max-width: 900px;
+
+    color: var(--heading);
+}
+
+
+.hero h1 span {
+    display: block;
+    background: var(--hero-gradient);
+    background-size: 250%;
+    -webkit-background-clip: text;
+    /* For WebKit browsers (Chrome, Safari) */
+    background-clip: text;
+    /* Standard property for cross-browser compatibility */
+    -webkit-text-fill-color: transparent;
+    animation: textGradient 6s linear infinite;
+}
+
+
+.hero p {
+
+    max-width: 760px;
+
+    font-size: 1.25rem;
+
+    line-height: 1.8;
+
+    color: var(--body);
+
+    margin-bottom: 55px;
+}
+
+
+/* ======================================================
+                  HERO BUTTONS
+====================================================== */
+
+.hero-buttons {
+
+    display: flex;
+
+    gap: 22px;
+
+    flex-wrap: wrap;
+}
+
+
+/* =====================================================
+   GLASS CARD
+===================================================== */
+
+.glass-card {
+
+    width: 420px;
+
+    padding: 40px;
+
+    border-radius: 30px;
+
+    background: rgba(255, 255, 255, .72);
+
+    backdrop-filter: blur(22px);
+
+    -webkit-backdrop-filter: blur(22px);
+
+    border: 1px solid rgba(255, 255, 255, .55);
+
+    box-shadow: 0 25px 70px rgba(37, 99, 235, .12);
+
+    animation: floatCard 6s ease-in-out infinite;
+}
+
+.glass-card h3 {
+
+    font-size: 34px;
+
+    margin-bottom: 30px;
+
+    color: var(--heading);
+}
+
+.glass-card ul {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 22px;
+}
+
+.glass-card li {
+
+    font-size: 20px;
+
+    color: var(--body);
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+}
+
+/* =====================================================
+   FLOAT ANIMATION
+===================================================== */
+
+@keyframes floatCard {
+
+    0% {
+
+        transform: translateY(0px);
+    }
+
+    50% {
+
+        transform: translateY(-18px);
+    }
+
+    100% {
+
+        transform: translateY(0px);
+    }
+
+}
+
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+/* Large desktop */
+@media (min-width:1401px) {
+
+    .home-page .hero-container {
+        max-width: 1500px;
+    }
+
+    .home-page .hero-content {
+        max-width: 700px;
+    }
+
+    .hero h1 {
+        font-size: clamp(72px, 5.2vw, 104px);
+    }
+}
+
+/* Tablet landscape / small laptop */
+@media (max-width:1100px) {
+
+    .home-page .hero-container {
+        flex-direction: column;
+        text-align: center;
+        gap: 48px;
+    }
+
+    .home-page .hero-content {
+        width: 100%;
+        max-width: 760px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .hero-buttons {
+        justify-content: center;
+    }
+
+    .hero h1 {
+        font-size: clamp(48px, 7vw, 72px);
+        line-height: 1.02;
+        letter-spacing: clamp(-2px, -0.2vw, -1px);
+        margin-bottom: 28px;
+    }
+
+    .hero p {
+        max-width: 720px;
+        font-size: clamp(18px, 2.2vw, 20px);
+        line-height: 1.75;
+        margin-bottom: 42px;
+    }
+
+    .hero-gallery {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .gallery-frame {
+        width: min(100%, 600px);
+        aspect-ratio: 4 / 3;
+    }
+}
+
+/* Tablet portrait */
+@media (max-width:768px) {
+
+    .hero {
+        min-height: auto;
+    }
+
+    .home-page .hero-container {
+        width: 100%;
+        padding:
+            110px clamp(18px, 5vw, 32px) 64px;
+        gap: 36px;
+    }
+
+    .hero-tag {
+        max-width: 100%;
+        padding: 10px 16px;
+        font-size: clamp(11px, 1.8vw, 13px);
+        letter-spacing: 1.5px;
+        text-align: center;
+    }
+
+    .hero h1 {
+        width: 100%;
+        font-size: clamp(40px, 10vw, 58px);
+        line-height: 1.02;
+        letter-spacing: -1.5px;
+        margin-bottom: 22px;
+    }
+
+    .hero p {
+        width: 100%;
+        max-width: 620px;
+        font-size: clamp(16px, 2.7vw, 18px);
+        line-height: 1.7;
+        margin-bottom: 34px;
+    }
+
+    .hero-buttons {
+        width: 100%;
+        max-width: 520px;
+        gap: 14px;
+    }
+
+    .hero-buttons .btn {
+        flex: 1 1 220px;
+        min-width: 0;
+    }
+
+    .hero-gallery {
+        width: 100%;
+    }
+
+    .gallery-frame {
+        width: 100%;
+        max-width: 600px;
+        aspect-ratio: 4 / 3;
+    }
+
+    .gallery-btn {
+        width: 44px;
+        height: 44px;
+        font-size: 28px;
+    }
+
+    .gallery-prev {
+        left: 12px;
+    }
+
+    .gallery-next {
+        right: 12px;
+    }
+}
+
+/* Mobile phones */
+@media (max-width:480px) {
+
+    .home-page .hero-container {
+        padding:
+            92px 16px 50px;
+        gap: 30px;
+    }
+
+    .hero-tag {
+        width: auto;
+        max-width: 100%;
+        padding: 8px 12px;
+        margin-bottom: 22px;
+        font-size: 10px;
+        letter-spacing: 1.2px;
+        white-space: normal;
+    }
+
+    .hero h1 {
+        font-size: clamp(34px, 11vw, 46px);
+        line-height: 1.05;
+        letter-spacing: -1px;
+        margin-bottom: 18px;
+    }
+
+    .hero p {
+        font-size: 16px;
+        line-height: 1.65;
+        margin-bottom: 28px;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        width: 100%;
+        max-width: 100%;
+        gap: 12px;
+    }
+
+    .hero-buttons .btn {
+        width: 100%;
+        flex: 0 0 auto;
+    }
+
+    .gallery-frame {
+        width: 100%;
+        aspect-ratio: 4 / 3;
+        border-radius: 22px;
+    }
+
+    .gallery-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 25px;
+    }
+
+    .gallery-prev {
+        left: 9px;
+    }
+
+    .gallery-next {
+        right: 9px;
+    }
+
+    .gallery-indicators {
+        bottom: 12px;
+        gap: 6px;
+        padding: 7px 10px;
+    }
+
+    .gallery-dot {
+        width: 6px;
+        height: 6px;
+    }
+
+    .gallery-dot.active {
+        width: 18px;
+    }
+}
+
+/* Very small phones */
+@media (max-width:360px) {
+
+    .home-page .hero-container {
+        padding-inline: 12px;
+    }
+
+    .hero h1 {
+        font-size: 34px;
+    }
+
+    .hero p {
+        font-size: 15px;
+    }
+
+    .hero-tag {
+        font-size: 9px;
+        letter-spacing: 1px;
+    }
+}
+
+/* =====================================================
+   HERO IMAGE GALLERY
+===================================================== */
+
+.hero-gallery {
+
+    flex: 1;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    min-width: 0;
+
+}
+
+
+/* =====================================================
+   GALLERY FRAME
+===================================================== */
+
+.gallery-frame {
+    position: relative;
+
+    width: min(100%, 520px);
+    aspect-ratio: 1 / 1;
+    height: auto;
+
+    border-radius: clamp(22px, 3vw, 32px);
+
+    overflow: hidden;
+
+    background: rgba(255, 255, 255, .08);
+
+    border: 1px solid rgba(255, 255, 255, .35);
+
+    backdrop-filter: blur(20px);
+
+    -webkit-backdrop-filter: blur(20px);
+
+    box-shadow:
+        0 30px 80px rgba(15, 23, 42, .18),
+        0 0 40px rgba(37, 99, 235, .08);
+
+}
+
+
+/* =====================================================
+   GALLERY SLIDES
+===================================================== */
+
+.gallery-slide {
+
+    position: absolute;
+
+    inset: 0;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transform: scale(1.05);
+
+    transition:
+        opacity .7s ease,
+        transform .9s ease,
+        visibility .7s ease;
+
+}
+
+
+.gallery-slide.active {
+
+    opacity: 1;
+
+    visibility: visible;
+
+    transform: scale(1);
+
+}
+
+
+.gallery-slide img {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+
+}
+
+
+/* =====================================================
+   DARK OVERLAY
+===================================================== */
+
+.gallery-frame::after {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(to bottom,
+            rgba(5, 10, 20, .05),
+            transparent 55%,
+            rgba(5, 10, 20, .35));
+
+    pointer-events: none;
+
+}
+
+
+/* =====================================================
+   GLASS NAVIGATION BUTTONS
+===================================================== */
+
+.gallery-btn {
+
+    position: absolute;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    z-index: 5;
+
+    width: 48px;
+
+    height: 48px;
+
+    border-radius: 50%;
+
+    border: 1px solid rgba(255, 255, 255, .45);
+
+    background: rgba(255, 255, 255, .16);
+
+    backdrop-filter: blur(15px);
+
+    -webkit-backdrop-filter: blur(15px);
+
+    color: white;
+
+    font-size: 32px;
+
+    line-height: 1;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    cursor: pointer;
+
+    transition:
+        background .3s ease,
+        transform .3s ease,
+        box-shadow .3s ease;
+
+}
+
+
+.gallery-btn:hover {
+
+    background: rgba(255, 255, 255, .30);
+
+    box-shadow:
+        0 8px 30px rgba(0, 0, 0, .20);
+
+}
+
+
+.gallery-prev {
+
+    left: 20px;
+
+}
+
+
+.gallery-next {
+
+    right: 20px;
+
+}
+
+
+.gallery-prev:hover {
+
+    transform: translateY(-50%) translateX(-3px);
+
+}
+
+
+.gallery-next:hover {
+
+    transform: translateY(-50%) translateX(3px);
+
+}
+
+
+/* =====================================================
+   GALLERY INDICATORS
+===================================================== */
+
+.gallery-indicators {
+
+    position: absolute;
+
+    bottom: 22px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    z-index: 5;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 9px 13px;
+
+    border-radius: 999px;
+
+    background: rgba(10, 15, 30, .25);
+
+    border: 1px solid rgba(255, 255, 255, .25);
+
+    backdrop-filter: blur(15px);
+
+    -webkit-backdrop-filter: blur(15px);
+
+}
+
+
+.gallery-dot {
+
+    width: 7px;
+
+    height: 7px;
+
+    padding: 0;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, .45);
+
+    cursor: pointer;
+
+    transition:
+        width .3s ease,
+        background .3s ease,
+        transform .3s ease;
+
+}
+
+
+.gallery-dot.active {
+
+    width: 22px;
+
+    border-radius: 999px;
+
+    background: white;
+
+}
+
+
+.gallery-dot:hover {
+
+    transform: scale(1.2);
+
+}
