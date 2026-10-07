@@ -711,7 +711,7 @@ function seedData() {
       linkedin: 'https://www.linkedin.com/in/tanmay-gudadhe-3878902bb',
       github: 'https://github.com/tanmaygudadhe18-lang',
       tagline: 'Ye dil mange more',
-      avatar: '/assets_committee/Tanmay Gudadhe..png.jpeg'
+      avatar: '/committee_assets/Tanmay Gudadhe..png.jpeg'
     },
     {
       name: 'Sharwari Dhandale',
@@ -725,14 +725,14 @@ function seedData() {
       linkedin: 'https://www.linkedin.com/in/vedant-nasare-24b6393b1',
       github: 'https://github.com/vedantnasare8-alt',
       tagline: 'Turning Small Efforts into Bigger Impact',
-      avatar: '/assets_committee/Vedant Nasare.png'
+      avatar: '/committee_assets/Vedant Nasare.png'
     },
     {
       name: 'Roopam Zade',
       linkedin: 'https://www.linkedin.com/in/roopam-zade-1a32b13b6',
       github: 'https://github.com/roopamzade1902-tech',
       tagline: 'Still figuring it out. Still moving forward.',
-      avatar: '/assets_committee/Roopam_Zade.png'
+      avatar: '/committee_assets/Roopam_Zade.png'
     },
     {
       name: 'Antariksh pilare',
@@ -746,14 +746,14 @@ function seedData() {
       linkedin: 'https://www.linkedin.com/in/anushka-mankar-4378153aa',
       github: 'https://github.com/anushkamankar49-dotcom',
       tagline: 'Tastes like heaven, burns like hell',
-      avatar: '/assets_committee/Anushka Mankar.jpeg'
+      avatar: '/committee_assets/Anushka Mankar.jpeg'
     },
     {
       name: 'Parth Janai',
       linkedin: 'https://www.linkedin.com/in/parth-janai-85569b334',
       github: 'https://github.com/parthjanai24-Master',
       tagline: 'Creating today. Inspiring tomorrow',
-      avatar: '/assets_committee/Parth Janai.png'
+      avatar: '/committee_assets/Parth Janai.png'
     },
     {
       name: 'Vedant Chamat',
@@ -767,28 +767,28 @@ function seedData() {
       linkedin: 'https://www.linkedin.com/in/jai-sagulale-8597383ab',
       github: 'https://github.com/jaisagulale18-png',
       tagline: 'Too rare to be understood, too real to be forgotten.',
-      avatar: '/assets_committee/Jai Sagulale.png'
+      avatar: '/committee_assets/Jai Sagulale.png'
     },
     {
       name: 'Mrunali Sakharkar',
       linkedin: 'https://www.linkedin.com/in/mrunali-sakharkar-83b65242a',
       github: 'https://github.com/mrunali0248',
       tagline: 'Curious enough to question. Bold enough to build.',
-      avatar: '/assets_committee/Mrunali Sakharkar .jpeg'
+      avatar: '/committee_assets/Mrunali Sakharkar .jpeg'
     },
     {
       name: 'Samiksha hedaou',
       linkedin: 'https://www.linkedin.com/in/samiksha-hedaou',
       github: 'https://github.com/Samiksha-tech-e/On-mobile-vibe-coding-/tree/main',
       tagline: 'Curious. Unfiltered. Becoming.',
-      avatar: '/assets_committee/samiksha_hedaou.jpeg'
+      avatar: '/committee_assets/samiksha_hedaou.jpeg'
     },
     {
       name: 'Purva Gadkari',
       linkedin: 'https://www.linkedin.com/in/purva-gadkari-4696293b0',
       github: 'https://github.com/purvagadkari10-pg',
       tagline: 'Turning “what if?” into “why not?”',
-      avatar: '/assets_committee/Purva Gadkari.jpeg'
+      avatar: '/committee_assets/Purva Gadkari.jpeg'
     },
     {
       name: 'Vishwaja Pinjarkar',
@@ -802,70 +802,70 @@ function seedData() {
       linkedin: 'https://www.linkedin.com/in/mayuri-atkar-3913b6343',
       github: 'https://github.com/mayuriatkar5-lgtm',
       tagline: 'Growing through every version of me',
-      avatar: '/assets_committee/mayuri_atkar.jpeg'
+      avatar: '/committee_assets/mayuri_atkar.jpeg'
     },
     {
       name: 'Suzan Francis',
       linkedin: 'https://www.linkedin.com/in/suzan-francis-96a19a3a7',
       github: '',
       tagline: 'Romanticizing the journey, conquering the destination.',
-      avatar: '/assets_committee/Suzan Francis_.jpg'
+      avatar: '/committee_assets/Suzan Francis_.jpg'
     },
     {
       name: 'Lakshita Bisen',
       linkedin: 'https://www.linkedin.com/in/lakshita-bisen-95ba183b4',
       github: 'https://github.com/lakshitabisen01',
       tagline: 'Opportunities to Learn. Experiences to Grow.',
-      avatar: '/assets_committee/Lakshita Bisen.jpeg'
+      avatar: '/committee_assets/Lakshita Bisen.jpeg'
     },
     {
       name: 'Hariom Shrinath',
       linkedin: 'https://www.linkedin.com/in/hariom-shrinath-a579693a1',
       github: '',
       tagline: 'Work in silence. Let progress speak.',
-      avatar: '/assets_committee/Hariom Shrinath.jpg'
+      avatar: '/committee_assets/Hariom Shrinath.jpg'
     },
     {
       name: 'Yadni Zade',
       linkedin: 'https://www.linkedin.com/in/yadni-zade-ab68b8382',
       github: 'https://github.com/Yadni-Zade',
       tagline: "Don't chase, Attract!",
-      avatar: '/assets_committee/yadni zade.png'
+      avatar: '/committee_assets/yadni zade.png'
     },
     {
       name: 'Samruddhi Warudkar',
       linkedin: 'https://www.linkedin.com/in/samruddhi-warudkar-58752a393',
       github: 'https://github.com/samruddhiwarudkar577-prog',
       tagline: 'Rooted in calm, reaching for more.',
-      avatar: '/assets_committee/SAMRUDDHI WARUDKAR_.png'
+      avatar: '/committee_assets/SAMRUDDHI WARUDKAR_.png'
     },
     {
       name: 'Aishita Balpande',
       linkedin: 'https://www.linkedin.com/in/aishita-balpande-5434b4386',
       github: 'https://github.com/aishitabalpande13',
       tagline: 'Ideas with purpose, actions with impact.',
-      avatar: '/assets_committee/Aishita_Balpande.jpg'
+      avatar: '/committee_assets/Aishita_Balpande.jpg'
     },
     {
       name: 'Tejasvi Bondre',
       linkedin: 'https://www.linkedin.com/in/tejasvi-bondre-9807abc',
       github: '',
       tagline: 'Dreams to Goals, Goals to Achievements',
-      avatar: '/assets_committee/Tejasvi Bondre.jpg'
+      avatar: '/committee_assets/Tejasvi Bondre.jpg'
     },
     {
       name: 'Pranay Mune',
       linkedin: 'https://www.linkedin.com/in/pranay-mune-40333338b',
       github: 'https://github.com/pranaymune04-sketch',
       tagline: 'Learning to build, building to learn',
-      avatar: '/assets_committee/Pranay Mune.jpg'
+      avatar: '/committee_assets/Pranay Mune.jpg'
     },
     {
       name: 'shrawani Akre',
       linkedin: 'https://www.linkedin.com/in/shrawani-akre-578784267',
       github: '',
       tagline: 'Creating. Connecting. Evolving',
-      avatar: '/assets_committee/Shrawani Akre.png'
+      avatar: '/committee_assets/Shrawani Akre.png'
     },
     {
       name: 'Bhavesh Gotmare',
@@ -886,21 +886,21 @@ function seedData() {
       linkedin: 'https://www.linkedin.com/in/vinit-paturkar',
       github: 'https://github.com/Therock1037X',
       tagline: 'Driven by Curiosity, Defined by Creativity.',
-      avatar: '/assets_committee/Vinit Paturkar.jpg'
+      avatar: '/committee_assets/Vinit Paturkar.jpg'
     },
     {
       name: 'Arshpreet Sandhu',
       linkedin: 'https://www.linkedin.com/in/arshpreet-kaur-sandhu-1820843b0',
       github: '',
       tagline: 'Focused on growth, committed to excellence.',
-      avatar: '/assets_committee/arshpreet.jpg'
+      avatar: '/committee_assets/arshpreet.jpg'
     },
     {
       name: 'Ankush Gawate',
       linkedin: 'https://www.linkedin.com/in/ankush-gawate-04621942b',
       github: '',
       tagline: "♞♜♘There's still a best move how bad ur thing's ar",
-      avatar: '/assets_committee/Ankush Gawate_.jpg'
+      avatar: '/committee_assets/Ankush Gawate_.jpg'
     },
     {
       name: 'Palak V. Dongre',
@@ -921,14 +921,14 @@ function seedData() {
       linkedin: 'https://www.linkedin.com/in/priyal-raut-30283937b',
       github: 'https://github.com/priyalraut703',
       tagline: 'Curious by Nature, Relentless by Choice',
-      avatar: '/assets_committee/Priyal_Raut.jpeg'
+      avatar: '/committee_assets/Priyal_Raut.jpeg'
     },
     {
       name: 'Trusha R. Dhole',
       linkedin: 'https://www.linkedin.com/in/trusha-dhole-190208382',
       github: 'https://github.com/trushadhole-hue',
       tagline: 'Build by Ambition, forged by discipline.',
-      avatar: '/assets_committee/Trusha_Dhole.jpeg'
+      avatar: '/committee_assets/Trusha_Dhole.jpeg'
     },
     {
       name: 'Apurva Mohite',
@@ -942,7 +942,7 @@ function seedData() {
       linkedin: 'https://www.linkedin.com/in/aditya-devhare-4570323b4',
       github: 'https://github.com/Adityadevhare',
       tagline: 'Question Everything. Create Anything.',
-      avatar: '/assets_committee/Aditya Devhare.jpeg'
+      avatar: '/committee_assets/Aditya Devhare.jpeg'
     },
     {
       name: 'Ratan Ingle',
@@ -956,14 +956,14 @@ function seedData() {
       linkedin: 'https://www.linkedin.com/in/soham-giradkar-106a07384',
       github: 'https://github.com/sohamgiradkar',
       tagline: "As long as I'm alive, there are infinite chances!",
-      avatar: '/assets_committee/Soham Giradkar.jpg'
+      avatar: '/committee_assets/Soham Giradkar.jpg'
     },
     {
       name: 'Vaibhavi Purohit',
       linkedin: 'https://www.linkedin.com/in/vaibhavi-purohit-3b999b441',
       github: '',
       tagline: 'Turning Ideas into Impact, One Initiative at a Time.',
-      avatar: '/assets_committee/Vaibhavi.jpg'
+      avatar: '/committee_assets/Vaibhavi.jpg'
     }
   ];
 

@@ -367,6 +367,37 @@ export default function Events() {
         </div>
       </section>
 
+      {/* LIVE COUNTDOWN SECTION */}
+      <section className="countdown-section" data-reveal="fade-up">
+        <div className="container">
+          <div className="countdown-card countdown-wrapper">
+            <div className="countdown-text">
+              <span className="countdown-tag">COUNTDOWN TO MEGA TECH FEST</span>
+              <h2 className="countdown-title">Next Major Summit Starts In</h2>
+              <p>Featured event countdown — get ready to learn, connect and create.</p>
+            </div>
+            <div className="countdown countdown-timer">
+              <div className="time-box">
+                <h2 className="number" id="days">{countdown.days}</h2>
+                <p className="label">Days</p>
+              </div>
+              <div className="time-box">
+                <h2 className="number" id="hours">{countdown.hours}</h2>
+                <p className="label">Hours</p>
+              </div>
+              <div className="time-box">
+                <h2 className="number" id="minutes">{countdown.minutes}</h2>
+                <p className="label">Minutes</p>
+              </div>
+              <div className="time-box">
+                <h2 className="number" id="seconds">{countdown.seconds}</h2>
+                <p className="label">Seconds</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* STATS COUNTER SECTION */}
       <section className="stats-section" data-reveal="fade-up">
         <div className="container">
