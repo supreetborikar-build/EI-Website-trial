@@ -1,0 +1,375 @@
+/* ==========================================================
+   HOME PAGE VISUAL REFRESH
+   Design-only enhancement using the existing home content/assets.
+   ========================================================== */
+
+.home-page {
+  --home-glow-a: rgba(37, 99, 235, .14);
+  --home-glow-b: rgba(124, 58, 237, .11);
+  --home-glow-c: rgba(16, 185, 129, .10);
+}
+
+/* Pull the first content block closer to the navbar. */
+.home-page .hero {
+  min-height: calc(100vh - 96px);
+  padding: 0;
+  background:
+    radial-gradient(circle at 16% 18%, var(--home-glow-a), transparent 31%),
+    radial-gradient(circle at 86% 28%, var(--home-glow-b), transparent 26%),
+    radial-gradient(circle at 72% 92%, var(--home-glow-c), transparent 28%),
+    var(--bg);
+}
+
+.home-page .hero::before {
+  background:
+    radial-gradient(circle at 20% 20%, rgba(37,99,235,.12), transparent 30%),
+    radial-gradient(circle at 80% 72%, rgba(124,58,237,.10), transparent 34%);
+}
+
+.home-page .hero::after {
+  opacity: .28;
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,.15), rgba(0,0,0,.8), transparent);
+}
+
+.home-page .hero-container {
+  min-height: calc(100vh - 96px);
+  gap: clamp(36px, 5vw, 76px);
+  padding-top: 34px;
+  padding-bottom: 50px;
+  align-items: center;
+}
+
+.home-page .hero-content {
+  max-width: 700px;
+  position: relative;
+  z-index: 5;
+}
+
+.home-page .hero-tag {
+  padding: 9px 15px;
+  margin-bottom: 21px;
+  font-size: 11px;
+  letter-spacing: 1.9px;
+  border: 1px solid rgba(37,99,235,.18);
+  background: rgba(255,255,255,.48);
+  box-shadow: 0 10px 30px rgba(37,99,235,.07);
+}
+
+.home-page .hero h1 {
+  font-size: clamp(3rem, 5.9vw, 5.2rem);
+  margin-bottom: 23px;
+  letter-spacing: -3px;
+  text-wrap: balance;
+}
+
+.home-page .hero h1::after {
+  content: '';
+  display: block;
+  width: 92px;
+  height: 5px;
+  margin-top: 22px;
+  border-radius: 99px;
+  background: linear-gradient(90deg, #2563eb, #7c3aed, #10b981);
+  animation: homeLinePulse 3s ease-in-out infinite;
+}
+
+.home-page .hero p {
+  max-width: 645px;
+  font-size: 18px;
+  line-height: 1.8;
+  margin-bottom: 28px;
+}
+
+.home-page .hero-buttons {
+  gap: 13px;
+}
+
+.home-page .hero-buttons .btn {
+  padding: 13px 22px;
+  border-radius: 14px;
+  box-shadow: 0 12px 30px rgba(15,23,42,.07);
+}
+
+.home-page .hero-vision-note {
+  margin-top: 22px;
+  max-width: 660px;
+  padding: 17px 20px;
+  border: 1px solid rgba(148,163,184,.22);
+  border-radius: 18px;
+  background: rgba(255,255,255,.54);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 16px 35px rgba(15,23,42,.06);
+}
+
+.home-page .hero-vision-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 7px;
+  font-size: 10px;
+  letter-spacing: 2.2px;
+  font-weight: 800;
+  color: #2563eb;
+}
+
+.home-page .hero-vision-kicker::before {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: linear-gradient(135deg,#2563eb,#7c3aed);
+  box-shadow: 0 0 0 5px rgba(37,99,235,.08);
+}
+
+.home-page .hero-vision-note p {
+  margin: 0;
+  max-width: none;
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.home-page .hero-gallery {
+  position: relative;
+  min-width: 0;
+  perspective: 1200px;
+}
+
+.home-page .gallery-frame {
+  max-width: 560px;
+  height: min(62vh, 565px);
+  min-height: 430px;
+  border-radius: 30px;
+  border: 1px solid rgba(255,255,255,.6);
+  box-shadow:
+    0 30px 80px rgba(15,23,42,.14),
+    0 0 0 1px rgba(37,99,235,.04),
+    0 0 60px rgba(124,58,237,.10);
+  transform: rotateY(-4deg) rotateX(2deg);
+  transition: transform .55s cubic-bezier(.22,1,.36,1), box-shadow .35s ease;
+}
+
+.home-page .gallery-frame:hover {
+  transform: rotateY(0deg) rotateX(0deg) translateY(-6px);
+  box-shadow:
+    0 38px 90px rgba(15,23,42,.18),
+    0 0 60px rgba(124,58,237,.14);
+}
+
+.home-page .hero-visual-caption {
+  position: absolute;
+  left: 22px;
+  bottom: 18px;
+  z-index: 8;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 12px;
+  border: 1px solid rgba(255,255,255,.28);
+  border-radius: 999px;
+  background: rgba(11,18,32,.62);
+  color: rgba(255,255,255,.92);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 12px 26px rgba(0,0,0,.18);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1.35px;
+}
+
+.home-page .hero-visual-caption i {
+  opacity: .55;
+  font-style: normal;
+}
+
+.home-page .hero-caption-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 0 5px rgba(16,185,129,.12);
+  animation: homeDotPulse 2s ease-in-out infinite;
+}
+
+/* Make the existing home sections feel like connected glass panels. */
+.home-page .about,
+.home-page .events,
+.home-page .news,
+.home-page .contact {
+  background:
+    radial-gradient(circle at 90% 10%, rgba(124,58,237,.07), transparent 24%),
+    radial-gradient(circle at 8% 90%, rgba(37,99,235,.055), transparent 25%),
+    var(--bg);
+}
+
+.home-page .about .about-grid,
+.home-page .events .container,
+.home-page .news .container,
+.home-page .contact .container {
+  position: relative;
+}
+
+.home-page .about .about-content,
+.home-page .events-header,
+.home-page .news-header,
+.home-page .contact-header {
+  position: relative;
+  z-index: 2;
+}
+
+.home-page .feature-card,
+.home-page .event-card,
+.home-page .news-card,
+.home-page .contact-form-wrapper,
+.home-page .contact-info {
+  border-radius: 22px;
+  border: 1px solid rgba(148,163,184,.17);
+  box-shadow: 0 18px 45px rgba(15,23,42,.07);
+  transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+}
+
+.home-page .feature-card:hover,
+.home-page .event-card:hover,
+.home-page .news-card:hover,
+.home-page .contact-form-wrapper:hover,
+.home-page .contact-info:hover {
+  transform: translateY(-7px);
+  box-shadow: 0 24px 60px rgba(15,23,42,.11);
+}
+
+.home-page .about .image-card {
+  border: 1px solid rgba(255,255,255,.34);
+  box-shadow: 0 28px 75px rgba(15,23,42,.12);
+}
+
+/* Dark mode for the full home page — readable, but still keeping the rich committee-style feel. */
+html.ei-dark .home-page .hero,
+html.ei-dark .home-page .about,
+html.ei-dark .home-page .events,
+html.ei-dark .home-page .news,
+html.ei-dark .home-page .contact {
+  background:
+    radial-gradient(circle at 18% 12%, rgba(37,99,235,.12), transparent 28%),
+    radial-gradient(circle at 84% 35%, rgba(124,58,237,.12), transparent 26%),
+    radial-gradient(circle at 72% 92%, rgba(16,185,129,.08), transparent 24%),
+    #0b1220 !important;
+}
+
+html.ei-dark .home-page .hero-tag,
+html.ei-dark .home-page .hero-vision-note {
+  background: rgba(17,24,39,.72) !important;
+  border-color: rgba(148,163,184,.2) !important;
+  box-shadow: 0 16px 38px rgba(0,0,0,.25) !important;
+}
+
+html.ei-dark .home-page .hero p,
+html.ei-dark .home-page .hero-vision-note p,
+html.ei-dark .home-page .about p,
+html.ei-dark .home-page .events p,
+html.ei-dark .home-page .news p,
+html.ei-dark .home-page .contact p {
+  color: #cbd5e1 !important;
+}
+
+html.ei-dark .home-page .feature-card,
+html.ei-dark .home-page .event-card,
+html.ei-dark .home-page .news-card,
+html.ei-dark .home-page .contact-form-wrapper,
+html.ei-dark .home-page .contact-info {
+  background: linear-gradient(145deg, rgba(17,24,39,.96), rgba(15,23,42,.92)) !important;
+  border-color: rgba(148,163,184,.18) !important;
+  box-shadow: 0 20px 45px rgba(0,0,0,.27) !important;
+}
+
+html.ei-dark .home-page .feature-card:hover,
+html.ei-dark .home-page .event-card:hover,
+html.ei-dark .home-page .news-card:hover,
+html.ei-dark .home-page .contact-form-wrapper:hover,
+html.ei-dark .home-page .contact-info:hover {
+  box-shadow: 0 28px 62px rgba(0,0,0,.32), 0 0 34px rgba(124,58,237,.08) !important;
+}
+
+html.ei-dark .home-page .about .image-card {
+  background: linear-gradient(145deg, #111827, #0f172a) !important;
+  border-color: rgba(148,163,184,.18) !important;
+}
+
+@keyframes homeLinePulse {
+  0%, 100% { transform: scaleX(1); opacity: .85; }
+  50% { transform: scaleX(1.35); opacity: 1; }
+}
+
+@keyframes homeDotPulse {
+  0%, 100% { box-shadow: 0 0 0 5px rgba(16,185,129,.10); }
+  50% { box-shadow: 0 0 0 8px rgba(16,185,129,.04); }
+}
+
+@media (max-width: 1100px) {
+  .home-page .hero {
+    min-height: auto;
+  }
+
+  .home-page .hero-container {
+    min-height: auto;
+    padding-top: 36px;
+    padding-bottom: 62px;
+  }
+
+  .home-page .hero-vision-note {
+    text-align: left;
+  }
+
+  .home-page .gallery-frame {
+    height: min(68vw, 520px);
+    min-height: 390px;
+    transform: none;
+  }
+
+  .home-page .hero-visual-caption {
+    left: 18px;
+    bottom: 16px;
+    max-width: calc(100% - 36px);
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 760px) {
+  .home-page .hero-container {
+    padding-top: 28px;
+    padding-bottom: 42px;
+  }
+
+  .home-page .hero h1 {
+    font-size: 2.65rem;
+    letter-spacing: -1.7px;
+  }
+
+  .home-page .hero p {
+    font-size: 16px;
+    line-height: 1.72;
+  }
+
+  .home-page .hero-buttons {
+    width: 100%;
+  }
+
+  .home-page .hero-buttons .btn {
+    width: 100%;
+  }
+
+  .home-page .hero-vision-note {
+    padding: 15px 16px;
+  }
+
+  .home-page .gallery-frame {
+    min-height: 330px;
+    height: 92vw;
+    border-radius: 24px;
+  }
+
+  .home-page .hero-visual-caption {
+    font-size: 7px;
+    letter-spacing: 1px;
+    gap: 6px;
+  }
+}

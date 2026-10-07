@@ -1,0 +1,379 @@
+/* ==========================================================================
+   FOOTER — ARCHITECTURAL DRAWING SHEET TITLE BLOCK
+   High contrast, fully adaptive to Light Paper and Dark Night Lab themes.
+   ========================================================================== */
+
+.footer.blueprint-footer {
+  position: relative;
+  background: var(--paper-surface, #FAFAF7);
+  color: var(--heading, #111315);
+  overflow: hidden;
+  border-top: 2px solid var(--cad-border, rgba(21, 94, 239, 0.35));
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+[data-theme="dark"] .footer.blueprint-footer {
+  background: #0B0E14;
+  color: #F8FAFC;
+  border-top-color: rgba(56, 189, 248, 0.35);
+}
+
+/* ==========================================================================
+   CAD DRAWING SHEET TITLE BLOCK TABLE
+   ========================================================================== */
+.footer .cad-title-block {
+  background: var(--paper-card, #FFFFFF);
+  border: 1.5px solid var(--cad-border, rgba(21, 94, 239, 0.35));
+  position: relative;
+  transition: background-color 0.25s ease, border-color 0.25s ease;
+}
+
+[data-theme="dark"] .footer .cad-title-block {
+  background: #111726;
+  border-color: rgba(56, 189, 248, 0.35);
+}
+
+.footer .cad-tb-row {
+  display: flex;
+  flex-wrap: wrap;
+  border-bottom: 1px solid var(--cad-border-subtle, rgba(17, 19, 21, 0.12));
+}
+
+[data-theme="dark"] .footer .cad-tb-row {
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+
+.footer .cad-tb-cell {
+  padding: 10px 16px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  border-right: 1px solid var(--cad-border-subtle, rgba(17, 19, 21, 0.12));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+[data-theme="dark"] .footer .cad-tb-cell {
+  border-right-color: rgba(255, 255, 255, 0.08);
+}
+
+.footer .cad-tb-cell:last-child {
+  border-right: none;
+}
+
+.footer .cad-tb-label {
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 2px;
+  color: var(--light-text, #64748B) !important;
+  font-weight: 600;
+}
+
+[data-theme="dark"] .footer .cad-tb-label {
+  color: #94A3B8 !important;
+}
+
+.footer .cad-tb-val {
+  font-weight: 700;
+  color: var(--blueprint-blue, #155EEF) !important;
+}
+
+[data-theme="dark"] .footer .cad-tb-val {
+  color: #38BDF8 !important;
+}
+
+/* ==========================================================================
+   4-COLUMN ARCHITECTURAL SPREAD
+   ========================================================================== */
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1.3fr;
+  gap: 50px;
+  padding: 60px 0 50px;
+}
+
+/* --- Brand Column --- */
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.footer-logo span:first-child {
+  color: var(--heading, #111315) !important;
+  font-family: "Outfit", sans-serif;
+  font-weight: 900;
+  font-size: 1.75rem;
+  letter-spacing: -0.03em;
+}
+
+[data-theme="dark"] .footer-logo span:first-child {
+  color: #F8FAFC !important;
+}
+
+.footer-brand p {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.92rem;
+  line-height: 1.65;
+  color: var(--body, #334155) !important;
+  max-width: 44ch;
+  margin: 0.75rem 0 1.5rem 0;
+}
+
+[data-theme="dark"] .footer-brand p {
+  color: #94A3B8 !important;
+}
+
+/* Social Buttons */
+.footer-social {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.cad-social-btn {
+  width: 38px;
+  height: 38px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  border: 1px solid var(--cad-border-subtle, rgba(17, 19, 21, 0.16));
+  background: var(--paper-card, #FFFFFF);
+  color: var(--heading, #111315) !important;
+  text-decoration: none;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  font-size: 0.95rem;
+}
+
+.cad-social-btn:hover {
+  background: var(--blueprint-blue, #155EEF) !important;
+  border-color: var(--blueprint-blue, #155EEF) !important;
+  color: #FFFFFF !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(21, 94, 239, 0.25);
+}
+
+[data-theme="dark"] .cad-social-btn {
+  background: #131B2E;
+  border-color: rgba(255, 255, 255, 0.12);
+  color: #F8FAFC !important;
+}
+
+[data-theme="dark"] .cad-social-btn:hover {
+  background: #38BDF8 !important;
+  border-color: #38BDF8 !important;
+  color: #0B0E14 !important;
+}
+
+/* --- System Directory & Lab Disciplines --- */
+.footer-links h4 {
+  font-family: "Space Grotesk", monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--blueprint-blue, #155EEF) !important;
+  margin-bottom: 1.25rem;
+  font-weight: 700;
+}
+
+[data-theme="dark"] .footer-links h4 {
+  color: #38BDF8 !important;
+}
+
+.footer-links ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.footer-links a {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.9rem;
+  color: var(--heading, #111315) !important;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.footer-links a:hover {
+  color: var(--blueprint-blue, #155EEF) !important;
+  transform: translateX(4px);
+}
+
+[data-theme="dark"] .footer-links a {
+  color: #CBD5E1 !important;
+}
+
+[data-theme="dark"] .footer-links a:hover {
+  color: #38BDF8 !important;
+}
+
+.footer-links span {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.88rem;
+  color: var(--body, #334155) !important;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+[data-theme="dark"] .footer-links span {
+  color: #94A3B8 !important;
+}
+
+/* --- Telemetry Dispatch Newsletter --- */
+.footer-newsletter h4 {
+  font-family: "Space Grotesk", monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--blueprint-blue, #155EEF) !important;
+  margin-bottom: 1.25rem;
+  font-weight: 700;
+}
+
+[data-theme="dark"] .footer-newsletter h4 {
+  color: #38BDF8 !important;
+}
+
+.footer-newsletter p {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: var(--body, #334155) !important;
+  margin-bottom: 1rem;
+}
+
+[data-theme="dark"] .footer-newsletter p {
+  color: #94A3B8 !important;
+}
+
+.newsletter-form .cad-input-box {
+  width: 100%;
+  padding: 12px 48px 12px 14px;
+  background: var(--paper-card, #FFFFFF);
+  border: 1px solid var(--cad-border-subtle, rgba(17, 19, 21, 0.16));
+  border-radius: 4px;
+  color: var(--heading, #111315) !important;
+  font-size: 0.9rem;
+}
+
+.newsletter-form .cad-input-box::placeholder {
+  color: var(--light-text, #64748B);
+  opacity: 0.75;
+}
+
+[data-theme="dark"] .newsletter-form .cad-input-box {
+  background: #111726;
+  border-color: rgba(255, 255, 255, 0.12);
+  color: #F8FAFC !important;
+}
+
+[data-theme="dark"] .newsletter-form .cad-input-box::placeholder {
+  color: #64748B;
+}
+
+/* ==========================================================================
+   COPYRIGHT BAR & DRAWING SHEET STAMP
+   ========================================================================== */
+.footer-bottom {
+  border-top: 1px solid var(--cad-border-subtle, rgba(17, 19, 21, 0.12));
+  padding: 20px 0;
+  background: rgba(17, 19, 21, 0.02);
+  color: var(--light-text, #64748B) !important;
+}
+
+[data-theme="dark"] .footer-bottom {
+  border-top-color: rgba(255, 255, 255, 0.08);
+  background: rgba(0, 0, 0, 0.2);
+  color: #94A3B8 !important;
+}
+
+.footer-bottom p {
+  margin: 0;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.75rem;
+  color: var(--light-text, #64748B) !important;
+}
+
+[data-theme="dark"] .footer-bottom p {
+  color: #94A3B8 !important;
+}
+
+.footer-bottom-links {
+  display: flex;
+  gap: 1.5rem;
+  font-family: "Space Grotesk", monospace;
+  font-size: 0.75rem;
+}
+
+.footer-bottom-links a {
+  text-decoration: none;
+  color: var(--light-text, #64748B) !important;
+  transition: color 0.2s ease;
+}
+
+.footer-bottom-links a:hover {
+  color: var(--blueprint-blue, #155EEF) !important;
+}
+
+[data-theme="dark"] .footer-bottom-links a {
+  color: #94A3B8 !important;
+}
+
+[data-theme="dark"] .footer-bottom-links a:hover {
+  color: #38BDF8 !important;
+}
+
+/* ==========================================================================
+   RESPONSIVE BREAKPOINTS
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .footer-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+    padding: 50px 0 40px;
+  }
+}
+
+@media (max-width: 640px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding: 40px 0 30px;
+  }
+
+  .footer .cad-tb-row {
+    flex-direction: column;
+  }
+
+  .footer .cad-tb-cell {
+    border-right: none;
+    border-bottom: 1px solid var(--cad-border-subtle, rgba(17, 19, 21, 0.12));
+  }
+
+  [data-theme="dark"] .footer .cad-tb-cell {
+    border-bottom-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .footer-bottom .container {
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+  }
+
+  .footer-bottom-links {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  }
+}
