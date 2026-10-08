@@ -145,7 +145,7 @@ export default function About() {
             }, stepTime);
           };
 
-          animateCount(0, 150, 1200, 'members');
+          animateCount(0, 50, 1200, 'members');
           animateCount(0, 12, 1000, 'chapters');
           animateCount(0, 300, 1500, 'volunteers');
           animateCount(0, 4, 800, 'areas');
@@ -301,7 +301,7 @@ export default function About() {
       </section>
 
       {/* WHAT WE DO - 4 PILLARS */}
-      <section style={{ position: 'relative', zIndex: 1 }}>
+      <section style={{ position: 'relative', zIndex: 1, paddingBottom: '15px' }}>
         <div className="wrap">
           <div className="section-head" data-reveal="fade-up">
             <span className="telemetry-tag" style={{ marginBottom: '0.5rem' }}>
@@ -374,7 +374,7 @@ export default function About() {
       </section>
 
       {/* CHAPTER STORY */}
-      <section style={{ position: 'relative', zIndex: 1 }} data-reveal="fade-up">
+      <section style={{ position: 'relative', zIndex: 1, paddingTop: '15px' }} data-reveal="fade-up">
         <div className="wrap">
           <div className="section-head">
             <span className="telemetry-tag" style={{ marginBottom: '0.5rem' }}>
@@ -420,7 +420,7 @@ export default function About() {
 
             <div className="stats">
               <div className="stat">
-                <div className="num" style={{ color: 'var(--blueprint-blue, #155EEF)' }}><KineticCounter target={150} suffix="+" /></div>
+                <div className="num" style={{ color: 'var(--blueprint-blue, #155EEF)' }}><KineticCounter target={50} suffix="+" /></div>
                 <p style={{ fontFamily: 'Space Grotesk, sans-serif' }}>Pallotti Chapter Members</p>
               </div>
               <div className="stat">

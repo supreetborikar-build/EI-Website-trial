@@ -353,7 +353,7 @@ export default function Home() {
                   color: '#FFFFFF'
                 }}
               >
-                BUILD WHAT <span style={{ color: 'transparent', WebkitTextStroke: '1.5px rgba(255, 255, 255, 0.7)' }}>MATTERS.</span>
+                EVENT <span style={{ color: 'transparent', WebkitTextStroke: '1.5px rgba(255, 255, 255, 0.7)' }}>HIGHLIGHTS</span>
               </h2>
               <p style={{ color: '#94A3B8', marginTop: '1rem', fontSize: '1.15rem', maxWidth: '56ch' }}>
                 Our metrics reflect relentless execution: building tangible software, empowering engineering talent, and shaping national leaders.
@@ -372,7 +372,7 @@ export default function Home() {
           {/* Animated Kinetic Statistics */}
           <div className="dark-stat-grid">
             <div className="dark-stat-item">
-              <KineticCounter target={1500} suffix="+" className="dark-stat-num" />
+              <KineticCounter target={50} suffix="+" className="dark-stat-num" />
               <span className="dark-stat-label">Active Members Across India</span>
             </div>
 
@@ -382,7 +382,7 @@ export default function Home() {
             </div>
 
             <div className="dark-stat-item">
-              <KineticCounter target={120} suffix="+" className="dark-stat-num" />
+              <KineticCounter target={30} suffix="+" className="dark-stat-num" />
               <span className="dark-stat-label">Hands-on Lab Workshops</span>
             </div>
 
@@ -546,6 +546,164 @@ export default function Home() {
                 </div>
               </TiltCard>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ====================================================================
+          SCENE 06: EDITORIAL MAGAZINE NEWS SPREAD
+          ==================================================================== */}
+      <section className="editorial-news-section blueprint-paper-canvas" id="news" style={{ padding: '120px 5vw', position: 'relative', borderTop: '1px solid var(--cad-border-subtle, rgba(17, 19, 21, 0.12))' }}>
+        <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: '1.5rem' }}>
+            <div>
+              <div className="telemetry-tag">
+                <span>07 // JOURNAL // DISPATCHES &amp; BREAKTHROUGHS</span>
+              </div>
+              <h2 className="editorial-section-title" style={{ marginTop: '0.75rem' }}>
+                The Engineering India Journal
+              </h2>
+              <p className="editorial-lead">
+                Research breakdowns, campus dispatches, technical insights, and community breakthroughs.
+              </p>
+            </div>
+
+            <MagneticButton>
+              <Link to="/news" className="btn-cinematic-outline">
+                <span>All Announcements ({news.length}) &rarr;</span>
+              </Link>
+            </MagneticButton>
+          </div>
+
+          {/* Asymmetric Editorial Spread */}
+          <div className="editorial-news-spread">
+            {/* Left Dominant Feature */}
+            {featuredNews && (
+              <div
+                className="featured-editorial-card interactive-hover"
+                onClick={() => handleOpenArticleModal(featuredNews)}
+                style={{ cursor: 'pointer' }}
+              >
+                <div style={{ height: '320px', overflow: 'hidden', position: 'relative' }}>
+                  <img
+                    src={featuredNews.image?.startsWith('/') ? featuredNews.image : `/${featuredNews.image || 'assets_news/hackathon.jpg'}`}
+                    alt={featuredNews.title}
+                    style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.7s ease' }}
+                    onError={(e) => {
+                      e.target.src = '/assets_news/hackathon.jpg';
+                    }}
+                  />
+                  <span
+                    style={{
+                      position: 'absolute',
+                      top: '1rem',
+                      left: '1.25rem',
+                      background: '#0F172A',
+                      color: '#FFFFFF',
+                      fontFamily: 'Space Grotesk, monospace',
+                      fontSize: '0.72rem',
+                      fontWeight: 600,
+                      padding: '4px 10px',
+                      borderRadius: '4px',
+                      textTransform: 'uppercase'
+                    }}
+                  >
+                    FEATURED DISPATCH
+                  </span>
+                </div>
+
+                <div style={{ padding: '2rem' }}>
+                  <div
+                    style={{
+                      display: 'flex',
+                      gap: '1rem',
+                      fontFamily: 'Space Grotesk, monospace',
+                      fontSize: '0.78rem',
+                      color: 'var(--light-text, #64748B)',
+                      marginBottom: '0.75rem'
+                    }}
+                  >
+                    <span>{featuredNews.date}</span>
+                    <span>•</span>
+                    <span>{featuredNews.read_time || '4 min read'}</span>
+                  </div>
+
+                  <h3
+                    style={{
+                      fontFamily: 'Outfit, sans-serif',
+                      fontSize: '1.75rem',
+                      fontWeight: 700,
+                      lineHeight: 1.25,
+                      color: 'var(--heading, #0F172A)',
+                      margin: '0 0 1rem 0'
+                    }}
+                  >
+                    {featuredNews.title}
+                  </h3>
+
+                  <p style={{ color: 'var(--body, #475569)', lineHeight: 1.6, fontSize: '0.96rem', margin: '0 0 1.5rem 0' }}>
+                    {featuredNews.excerpt}
+                  </p>
+
+                  <span
+                    style={{
+                      fontFamily: 'Space Grotesk, sans-serif',
+                      fontWeight: 600,
+                      fontSize: '0.88rem',
+                      color: 'var(--primary, #2563EB)',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '0.5rem'
+                    }}
+                  >
+                    Read Full Story &rarr;
+                  </span>
+                </div>
+              </div>
+            )}
+
+            {/* Right Secondary Dispatch List */}
+            <div className="secondary-dispatch-list">
+              {secondaryNews.map((item) => (
+                <div
+                  key={item.id}
+                  className="dispatch-item"
+                  onClick={() => handleOpenArticleModal(item)}
+                >
+                  <div>
+                    <div
+                      style={{
+                        fontFamily: 'Space Grotesk, monospace',
+                        fontSize: '0.72rem',
+                        color: 'var(--primary, #2563EB)',
+                        fontWeight: 600,
+                        textTransform: 'uppercase',
+                        marginBottom: '0.35rem'
+                      }}
+                    >
+                      {item.category_label || item.category || 'Article'} • {item.date}
+                    </div>
+
+                    <h4
+                      style={{
+                        fontFamily: 'Outfit, sans-serif',
+                        fontSize: '1.15rem',
+                        fontWeight: 700,
+                        margin: 0,
+                        color: 'var(--heading, #0F172A)',
+                        lineHeight: 1.35
+                      }}
+                    >
+                      {item.title}
+                    </h4>
+                  </div>
+
+                  <span style={{ fontSize: '1.25rem', color: 'var(--primary, #2563EB)', marginLeft: '1rem' }}>
+                    &rarr;
+                  </span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>

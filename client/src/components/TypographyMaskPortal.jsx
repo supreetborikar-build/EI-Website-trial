@@ -155,41 +155,17 @@ export default function TypographyMaskPortal() {
             BUILD
           </h1>
 
-          {/* Micro Telemetry HUD Floating Under Typography */}
-          <div
-            style={{
-              marginTop: '2.5rem',
-              display: 'flex',
-              gap: '24px',
-              alignItems: 'center',
-              fontFamily: 'Space Grotesk, monospace',
-              fontSize: '0.78rem',
-              letterSpacing: '0.14em',
-              textTransform: 'uppercase',
-              color: 'var(--graphite, #111315)',
-              flexWrap: 'wrap',
-              justifyContent: 'center'
-            }}
-          >
-            <span>[01 // BLUEPRINT]</span>
-            <span style={{ color: 'var(--blueprint-blue, #155EEF)' }}>&rarr;</span>
-            <span>[02 // ARCHITECTURE]</span>
-            <span style={{ color: 'var(--blueprint-blue, #155EEF)' }}>&rarr;</span>
-            <span style={{ color: '#10B981', fontWeight: 700 }}>[03 // DEPLOYABLE CODE]</span>
-          </div>
-
           <p
             style={{
               maxWidth: '56ch',
-              margin: '1.5rem auto 0',
+              margin: '2rem auto 0',
               fontSize: '1.05rem',
               lineHeight: 1.6,
               color: 'var(--body, #334155)',
               fontFamily: 'Space Grotesk, sans-serif'
             }}
           >
-            We don't theorize from ivory towers. We engineer in git commits, terminal prompts,
-            hardware circuits, and collaborative hackathons across India.
+            We build ideas, connect people, and create experiences together.
           </p>
         </div>
       </div>

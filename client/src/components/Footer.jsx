@@ -171,13 +171,13 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Column 4: Telemetry Dispatch (Newsletter) */}
+          {/* Column 4: Community Updates (Newsletter) */}
           <div className="footer-newsletter">
             <h4 style={{ fontFamily: 'Space Grotesk, monospace', fontSize: '0.78rem', letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--blueprint-blue, #155EEF)', marginBottom: '1.25rem' }}>
-              TELEMETRY DISPATCH
+              STAY IN THE LOOP
             </h4>
             <p style={{ color: 'var(--body, #334155)', fontFamily: 'Space Grotesk, sans-serif', fontSize: '0.88rem', lineHeight: 1.6, marginBottom: '1rem' }}>
-              Subscribe to national hackathon alerts, engineering blueprints, and open-source releases.
+              Get updates on upcoming events, workshops, hackathons, and everything happening in our club community.
             </p>
             <form className="newsletter-form" onSubmit={handleSubscribe} style={{ position: 'relative' }}>
               <input
@@ -187,7 +187,7 @@ export default function Footer() {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                aria-label="Email for telemetry dispatch"
+                aria-label="Email for community updates"
                 disabled={submitting}
                 style={{ paddingRight: '48px' }}
               />

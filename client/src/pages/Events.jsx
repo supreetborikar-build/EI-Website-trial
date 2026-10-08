@@ -404,7 +404,7 @@ export default function Events() {
           <div className="stats-grid">
             <TiltCard className="stat-card">
               <i className="fa-solid fa-users"></i>
-              <h2 className="stat-number">1,500+</h2>
+              <h2 className="stat-number">50+</h2>
               <p className="stat-label">Active Members</p>
             </TiltCard>
             <TiltCard className="stat-card">
@@ -414,7 +414,7 @@ export default function Events() {
             </TiltCard>
             <TiltCard className="stat-card">
               <i className="fa-solid fa-laptop-code"></i>
-              <h2 className="stat-number">120+</h2>
+              <h2 className="stat-number">30+</h2>
               <p className="stat-label">Hands-on Workshops</p>
             </TiltCard>
             <TiltCard className="stat-card">
