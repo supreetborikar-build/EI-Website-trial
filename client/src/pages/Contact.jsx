@@ -187,7 +187,7 @@ export default function Contact() {
                     <h4 style={{ fontFamily: 'Space Grotesk, monospace', fontSize: '0.75rem', textTransform: 'uppercase', color: 'var(--blueprint-blue, #155EEF)' }}>
                       COMMUNICATION_LINK // EMAIL
                     </h4>
-                    <p style={{ margin: 0, fontWeight: 600 }}>hello@engineeringindia.org</p>
+                    <p style={{ margin: 0, fontWeight: 600 }}>engineeringindiasvpect@gmail.com</p>
                   </div>
                 </TiltCard>
 
@@ -205,7 +205,7 @@ export default function Contact() {
                     <h4 style={{ fontFamily: 'Space Grotesk, monospace', fontSize: '0.75rem', textTransform: 'uppercase', color: 'var(--blueprint-blue, #155EEF)' }}>
                       DIRECT_LINE // TELEPHONE
                     </h4>
-                    <p style={{ margin: 0, fontWeight: 600 }}>+91 98765 43210</p>
+                    <p style={{ margin: 0, fontWeight: 600 }}>+91 820 844 7582</p>
                   </div>
                 </TiltCard>
 
