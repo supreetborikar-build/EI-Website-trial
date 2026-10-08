@@ -402,6 +402,14 @@ function seedData() {
             linkedin: 'https://linkedin.com/in/pooja-iyer-ei',
             bio: 'Supporting student member onboarding, grievance redressal, and peer mentorship study groups across batches.',
             skills: ['Student Welfare', 'Onboarding', 'Community Building', 'Event Planning']
+          },
+          {
+            name: 'Sharwari Dhandale',
+            role: 'Executive Committee Member',
+            avatar: '/committee_assets/Sharwari Dhandale.jpg',
+            linkedin: 'https://www.linkedin.com/in/sharwari-dhandale-820a262b8',
+            bio: 'Turning ambition into architecture.',
+            skills: []
           }
         ])
       },
