@@ -79,7 +79,7 @@ export default function Footer() {
               Uniting student developers, designers, and innovators to engineer solutions with human purpose.
             </p>
 
-            <div className="footer-social" style={{ display: 'flex', gap: '8px' }}>
+            {/* <div className="footer-social" style={{ display: 'flex', gap: '8px' }}>
               <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="cad-social-btn">
                 <i className="fa-brands fa-x-twitter"></i>
               </a>
@@ -94,6 +94,32 @@ export default function Footer() {
               </a>
               <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="cad-social-btn">
                 <i className="fa-brands fa-youtube"></i>
+              </a>
+            </div> */}
+
+            <div className="footer-social" style={{ display: 'flex', gap: '8px' }}>
+              {/* Official Engineering India LinkedIn page */}
+              <a
+                href="https://www.linkedin.com/company/engineeringindia-2047/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Engineering India on LinkedIn"
+                title="LinkedIn"
+                className="cad-social-btn"
+              >
+                <i className="fa-brands fa-linkedin" aria-hidden="true"></i>
+              </a>
+
+              {/* Official Engineering India Instagram page */}
+              <a
+                href="https://www.instagram.com/engineering.india_svpcet/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Engineering India on Instagram"
+                title="Instagram"
+                className="cad-social-btn"
+              >
+                <i className="fa-brands fa-instagram" aria-hidden="true"></i>
               </a>
             </div>
           </div>

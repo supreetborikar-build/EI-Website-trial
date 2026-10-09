@@ -54,10 +54,10 @@ export default function Contact() {
               <h1 className="editorial-section-title" style={{ marginTop: '0.5rem', marginBottom: '1.25rem' }}>
                 Let's <span className="outline-text">Connect</span>
               </h1>
-              <p className="editorial-lead">
+              {/* <p className="editorial-lead">
                 Have a question, partnership idea, or want to start a chapter? We'd love to
                 hear from you. Send us a message and our team will get back to you.
-              </p>
+              </p> */}
             </div>
 
             {/* Contact Grid */}
@@ -184,10 +184,37 @@ export default function Contact() {
                     </svg>
                   </div>
                   <div>
-                    <h4 style={{ fontFamily: 'Space Grotesk, monospace', fontSize: '0.75rem', textTransform: 'uppercase', color: 'var(--blueprint-blue, #155EEF)' }}>
+                    {/* <h4 style={{ fontFamily: 'Space Grotesk, monospace', fontSize: '0.75rem', textTransform: 'uppercase', color: 'var(--blueprint-blue, #155EEF)' }}>
                       COMMUNICATION_LINK // EMAIL
                     </h4>
-                    <p style={{ margin: 0, fontWeight: 600 }}>hello@engineeringindia.org</p>
+                    <p style={{ margin: 0, fontWeight: 600 }}>hello@engineeringindia.org</p> */}
+
+                    <h4
+                      style={{
+                        fontFamily: 'Space Grotesk, monospace',
+                        fontSize: '0.75rem',
+                        textTransform: 'uppercase',
+                        color: 'var(--blueprint-blue, #155EEF)'
+                      }}
+                    >
+                      COMMUNICATION_LINK // INSTAGRAM
+                    </h4>
+
+                    <p style={{ margin: 0, fontWeight: 600 }}>
+                      <a
+                        href="https://www.instagram.com/engineering.india_svpcet/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{
+                          color: 'inherit',
+                          textDecoration: 'underline',
+                          overflowWrap: 'anywhere'
+                        }}
+                      >
+                        @engineering.india_svpcet 
+                      </a>
+                    </p>
+
                   </div>
                 </TiltCard>
 
@@ -232,18 +259,44 @@ export default function Contact() {
                 <div className="contact-social">
                   <h4>Follow Our Journey</h4>
                   <div className="social-row">
-                    <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="social-link">
+                    {/* <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="social-link">
                       <i className="fa-brands fa-x-twitter"></i>
-                    </a>
-                    <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="social-link">
+                    </a> */}
+                    {/* <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="social-link">
                       <i className="fa-brands fa-linkedin"></i>
                     </a>
                     <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="social-link">
                       <i className="fa-brands fa-instagram"></i>
-                    </a>
-                    <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="social-link">
+                    </a> */}
+                    {/* <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="social-link">
                       <i className="fa-brands fa-youtube"></i>
-                    </a>
+                    </a> */}
+
+                    <div className="social-row">
+                      {/* LinkedIn */}
+                      <a
+                        href="https://www.linkedin.com/company/engineeringindia-2047/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="LinkedIn"
+                        className="social-link"
+                      >
+                        <i className="fa-brands fa-linkedin"></i>
+                      </a>
+
+                      {/* Instagram */}
+                      <a
+                        href="https://www.instagram.com/engineering.india_svpcet/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Instagram"
+                        className="social-link"
+                      >
+                        <i className="fa-brands fa-instagram"></i>
+                      </a>
+                    </div>
+
+
                   </div>
                 </div>
               </div>
