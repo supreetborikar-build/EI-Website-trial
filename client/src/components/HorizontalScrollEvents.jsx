@@ -15,31 +15,74 @@ export default function HorizontalScrollEvents({ events = [], onSelectEvent }) {
 
   const displayEvents = events.length > 0 ? events : [
     {
-      id: 'demo-1',
-      title: 'National InnoHack 2026',
-      date: '15–17 September 2026',
+      id: 'promptwars-2026',
+      title: 'PromptWars 2026',
+      date: '4 October 2026',
+      location: 'SVPCET, Nagpur',
       category: 'Hackathon',
-      badge: 'Flagship Event',
-      description: '48-hour national hackathon uniting 500+ builders to develop real-world solutions for societal and industrial problems.',
-      image: '/assets_events/hackathon.jpg'
+      badge: 'Hackathon',
+      description: 'Engineering India\'s AI Vibe-Coding Hackathon brought together participants to transform ideas into working solutions through creativity, rapid development, and problem-solving. Organized in collaboration with GDG Nagpur and hack2skill, the event marked a significant milestone as the first event of its kind in Nagpur, featuring large-scale participation and an energetic innovation-driven atmosphere.',
+      image: 'assets_events/promptwars-2026.jpg'
     },
     {
-      id: 'demo-2',
-      title: 'AI & Robotics Innovation Summit',
-      date: '05 October 2026',
-      category: 'Workshop',
-      badge: 'Hands-on Lab',
-      description: 'Immersive exploration into neural networks, computer vision, embedded edge-computing, and robotic autonomy.',
-      image: '/assets_events/Ai Innovation.jpg'
+      id: 'alumni-meet-2026',
+      title: 'Alumni Meet',
+      date: '2 May 2026',
+      location: '',
+      category: 'Community',
+      badge: 'Alumni',
+      description: 'Engineering India coordinators connected with the founding batch of the Pallotti chapter for a memorable alumni gathering filled with cricket, games, and meaningful conversations. The interaction offered valuable career perspectives, insights into professional journeys, and an opportunity to strengthen bonds between alumni and current coordinators.',
+      image: 'assets_events/alumni-meet.jpeg'
     },
     {
-      id: 'demo-3',
-      title: 'National Code Sprint 2026',
-      date: '28 December 2026',
-      category: 'Competition',
-      badge: 'Competitive Coding',
-      description: 'High-octane algorithmic sprints, competitive architecture rounds, and live peer debugging with national recognition.',
-      image: '/assets_events/code sprint.png'
+      id: 'cdp-industry-visit',
+      title: 'CDP — Industry Visit',
+      date: '6 January 2026',
+      location: 'Trust Systems and Software Ltd., IT Park Road, Pratap Nagar, Nagpur',
+      category: 'Seminar',
+      badge: 'Industry Visit',
+      description: 'As part of the Coordinator Development Plan, the Engineering India SVPCET team visited Trust Systems and Software Ltd. Students explored the company\'s working environment, learned about technologies used in industry, and interacted with HR to understand hiring expectations, essential skills, and career opportunities.',
+      image: 'assets_events/cdp-industry-visit.jpg'
+    },
+    {
+      id: 'induction-programme-2025',
+      title: 'Induction Programme',
+      date: '21 August 2025',
+      location: 'SVPCET, Nagpur',
+      category: 'Seminar',
+      badge: 'Induction',
+      description: 'Engineering India welcomed first-year students and introduced them to the chapter\'s vision, initiatives, and upcoming events. The session highlighted EI\'s technical and social contributions, encouraged students to become involved, and was graced by Ms. Mrunali Buradkar, Pallotti EI Faculty Coordinator.',
+      image: 'assets_events/induction-programme.JPG'
+    },
+    {
+      id: 'rangittalim-1',
+      title: 'Rangittalim 1.0',
+      date: '27 July 2025',
+      location: 'Omkar Nagar, Nagpur',
+      category: 'Community',
+      badge: 'Community',
+      description: 'Under the Light of Learning initiative, Engineering India coordinators collaborated with Youth for Seva, Nagpur, to engage with children in Omkar Nagar. Through lessons, poems, games, and the distribution of books and stationery, the team created a joyful learning environment while connecting with families and understanding community needs.',
+      image: 'assets_events/rangittalim-1.JPG'
+    },
+    {
+      id: 'rangittalim-2',
+      title: 'Rangittalim 2.0',
+      date: '2 August 2026',
+      location: 'Near London Street, Nagpur',
+      category: 'Community',
+      badge: 'Community',
+      description: 'Engineering India celebrated Friendship Day with children from a local community through educational games, creative learning activities, and moments of shared fun. The initiative encouraged children to explore new ideas, understand the value of friendship, and build meaningful connections in a warm and inclusive environment.',
+      image: 'assets_events/rangittalim-2.jpg'
+    },
+    {
+      id: 'seva-sankalp',
+      title: 'Seva Sankalp',
+      date: '16 October 2025',
+      location: 'Nalanda Vastistar Vruddhashram, Binaki, Nagpur',
+      category: 'Community',
+      badge: 'Community',
+      description: 'In collaboration with EI RBU, Engineering India coordinators visited an old-age home to spend quality time with elderly residents. Through heartfelt conversations, shared life experiences, old songs, and a cake-cutting celebration, the visit promoted companionship, respect, and compassion across generations.',
+      image: 'assets_events/seva-sankalp.jpeg'
     }
   ];
 
@@ -98,7 +141,7 @@ export default function HorizontalScrollEvents({ events = [], onSelectEvent }) {
             <span>04 // EXHIBITION TRACK // CAD-04</span>
           </div>
           <h2 className="editorial-section-title" style={{ marginTop: '0.5rem' }}>
-            Upcoming Experiences
+            Our Experiences
           </h2>
           <p className="editorial-lead">
             Curated national summits, hackathons, and technical workshops across India.
@@ -224,10 +267,17 @@ export default function HorizontalScrollEvents({ events = [], onSelectEvent }) {
                       marginBottom: '0.6rem',
                       display: 'flex',
                       alignItems: 'center',
-                      gap: '0.5rem'
+                      gap: '0.5rem',
+                      flexWrap: 'wrap'
                     }}
                   >
                     <span>🗓 {event.date}</span>
+                    {event.location && (
+                      <>
+                        <span style={{ opacity: 0.5 }}>|</span>
+                        <span>📍 {event.location}</span>
+                      </>
+                    )}
                   </div>
 
                   <h3
@@ -253,44 +303,6 @@ export default function HorizontalScrollEvents({ events = [], onSelectEvent }) {
                   >
                     {event.description}
                   </p>
-                </div>
-
-                <div
-                  style={{
-                    marginTop: '1.5rem',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    borderTop: '1px solid var(--border, #E2E8F0)',
-                    paddingTop: '1.25rem'
-                  }}
-                >
-                  <button
-                    type="button"
-                    onClick={() => onSelectEvent && onSelectEvent(event)}
-                    className="btn-cinematic-primary"
-                    style={{
-                      padding: '0.65rem 1.35rem',
-                      fontSize: '0.82rem'
-                    }}
-                  >
-                    <span>Register Now</span>
-                    <span aria-hidden="true">&rarr;</span>
-                  </button>
-
-                  <Link
-                    to="/events"
-                    style={{
-                      fontFamily: 'Space Grotesk, monospace',
-                      fontSize: '0.8rem',
-                      fontWeight: 600,
-                      color: 'var(--light-text, #64748B)',
-                      textDecoration: 'none',
-                      textTransform: 'uppercase'
-                    }}
-                  >
-                    Details &amp; Schedule &rarr;
-                  </Link>
                 </div>
               </div>
             </div>

@@ -16,12 +16,10 @@ import PrinciplesReel from '../components/PrinciplesReel';
 import { OFFICIAL_COMMITTEE_DOMAINS } from '../data/committeeData';
 
 const HERO_IMAGES = [
-  { src: '/assets/images/hero/EI.png', title: 'National Movement', tag: 'Initiative' },
-  { src: '/assets/images/hero/future.png', title: 'Future of Engineering', tag: 'Vision 2030' },
-  { src: '/assets/images/hero/hackathon.png', title: 'National InnoHack', tag: 'Competition' },
-  { src: '/assets/images/hero/project.png', title: 'Student Innovation', tag: 'R&D Labs' },
-  { src: '/assets/images/hero/Student.png', title: 'Engineering Students', tag: 'Community' },
-  { src: '/assets/images/hero/Workshops.png', title: 'Hands-on Labs', tag: 'Skill Sessions' }
+  { src: '/assets_events/impact.jpeg', title: 'Taking the Lead', tag: 'Initiative' },
+  { src: '/assets_events/learn.JPG', title: 'Future of Engineering', tag: 'Vision' },
+  { src: '/assets_events/promptwars-2026.jpg', title: 'PromptWars 2026', tag: 'Competition' },
+  { src: '/assets_events/rangittalim-1.JPG', title: 'Social Impact', tag: 'Community' }
 ];
 
 export default function Home() {

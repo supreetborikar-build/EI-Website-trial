@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { api } from '../services/api';
-import EventRegisterModal from '../components/EventRegisterModal';
 import { useToast } from '../components/Toast';
 import TiltCard from '../components/TiltCard';
 import MagneticButton from '../components/MagneticButton';
@@ -47,70 +46,110 @@ const GALLERY_DATA = [
   }
 ];
 
-const MEGA_SLIDES = [
-  {
-    title: 'National InnoHack 2026',
-    tag: 'Flagship Event',
-    date: '15–17 September 2026',
-    location: 'Main Auditorium & Virtual',
-    description: '48-hour national hackathon bringing together 500+ students to build solutions for real-world engineering challenges.',
-    image: '/assets_events/hackathon.jpg',
-    category: 'hackathon'
-  },
-  {
-    title: 'AI Innovation Summit 2026',
-    tag: 'National Summit',
-    date: '05 October 2026',
-    location: 'Tech Hub Arena',
-    description: 'Explore neural networks, generative AI, robotic systems, and intelligent edge computing with industry leaders.',
-    image: '/assets_events/Ai Innovation.jpg',
-    category: 'seminar'
-  },
-  {
-    title: 'National Code Sprint 2026',
-    tag: 'Competitive Coding',
-    date: '28 December 2026',
-    location: 'Online Coding Arena',
-    description: 'Algorithm challenges, speed-coding rounds, and collaborative architecture problem solving with cash prizes.',
-    image: '/assets_events/code sprint.png',
-    category: 'hackathon'
-  }
-];
-
 export default function Events() {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [activeFilter, setActiveFilter] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
-  const [visibleCount, setVisibleCount] = useState(3);
-  const [selectedEvent, setSelectedEvent] = useState(null);
-  const [isRegisterOpen, setIsRegisterOpen] = useState(false);
-  const [savedEvents, setSavedEvents] = useState(() => {
-    try {
-      return JSON.parse(localStorage.getItem('ei_saved_events') || '[]');
-    } catch {
-      return [];
-    }
-  });
-
-  // Mega slide state
+  
   const [currentMegaSlide, setCurrentMegaSlide] = useState(0);
-
-  // Creative Gallery state
   const [activeGalleryIndex, setActiveGalleryIndex] = useState(0);
 
-  // Live countdown timer state
-  const [countdown, setCountdown] = useState({ days: '00', hours: '00', minutes: '00', seconds: '00' });
-
-  const { addToast } = useToast();
   const eventsSectionRef = useRef(null);
   const lenis = useLenis();
 
-  // Fetch events from API
+  // Authoritative single source of truth fallback
+  const FALLBACK_EVENTS = [
+    {
+      id: 'promptwars-2026',
+      title: 'PromptWars 2026',
+      category: 'hackathon',
+      date: '4 October 2026',
+      location: 'SVPCET, Nagpur',
+      description: "Engineering India's AI Vibe-Coding Hackathon brought together participants to transform ideas into working solutions through creativity, rapid development, and problem-solving. Organized in collaboration with GDG Nagpur and hack2skill, the event marked a significant milestone as the first event of its kind in Nagpur, featuring large-scale participation and an energetic innovation-driven atmosphere.",
+      image: '/assets_events/promptwars-2026.jpg',
+      badge: 'Hackathon'
+    },
+    {
+      id: 'alumni-meet',
+      title: 'Alumni Meet',
+      category: 'community',
+      date: '2 May 2026',
+      location: '',
+      description: "Engineering India coordinators connected with the founding batch of the Pallotti chapter for a memorable alumni gathering filled with cricket, games, and meaningful conversations. The interaction offered valuable career perspectives, insights into professional journeys, and an opportunity to strengthen bonds between alumni and current coordinators.",
+      image: '/assets_events/alumni-meet.jpeg',
+      badge: 'Alumni'
+    },
+    {
+      id: 'cdp-industry-visit',
+      title: 'CDP — Industry Visit',
+      category: 'seminar',
+      date: '6 January 2026',
+      location: 'Trust Systems and Software Ltd., IT Park Road, Pratap Nagar, Nagpur',
+      description: "As part of the Coordinator Development Plan, the Engineering India SVPCET team visited Trust Systems and Software Ltd. Students explored the company's working environment, learned about technologies used in industry, and interacted with HR to understand hiring expectations, essential skills, and career opportunities.",
+      image: '/assets_events/cdp-industry-visit.jpg',
+      badge: 'Industry Visit'
+    },
+    {
+      id: 'induction-programme',
+      title: 'Induction Programme',
+      category: 'seminar',
+      date: '21 August 2025',
+      location: 'SVPCET, Nagpur',
+      description: "Engineering India welcomed first-year students and introduced them to the chapter's vision, initiatives, and upcoming events. The session highlighted EI's technical and social contributions, encouraged students to become involved, and was graced by Ms. Mrunali Buradkar, Pallotti EI Faculty Coordinator.",
+      image: '/assets_events/induction-programme.JPG',
+      badge: 'Induction'
+    },
+    {
+      id: 'rangittalim-1',
+      title: 'Rangittalim 1.0',
+      category: 'community',
+      date: '27 July 2025',
+      location: 'Omkar Nagar, Nagpur',
+      description: "Under the Light of Learning initiative, Engineering India coordinators collaborated with Youth for Seva, Nagpur, to engage with children in Omkar Nagar. Through lessons, poems, games, and the distribution of books and stationery, the team created a joyful learning environment while connecting with families and understanding community needs.",
+      image: '/assets_events/rangittalim-1.JPG',
+      badge: 'Community'
+    },
+    {
+      id: 'rangittalim-2',
+      title: 'Rangittalim 2.0',
+      category: 'community',
+      date: '2 August 2026',
+      location: 'Near London Street, Nagpur',
+      description: "Engineering India celebrated Friendship Day with children from a local community through educational games, creative learning activities, and moments of shared fun. The initiative encouraged children to explore new ideas, understand the value of friendship, and build meaningful connections in a warm and inclusive environment.",
+      image: '/assets_events/rangittalim-2.jpg',
+      badge: 'Community'
+    },
+    {
+      id: 'seva-sankalp',
+      title: 'Seva Sankalp',
+      category: 'community',
+      date: '16 October 2025',
+      location: 'Nalanda Vastistar Vruddhashram, Binaki, Nagpur',
+      description: "In collaboration with EI RBU, Engineering India coordinators visited an old-age home to spend quality time with elderly residents. Through heartfelt conversations, shared life experiences, old songs, and a cake-cutting celebration, the visit promoted companionship, respect, and compassion across generations.",
+      image: '/assets_events/seva-sankalp.jpeg',
+      badge: 'Community'
+    }
+  ];
+
   const fetchEvents = () => {
+    setLoading(true);
     api.getEvents(activeFilter, searchQuery)
-      .then(res => setEvents(res.data || []))
-      .catch(err => console.error('Error loading events:', err))
+      .then(res => {
+        if (res.data && res.data.length > 0) {
+          setEvents(res.data);
+        } else {
+          if (!searchQuery && activeFilter === 'all') {
+             setEvents(FALLBACK_EVENTS);
+          } else {
+             setEvents([]);
+          }
+        }
+      })
+      .catch(err => {
+        console.error('Error loading events:', err);
+        setEvents(FALLBACK_EVENTS);
+      })
       .finally(() => setLoading(false));
   };
 
@@ -118,66 +157,15 @@ export default function Events() {
     fetchEvents();
   }, [activeFilter, searchQuery]);
 
-  // Mega slider auto-play
+  const displayEvents = events.length > 0 ? events : (!loading && !searchQuery && activeFilter === 'all' ? FALLBACK_EVENTS : events);
+
   useEffect(() => {
+    if (displayEvents.length === 0) return;
     const timer = setInterval(() => {
-      setCurrentMegaSlide(prev => (prev + 1) % MEGA_SLIDES.length);
+      setCurrentMegaSlide(prev => (prev + 1) % displayEvents.length);
     }, 6000);
     return () => clearInterval(timer);
-  }, []);
-
-  // Live countdown timer
-  useEffect(() => {
-    const targetDate = new Date('December 15, 2026 09:00:00').getTime();
-
-    const updateTimer = () => {
-      const now = new Date().getTime();
-      const distance = targetDate - now;
-
-      if (distance <= 0) {
-        setCountdown({ days: '00', hours: '00', minutes: '00', seconds: '00' });
-        return;
-      }
-
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-      setCountdown({
-        days: String(days).padStart(2, '0'),
-        hours: String(hours).padStart(2, '0'),
-        minutes: String(minutes).padStart(2, '0'),
-        seconds: String(seconds).padStart(2, '0')
-      });
-    };
-
-    updateTimer();
-    const interval = setInterval(updateTimer, 1000);
-    return () => clearInterval(interval);
-  }, []);
-
-  const toggleSaveEvent = (eventId) => {
-    let updated;
-    if (savedEvents.includes(eventId)) {
-      updated = savedEvents.filter(id => id !== eventId);
-      addToast('Event removed from saved items', 'info');
-    } else {
-      updated = [...savedEvents, eventId];
-      addToast('Event saved to favorites! ♥', 'success');
-    }
-    setSavedEvents(updated);
-    localStorage.setItem('ei_saved_events', JSON.stringify(updated));
-  };
-
-  const handleRegisterClick = (event) => {
-    setSelectedEvent(event);
-    setIsRegisterOpen(true);
-  };
-
-  const handleRegisterSuccess = () => {
-    fetchEvents();
-  };
+  }, [displayEvents.length]);
 
   const scrollToEvents = () => {
     if (lenis && eventsSectionRef.current) {
@@ -195,8 +183,12 @@ export default function Events() {
     { id: 'community', label: 'Community' }
   ];
 
-  const visibleEvents = events.slice(0, visibleCount);
-  const containerRef = useScrollReveal([visibleEvents]);
+  const containerRef = useScrollReveal([displayEvents]);
+
+  const getImagePath = (imgPath) => {
+    if (!imgPath) return '/assets_events/gallery1.jpg';
+    return imgPath.startsWith('/') ? imgPath : `/${imgPath}`;
+  };
 
   return (
     <div className="events-page-container blueprint-paper-canvas" ref={containerRef} style={{ position: 'relative' }}>
@@ -204,135 +196,68 @@ export default function Events() {
       <div className="blueprint-ruler-top">
         <span>04 // EVENT BLUEPRINT ARCHIVE // EI-CATALOG</span>
         <span>SYS_STATUS: ACTIVE</span>
-        <span>INDEX: 01 – {String(events.length).padStart(2, '0')}</span>
-      </div>
-
-      {/* LIVE ANNOUNCEMENT MARQUEE BAR */}
-      <div className="live-bar">
-        <div className="live-track">
-          <span>
-            🔴 LIVE NOW • Registrations Open for InnoHack 2026 • AI &amp; Robotics Summit •
-            Full Stack Bootcamp • Community Impact Drive • Technology with Purpose •
-          </span>
-          <span>
-            🔴 LIVE NOW • Registrations Open for InnoHack 2026 • AI &amp; Robotics Summit •
-            Full Stack Bootcamp • Community Impact Drive • Technology with Purpose •
-          </span>
-        </div>
+        <span>INDEX: 01 – {String(displayEvents.length).padStart(2, '0')}</span>
       </div>
 
       {/* HERO SECTION */}
-      <section className="hero" id="home">
+      <section className="hero" id="home" style={{ minHeight: 'auto', paddingBottom: '3rem' }}>
         <div className="hero-shape shape1"></div>
         <div className="hero-shape shape2"></div>
         <div className="hero-shape shape3"></div>
 
-        <div className="container hero-grid">
-          <div className="hero-content">
-            <div className="telemetry-tag" style={{ marginBottom: '1rem' }}>
-              <span>04 // DIRECTORY &amp; TIMELINE // CAD-SPEC</span>
+        <div className="container hero-grid" style={{ gridTemplateColumns: '1fr' }}>
+          <div className="hero-content" style={{ textAlign: 'center', margin: '0 auto', maxWidth: '800px' }}>
+            <div className="telemetry-tag" style={{ marginBottom: '1rem', justifyContent: 'center' }}>
+              <span>04 // OUR JOURNEY // IMPACT</span>
             </div>
             <div className="hero-tag">Technology • Innovation • Community</div>
-            <h1 className="editorial-section-title" style={{ marginTop: '0.5rem', marginBottom: '1.25rem' }}>
-              Building Technology <span className="outline-text">For Tomorrow</span>
+            <h1 className="editorial-section-title" style={{ marginTop: '0.5rem', marginBottom: '1.25rem', marginLeft: 'auto', marginRight: 'auto' }}>
+              Successfully Completed <span className="outline-text">Events</span>
             </h1>
-            <p className="editorial-lead" style={{ marginBottom: '2rem' }}>
-              Empowering students through innovation, collaboration, and meaningful community
-              impact. Join workshops, hackathons, seminars, and social initiatives designed to
-              create real-world change.
+            <p className="editorial-lead" style={{ marginBottom: '2rem', margin: '0 auto 2rem auto' }}>
+              Explore the initiatives, workshops, hackathons, and community outreach programs 
+              where our chapter turned ideas into action.
             </p>
-            <div className="hero-buttons">
+            <div className="hero-buttons" style={{ justifyContent: 'center' }}>
               <MagneticButton>
                 <button onClick={scrollToEvents} className="btn-cinematic-primary" type="button">
-                  <span>Explore Events ↓</span>
-                </button>
-              </MagneticButton>
-              <MagneticButton>
-                <button
-                  onClick={() => handleRegisterClick(events[0] || MEGA_SLIDES[0])}
-                  className="btn-cinematic-outline"
-                  type="button"
-                >
-                  <span>Register Next &rarr;</span>
+                  <span>Explore Timeline ↓</span>
                 </button>
               </MagneticButton>
             </div>
-          </div>
-
-          {/* FLOATING CLUB EVENT WINDOW */}
-          <div className="hero-image">
-            <TiltCard className="club-event-window" maxTilt={2.5}>
-              <div className="event-window-glow"></div>
-              <div className="club-event-top">
-                <span className="club-event-badge">🔥 Trending</span>
-                <span className="club-event-live">● UPCOMING</span>
-              </div>
-              <div className="club-event-content">
-                <span className="club-event-mini">ENGINEERING INDIA PRESENTS</span>
-                <h3>Summer Mega Fest 2026</h3>
-                <p>
-                  A nationwide celebration of innovation, open-source projects, and
-                  unforgettable tech community moments.
-                </p>
-                <div className="club-event-details">
-                  <span>
-                    <i className="fa-solid fa-calendar"></i> 15–17 July 2026
-                  </span>
-                  <span>
-                    <i className="fa-solid fa-location-dot"></i> SVPCET Innovation Hub
-                  </span>
-                </div>
-                <div className="club-event-btn-wrapper">
-                  <button
-                    onClick={() => handleRegisterClick({ id: 'event-hackathon', title: 'Summer Mega Fest 2026', date: '15-17 July 2026', location: 'SVPCET Innovation Hub', badge: 'Mega Fest' })}
-                    className="club-event-btn"
-                  >
-                    Register Free &rarr;
-                  </button>
-                </div>
-              </div>
-            </TiltCard>
           </div>
         </div>
       </section>
 
-      {/* MEGA FEATURED CAROUSEL */}
+      {/* MEGA FEATURED CAROUSEL - Real Events */}
+      {displayEvents.length > 0 && (
       <section className="featured-event">
         <div className="container">
           <div className="featured-card mega-event-card events-featured-card">
             <div className="mega-carousel-track">
-              {MEGA_SLIDES.map((slide, idx) => (
+              {displayEvents.map((slide, idx) => (
                 <article
                   key={idx}
                   className={`mega-slide ${idx === currentMegaSlide ? 'active' : ''}`}
                 >
                   <div className="featured-content">
-                    <div className="event-label">🔥 {slide.tag}</div>
+                    {slide.badge && <div className="event-label">🔥 {slide.badge}</div>}
                     <h2>{slide.title}</h2>
-                    <p>{slide.description}</p>
-                    <div className="featured-info">
+                    <p style={{ fontSize: '1.1rem', lineHeight: 1.6 }}>{slide.description}</p>
+                    <div className="featured-info" style={{ marginTop: '1.5rem' }}>
                       <div>
                         <i className="fa-solid fa-calendar"></i> {slide.date}
                       </div>
+                      {slide.location && (
                       <div>
                         <i className="fa-solid fa-location-dot"></i> {slide.location}
                       </div>
-                    </div>
-                    <div className="featured-buttons">
-                      <button
-                        onClick={() => handleRegisterClick({ id: `mega-${idx}`, title: slide.title, date: slide.date, location: slide.location, badge: slide.tag })}
-                        className="btn primary"
-                      >
-                        Register for Event
-                      </button>
-                      <button onClick={scrollToEvents} className="btn secondary">
-                        View Schedule
-                      </button>
+                      )}
                     </div>
                   </div>
                   <div className="featured-image">
-                    <img src={slide.image} alt={slide.title} />
-                    <div className="mega-status">🔥 Featured</div>
+                    <img src={getImagePath(slide.image)} alt={slide.title} />
+                    <div className="mega-status">🎯 Completed</div>
                   </div>
                 </article>
               ))}
@@ -340,21 +265,21 @@ export default function Events() {
 
             <button
               className="mega-arrow mega-prev"
-              onClick={() => setCurrentMegaSlide((currentMegaSlide - 1 + MEGA_SLIDES.length) % MEGA_SLIDES.length)}
-              aria-label="Previous mega slide"
+              onClick={() => setCurrentMegaSlide((currentMegaSlide - 1 + displayEvents.length) % displayEvents.length)}
+              aria-label="Previous event"
             >
               <i className="fa-solid fa-chevron-left"></i>
             </button>
             <button
               className="mega-arrow mega-next"
-              onClick={() => setCurrentMegaSlide((currentMegaSlide + 1) % MEGA_SLIDES.length)}
-              aria-label="Next mega slide"
+              onClick={() => setCurrentMegaSlide((currentMegaSlide + 1) % displayEvents.length)}
+              aria-label="Next event"
             >
               <i className="fa-solid fa-chevron-right"></i>
             </button>
 
             <div className="mega-dots">
-              {MEGA_SLIDES.map((_, idx) => (
+              {displayEvents.map((_, idx) => (
                 <button
                   key={idx}
                   className={`mega-dot ${idx === currentMegaSlide ? 'active' : ''}`}
@@ -366,75 +291,16 @@ export default function Events() {
           </div>
         </div>
       </section>
-
-      {/* LIVE COUNTDOWN SECTION */}
-      <section className="countdown-section" data-reveal="fade-up">
-        <div className="container">
-          <div className="countdown-card countdown-wrapper">
-            <div className="countdown-text">
-              <span className="countdown-tag">COUNTDOWN TO MEGA TECH FEST</span>
-              <h2 className="countdown-title">Next Major Summit Starts In</h2>
-              <p>Featured event countdown — get ready to learn, connect and create.</p>
-            </div>
-            <div className="countdown countdown-timer">
-              <div className="time-box">
-                <h2 className="number" id="days">{countdown.days}</h2>
-                <p className="label">Days</p>
-              </div>
-              <div className="time-box">
-                <h2 className="number" id="hours">{countdown.hours}</h2>
-                <p className="label">Hours</p>
-              </div>
-              <div className="time-box">
-                <h2 className="number" id="minutes">{countdown.minutes}</h2>
-                <p className="label">Minutes</p>
-              </div>
-              <div className="time-box">
-                <h2 className="number" id="seconds">{countdown.seconds}</h2>
-                <p className="label">Seconds</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* STATS COUNTER SECTION */}
-      <section className="stats-section" data-reveal="fade-up">
-        <div className="container">
-          <div className="stats-grid">
-            <TiltCard className="stat-card">
-              <i className="fa-solid fa-users"></i>
-              <h2 className="stat-number">1,500+</h2>
-              <p className="stat-label">Active Members</p>
-            </TiltCard>
-            <TiltCard className="stat-card">
-              <i className="fa-solid fa-calendar-check"></i>
-              <h2 className="stat-number">45+</h2>
-              <p className="stat-label">Events Hosted</p>
-            </TiltCard>
-            <TiltCard className="stat-card">
-              <i className="fa-solid fa-laptop-code"></i>
-              <h2 className="stat-number">120+</h2>
-              <p className="stat-label">Hands-on Workshops</p>
-            </TiltCard>
-            <TiltCard className="stat-card">
-              <i className="fa-solid fa-trophy"></i>
-              <h2 className="stat-number">12+</h2>
-              <p className="stat-label">National Hackathons</p>
-            </TiltCard>
-          </div>
-        </div>
-      </section>
+      )}
 
       {/* MAIN EVENTS DIRECTORY SECTION */}
       <section className="events-section" id="events" ref={eventsSectionRef}>
         <div className="container">
           <div className="section-title" data-reveal="fade-up">
-            <span>OUR EVENTS</span>
-            <h2>Discover Upcoming Events</h2>
+            <span>OUR IMPACT</span>
+            <h2>Our Journey, Our Impact</h2>
             <p>
-              Explore workshops, hackathons, seminars, and community activities designed to
-              help you learn, build, and grow.
+              A complete archive of the events, workshops, and community activities that define the Engineering India chapter.
             </p>
           </div>
 
@@ -445,7 +311,7 @@ export default function Events() {
               <input
                 type="text"
                 id="searchInput"
-                placeholder="Search events by title or keyword..."
+                placeholder="Search past events by title or keyword..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
@@ -460,7 +326,6 @@ export default function Events() {
                 className={`filter-btn ${activeFilter === cat.id ? 'active' : ''}`}
                 onClick={() => {
                   setActiveFilter(cat.id);
-                  setVisibleCount(3);
                 }}
               >
                 {cat.label}
@@ -469,18 +334,87 @@ export default function Events() {
           </div>
 
           {/* Events Grid */}
-          <div className="events-grid">
+          <style>{`
+            .completed-events-grid {
+              display: grid;
+              grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+              gap: 2.5rem;
+              margin-top: 3rem;
+            }
+            .completed-event-card {
+              display: flex;
+              flex-direction: column;
+              height: 100%;
+            }
+            .completed-event-image-wrapper {
+              height: 240px;
+              width: 100%;
+              overflow: hidden;
+              position: relative;
+            }
+            .completed-event-image {
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+              transition: transform 0.5s ease;
+            }
+            .completed-event-card:hover .completed-event-image {
+              transform: scale(1.05);
+            }
+            .completed-event-content {
+              padding: 2rem;
+              display: flex;
+              flex-direction: column;
+              flex-grow: 1;
+            }
+            .completed-event-title {
+              font-family: 'Outfit', sans-serif;
+              font-size: 1.6rem;
+              font-weight: 700;
+              margin-bottom: 1rem;
+              color: var(--heading, #111315);
+              line-height: 1.3;
+            }
+            .completed-event-description {
+              font-size: 1.05rem;
+              line-height: 1.6;
+              color: var(--body, #334155);
+              margin-bottom: 1.5rem;
+              flex-grow: 1;
+            }
+            .completed-event-details {
+              display: flex;
+              flex-direction: column;
+              gap: 0.5rem;
+              font-family: 'Space Grotesk', monospace;
+              font-size: 0.85rem;
+              color: var(--primary, #155EEF);
+              font-weight: 600;
+            }
+            .completed-event-details p {
+              margin: 0;
+              display: flex;
+              align-items: center;
+              gap: 0.5rem;
+            }
+            @media (max-width: 768px) {
+              .completed-events-grid {
+                grid-template-columns: 1fr;
+              }
+            }
+          `}</style>
+          
+          <div className="completed-events-grid">
             {loading ? (
               <p style={{ textAlign: 'center', gridColumn: '1/-1', fontFamily: 'Space Grotesk, monospace' }}>
-                // INITIALIZING TELEMETRY &amp; EVENT SCHEMATICS...
+                // INITIALIZING TELEMETRY & EVENT SCHEMATICS...
               </p>
-            ) : visibleEvents.length > 0 ? (
-              visibleEvents.map((event, idx) => {
-                const isSaved = savedEvents.includes(event.id);
+            ) : displayEvents.length > 0 ? (
+              displayEvents.map((event, idx) => {
                 return (
                   <TiltCard
                     key={event.id || idx}
-                    className="event-card blueprint-sheet-card cad-frame-wrap"
+                    className="blueprint-sheet-card cad-frame-wrap completed-event-card"
                     data-category={event.category}
                   >
                     <div className="cad-corner-marker tl" />
@@ -489,52 +423,35 @@ export default function Events() {
                     <div className="cad-corner-marker br" />
 
                     <div className="blueprint-spec-header">
-                      <span>EVENT_{String(idx + 1).padStart(3, '0')} // CAD_SPEC</span>
+                      <span>ARCHIVE_{String(idx + 1).padStart(3, '0')}</span>
                       <span>{event.category?.toUpperCase() || 'CORE'}</span>
                     </div>
 
-                    <div className="event-image" style={{ position: 'relative', overflow: 'hidden' }}>
+                    <div className="completed-event-image-wrapper">
                       <img
-                        src={event.image ? (event.image.startsWith('/') ? event.image : `/${event.image}`) : '/assets_events/gallery1.jpg'}
+                        src={getImagePath(event.image)}
                         alt={event.title}
+                        className="completed-event-image"
                         onError={(e) => {
                           e.target.src = '/assets_events/gallery1.jpg';
                         }}
                       />
-                      <div className="event-badge">{event.badge || event.category}</div>
+                      {event.badge && <div className="event-badge">{event.badge}</div>}
                     </div>
 
-                    <div className="event-content">
-                      <h3 className="event-title">{event.title}</h3>
-                      <p className="event-description">{event.description}</p>
+                    <div className="completed-event-content">
+                      <h3 className="completed-event-title">{event.title}</h3>
+                      <p className="completed-event-description">{event.description}</p>
 
-                      <div className="event-details">
+                      <div className="completed-event-details">
                         <p>
                           <i className="fa-solid fa-calendar"></i> {event.date}
                         </p>
+                        {event.location && (
                         <p>
                           <i className="fa-solid fa-location-dot"></i> {event.location}
                         </p>
-                        {event.registered_count !== undefined && (
-                          <p style={{ color: 'var(--blueprint-blue, #155EEF)', fontWeight: 600 }}>
-                            <i className="fa-solid fa-users"></i> {event.registered_count} Registered
-                          </p>
                         )}
-                      </div>
-
-                      <div className="event-actions">
-                        <button
-                          onClick={() => handleRegisterClick(event)}
-                          className="btn-small primary"
-                        >
-                          Register Now
-                        </button>
-                        <button
-                          onClick={() => toggleSaveEvent(event.id)}
-                          className={`btn-small outline ${isSaved ? 'saved' : ''}`}
-                        >
-                          {isSaved ? '♥ Saved' : 'Save'}
-                        </button>
                       </div>
                     </div>
                   </TiltCard>
@@ -546,71 +463,21 @@ export default function Events() {
               </p>
             )}
           </div>
-
-          {/* Load More Button */}
-          {visibleCount < events.length && (
-            <div className="load-more-wrapper">
-              <button
-                id="loadMoreBtn"
-                className="btn secondary"
-                onClick={() => setVisibleCount(prev => prev + 3)}
-              >
-                Load More Events &darr;
-              </button>
-            </div>
-          )}
         </div>
       </section>
 
-      {/* EVENT TIMELINE / SCHEDULE */}
-      <section className="timeline-section" id="timeline">
-        <div className="container">
-          <div className="section-title">
-            <span>EVENT JOURNEY</span>
-            <h2>Upcoming Schedule</h2>
-            <p>
-              Stay updated with our exciting lineup of technical and community events
-              throughout the year.
-            </p>
+      {/* NEW UPCOMING ANNOUNCEMENT SECTION */}
+      <section className="timeline-section" id="upcoming" style={{ padding: '6rem 0', background: 'rgba(15, 23, 42, 0.02)' }}>
+        <div className="container" style={{ textAlign: 'center', maxWidth: '800px' }}>
+          <div className="telemetry-tag" style={{ justifyContent: 'center', margin: '0 auto 1.5rem auto', display: 'flex' }}>
+            <span>05 // FUTURE INITIATIVES</span>
           </div>
-
-          <div className="timeline">
-            <div className="timeline-item">
-              <div className="timeline-dot"></div>
-              <div className="timeline-content">
-                <span className="timeline-date">January 20, 2026</span>
-                <h3>Full Stack Development Bootcamp</h3>
-                <p>Learn HTML, CSS, JavaScript, React, and Node.js through practical sessions.</p>
-              </div>
-            </div>
-
-            <div className="timeline-item">
-              <div className="timeline-dot"></div>
-              <div className="timeline-content">
-                <span className="timeline-date">September 15–17, 2026</span>
-                <h3>InnoHack 2026</h3>
-                <p>Compete in our 48-hour national student hackathon with mentors from industry.</p>
-              </div>
-            </div>
-
-            <div className="timeline-item">
-              <div className="timeline-dot"></div>
-              <div className="timeline-content">
-                <span className="timeline-date">October 5, 2026</span>
-                <h3>AI &amp; Robotics Workshop</h3>
-                <p>Build real robotic controllers and explore machine learning deployment pipelines.</p>
-              </div>
-            </div>
-
-            <div className="timeline-item">
-              <div className="timeline-dot"></div>
-              <div className="timeline-content">
-                <span className="timeline-date">November 12, 2026</span>
-                <h3>Community Digital Impact Drive</h3>
-                <p>Volunteer to spread digital literacy and tech education in regional schools.</p>
-              </div>
-            </div>
-          </div>
+          <h2 style={{ fontFamily: 'Outfit, sans-serif', fontSize: '2.5rem', fontWeight: 800, marginBottom: '1.5rem', color: 'var(--heading)' }}>
+            Something New Is Coming
+          </h2>
+          <p style={{ fontSize: '1.15rem', lineHeight: 1.7, color: 'var(--body)' }}>
+            Every event is another opportunity to learn, build, and make a difference. We're preparing what's next. Stay connected with Engineering India.
+          </p>
         </div>
       </section>
 
@@ -655,23 +522,10 @@ export default function Events() {
                 </div>
               ))}
             </div>
-
-            <div style={{ textAlign: 'center', marginTop: '20px' }}>
-              <button onClick={scrollToEvents} className="btn secondary gallery-explore">
-                Explore All Events &uarr;
-              </button>
-            </div>
           </div>
         </div>
       </section>
 
-      {/* REGISTRATION MODAL */}
-      <EventRegisterModal
-        event={selectedEvent}
-        isOpen={isRegisterOpen}
-        onClose={() => setIsRegisterOpen(false)}
-        onSuccess={handleRegisterSuccess}
-      />
     </div>
   );
 }

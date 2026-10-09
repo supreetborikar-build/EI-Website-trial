@@ -4,43 +4,47 @@ import TiltCard from './TiltCard';
 const PRINCIPLES = [
   {
     num: '01',
-    id: 'LEARN',
-    title: 'Foundations & Deep Tech',
-    spec: 'SYS_CORE // REPO_SYNC_v4',
-    lead: 'Mastering operating systems, distributed architectures, neural networks, and foundational engineering principles through continuous hands-on labs.',
-    tags: ['C++', 'Rust', 'Cloud Infrastructure', 'Distributed Systems'],
-    cadCode: 'CAD_SPEC_01 // ARCH-2026',
-    image: '/assets_events/cloud.jpg'
+    id: 'IMAGINE',
+    title: 'Ideas Without Limits',
+    spec: 'RESEARCH_LAB // VISION_01',
+    lead: 'Exploring possibilities, challenging conventional thinking, and bringing curious minds together to imagine innovative solutions to real-world challenges.',
+    tags: ['Innovation', 'Ideation', 'Hackathons', 'Creativity'],
+    cadCode: 'CAD_SPEC_01 // R&D-LAB',
+    image: '/assets_events/imagine.jpeg',
+    objectPosition: 'center'
   },
   {
     num: '02',
-    id: 'IMAGINE',
-    title: 'Speculative Design & R&D',
-    spec: 'RESEARCH_LAB // VISION_02',
-    lead: 'Prototyping next-generation autonomous systems, edge neural devices, clean mobility solutions, and unconventional hardware interfaces.',
-    tags: ['Computer Vision', 'Robotics', 'Edge AI', 'Hardware Prototyping'],
-    cadCode: 'CAD_SPEC_02 // R&D-LAB',
-    image: '/assets_events/ai.jpg'
+    id: 'LEARN',
+    title: 'Foundations & Skills',
+    spec: 'SYS_CORE // REPO_SYNC_v4',
+    lead: 'Building strong technical foundations through workshops, mentorship, peer learning, and hands-on exploration of emerging technologies.',
+    tags: ['Workshops', 'Technical Skills', 'Mentorship', 'Learning'],
+    cadCode: 'CAD_SPEC_02 // ARCH-2026',
+    image: '/assets_events/learn.JPG',
+    objectPosition: 'center'
   },
   {
     num: '03',
     id: 'BUILD',
-    title: 'Production Software & Hackathons',
+    title: 'From Ideas to Reality',
     spec: 'SPRINT_CYCLE // 48H_DEV',
-    lead: 'Translating concepts into deployable production code during intense 48-hour national hackathons, tested under real-world traffic conditions.',
-    tags: ['Microservices', 'Docker', 'Kubernetes', 'High-Throughput APIs'],
+    lead: 'Turning concepts into tangible outcomes through collaborative projects, practical experimentation, and the development of creative technical solutions.',
+    tags: ['Projects', 'Prototyping', 'Development', 'Teamwork'],
     cadCode: 'CAD_SPEC_03 // INNOHACK',
-    image: '/assets_events/hackathon.jpg'
+    image: '/assets_events/build.jpeg',
+    objectPosition: 'center'
   },
   {
     num: '04',
     id: 'IMPACT',
-    title: 'Field Deployment & Community',
+    title: 'Engineering for Society',
     spec: 'PUBLIC_GOOD // NATIONWIDE',
-    lead: 'Deploying engineering tools across rural schools, open-source civic tech collectives, and regional chapters to empower India from the ground up.',
-    tags: ['Civic Tech', 'Digital Literacy', 'Public Infrastructure', 'Open Source'],
+    lead: 'Using our knowledge, creativity, and collective effort to address societal challenges, support communities, and contribute to a more inclusive and sustainable future.',
+    tags: ['Social Impact', 'Community', 'Outreach', 'Sustainability'],
     cadCode: 'CAD_SPEC_04 // PAN-INDIA',
-    image: '/assets_events/community-drive.jpg'
+    image: '/assets_events/impact.jpeg',
+    objectPosition: 'center'
   }
 ];
 
@@ -50,15 +54,34 @@ export default function PrinciplesReel() {
 
   return (
     <div className="pinned-principles-wrap" style={{ marginTop: '3.5rem' }}>
+      <style>{`
+        .principle-content-grid {
+          display: grid;
+          grid-template-columns: 1.2fr 1fr;
+          min-height: 420px;
+          height: 100%;
+        }
+        .principle-nav-grid {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 12px;
+          margin-bottom: 2rem;
+        }
+        @media (max-width: 768px) {
+          .principle-content-grid {
+            grid-template-columns: 1fr;
+            min-height: auto;
+          }
+          .principle-nav-grid {
+            grid-template-columns: repeat(2, 1fr);
+          }
+          .principle-image-container {
+            min-height: 300px !important;
+          }
+        }
+      `}</style>
       {/* Principle Step Selector Tabs */}
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(4, 1fr)',
-          gap: '12px',
-          marginBottom: '2rem'
-        }}
-      >
+      <div className="principle-nav-grid">
         {PRINCIPLES.map((p, idx) => {
           const isActive = idx === activeStep;
           return (
@@ -144,14 +167,7 @@ export default function PrinciplesReel() {
         </div>
 
         {/* Two-Column Principle Layout: Left Specs, Right Image */}
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: '1.2fr 1fr',
-            gap: '0',
-            minHeight: '380px'
-          }}
-        >
+        <div className="principle-content-grid">
           {/* Left Editorial Spec Column */}
           <div
             style={{
@@ -242,20 +258,39 @@ export default function PrinciplesReel() {
 
           {/* Right Blueprint Technical Drawing / Image */}
           <div
+            className="principle-image-container"
             style={{
               position: 'relative',
               overflow: 'hidden',
               minHeight: '320px',
-              background: '#0F172A'
+              height: '100%',
+              background: '#0F172A',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
             }}
           >
+            {/* Blurred background for photos that don't cover naturally */}
+            <div 
+              style={{
+                position: 'absolute',
+                inset: -20,
+                backgroundImage: `url(${current.image})`,
+                backgroundSize: 'cover',
+                backgroundPosition: current.objectPosition || 'center',
+                filter: 'blur(15px)',
+                opacity: 0.5
+              }}
+            />
             <img
               src={current.image}
               alt={current.title}
               style={{
+                position: 'relative',
                 width: '100%',
                 height: '100%',
                 objectFit: 'cover',
+                objectPosition: current.objectPosition || 'center',
                 opacity: 0.88,
                 transition: 'transform 0.7s ease'
               }}
