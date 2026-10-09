@@ -23,6 +23,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/assets', express.static(path.join(__dirname, '../client/public/assets')));
 app.use('/assets_events', express.static(path.join(__dirname, '../client/public/assets_events')));
 app.use('/assets_news', express.static(path.join(__dirname, '../client/public/assets_news')));
+app.use('/assets_committee', express.static(path.join(__dirname, '../client/public/assets_committee')));
+app.use('/committee_assets', express.static(path.join(__dirname, '../client/public/assets_committee')));
 
 // Routes
 const eventsRouter = require('./routes/events');
