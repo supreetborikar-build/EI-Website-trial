@@ -13,6 +13,7 @@ import LeaderModal from '../components/LeaderModal';
 import Avatar from '../components/Avatar';
 import TypographyMaskPortal from '../components/TypographyMaskPortal';
 import PrinciplesReel from '../components/PrinciplesReel';
+import { OFFICIAL_COMMITTEE_DOMAINS } from '../data/committeeData';
 
 const HERO_IMAGES = [
   { src: '/assets/images/hero/EI.png', title: 'National Movement', tag: 'Initiative' },
@@ -27,7 +28,7 @@ export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [events, setEvents] = useState([]);
   const [news, setNews] = useState([]);
-  const [committeeTeams, setCommitteeTeams] = useState([]);
+  const [committeeTeams, setCommitteeTeams] = useState(OFFICIAL_COMMITTEE_DOMAINS);
   const [scrollRatio, setScrollRatio] = useState(0);
 
   // Modals state
@@ -66,7 +67,11 @@ export default function Home() {
       .catch(() => {});
 
     api.getCommittee()
-      .then((res) => setCommitteeTeams(res.data || []))
+      .then((res) => {
+        if (res.domains && res.domains.length > 0) {
+          setCommitteeTeams(res.domains);
+        }
+      })
       .catch(() => {});
   }, []);
 
@@ -428,124 +433,242 @@ export default function Home() {
           <div
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
               gap: '1.75rem',
               marginTop: '3.5rem'
             }}
           >
-            {committeeTeams.slice(0, 4).map((team) => (
-              <TiltCard
-                key={team.id}
-                className="interactive-hover"
-                style={{
-                  background: 'var(--surface, #FFFFFF)',
-                  border: '1px solid var(--border, #E2E8F0)',
-                  borderRadius: '8px',
-                  padding: '2rem',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'space-between',
-                  minHeight: '340px'
-                }}
-              >
-                <div>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
-                    <span
-                      style={{
-                        fontFamily: 'Space Grotesk, monospace',
-                        fontSize: '0.72rem',
-                        fontWeight: 600,
-                        letterSpacing: '0.12em',
-                        textTransform: 'uppercase',
-                        padding: '4px 10px',
-                        borderRadius: '4px',
-                        background: 'rgba(37, 99, 235, 0.08)',
-                        color: 'var(--primary, #2563EB)'
-                      }}
-                    >
-                      {team.domain}
-                    </span>
-                    <span style={{ fontFamily: 'Space Grotesk, monospace', fontSize: '0.75rem', opacity: 0.5 }}>
-                      TEAM
-                    </span>
-                  </div>
+            {committeeTeams.map((team, idx) => {
+              const domainName = team.domainName || team.domain || team.name || 'Domain';
+              const shortName = team.shortName || domainName;
+              const head = team.head || team.leader || (team.members && team.members.find(m => m.isHead)) || team.members?.[0] || {};
+              const memberCount = team.memberCount || team.members?.length || 0;
+              const badgeColor = team.badgeColor || '#2563EB';
+              const icon = team.icon || 'fa-users';
+              const headImg = head.photo || head.avatar || head.image;
 
-                  <div
-                    style={{ display: 'flex', gap: '1rem', alignItems: 'center', marginBottom: '1.25rem', cursor: 'pointer' }}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleOpenLeaderModal(team);
-                    }}
-                    title="Click to inspect leader & team roster"
-                  >
-                    <Avatar
-                      src={team.leader?.avatar || team.leader?.image}
-                      alt={team.leader?.name}
-                      size={56}
-                      style={{
-                        border: '2px solid var(--border, #E2E8F0)',
-                        boxShadow: '0 4px 10px rgba(0,0,0,0.06)'
-                      }}
-                    />
-                    <div>
-                      <h4
+              return (
+                <TiltCard
+                  key={team.id || `dom-${idx}`}
+                  className="interactive-hover blueprint-sheet-card cad-frame-wrap"
+                  style={{
+                    background: 'var(--surface, #FFFFFF)',
+                    border: '1px solid var(--border, #E2E8F0)',
+                    borderRadius: '12px',
+                    padding: '2rem',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'space-between',
+                    minHeight: '360px',
+                    cursor: 'pointer',
+                    position: 'relative'
+                  }}
+                  onClick={() => handleOpenLeaderModal(team)}
+                >
+                  <div>
+                    {/* Domain Card Header */}
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
+                      <span
                         style={{
-                          margin: 0,
-                          fontSize: '1.15rem',
+                          fontFamily: 'Space Grotesk, monospace',
+                          fontSize: '0.74rem',
                           fontWeight: 700,
-                          color: 'var(--heading, #0F172A)',
-                          transition: 'color 0.2s ease'
+                          letterSpacing: '0.08em',
+                          textTransform: 'uppercase',
+                          padding: '4px 10px',
+                          borderRadius: '6px',
+                          background: `${badgeColor}12`,
+                          color: badgeColor,
+                          border: `1px solid ${badgeColor}30`,
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: '6px'
                         }}
                       >
-                        {team.leader?.name}
-                      </h4>
-                      <p style={{ margin: '2px 0 0 0', fontSize: '0.84rem', color: 'var(--light-text, #64748B)' }}>
-                        {team.leader?.title}
-                      </p>
+                        <i className={`fa-solid ${icon}`}></i>
+                        {domainName}
+                      </span>
+                      <span style={{ fontFamily: 'Space Grotesk, monospace', fontSize: '0.72rem', color: 'var(--light-text, #64748B)', fontWeight: 600 }}>
+                        DOMAIN 0{idx + 1}
+                      </span>
                     </div>
+
+                    {/* Domain Head Spotlight Info */}
+                    <div
+                      style={{ display: 'flex', gap: '1rem', alignItems: 'center', marginBottom: '1.25rem' }}
+                      title="Click to inspect domain leader & team roster"
+                    >
+                      <div style={{ position: 'relative', width: '58px', height: '58px', flexShrink: 0 }}>
+                        <Avatar
+                          src={headImg}
+                          alt={head.name}
+                          size={58}
+                          style={{
+                            border: `2.5px solid ${badgeColor}`,
+                            boxShadow: '0 4px 12px rgba(0,0,0,0.08)'
+                          }}
+                        />
+                        <span
+                          style={{
+                            position: 'absolute',
+                            bottom: '-4px',
+                            left: '50%',
+                            transform: 'translateX(-50%)',
+                            background: 'linear-gradient(135deg, #f59e0b, #d97706)',
+                            color: '#ffffff',
+                            fontSize: '0.55rem',
+                            fontWeight: 800,
+                            padding: '1px 5px',
+                            borderRadius: '6px',
+                            textTransform: 'uppercase',
+                            whiteSpace: 'nowrap',
+                            boxShadow: '0 1px 4px rgba(0,0,0,0.25)'
+                          }}
+                        >
+                          HEAD
+                        </span>
+                      </div>
+
+                      <div style={{ overflow: 'hidden', flex: 1 }}>
+                        <h4
+                          style={{
+                            margin: '0 0 2px',
+                            fontSize: '1.15rem',
+                            fontWeight: 700,
+                            color: 'var(--heading, #0F172A)'
+                          }}
+                        >
+                          {head.name || `${domainName} Head`}
+                        </h4>
+                        <p style={{ margin: 0, fontSize: '0.82rem', fontWeight: 600, color: badgeColor }}>
+                          {head.role || `${shortName} Head`}
+                        </p>
+                        {head.branch && (
+                          <p style={{ margin: '2px 0 0', fontSize: '0.75rem', color: 'var(--light-text, #64748B)' }}>
+                            {head.year ? `${head.year} Year • ` : ''}{head.branch}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Domain Description / Tagline */}
+                    <p style={{ fontSize: '0.86rem', color: 'var(--body, #475569)', lineHeight: 1.55, margin: '0 0 1.25rem' }}>
+                      {head.tagline ? `"${head.tagline}"` : (team.description || `Leading ${domainName} initiatives and student projects.`)}
+                    </p>
                   </div>
 
-                  <p style={{ fontSize: '0.88rem', color: 'var(--body, #475569)', lineHeight: 1.5, margin: 0 }}>
-                    {team.leader?.bio}
-                  </p>
-                </div>
+                  {/* Team Members Avatar Stack & CTA Footer */}
+                  <div>
+                    {/* Teammates Avatar Stack Preview */}
+                    <div
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        padding: '8px 12px',
+                        background: 'var(--bg-input, #F8FAFC)',
+                        borderRadius: '8px',
+                        border: '1px solid var(--border, #E2E8F0)',
+                        marginBottom: '1rem'
+                      }}
+                    >
+                      <div style={{ display: 'flex', alignItems: 'center' }}>
+                        {(team.members || []).slice(0, 4).map((tm, tIdx) => (
+                          <div
+                            key={tm.id || `${tIdx}`}
+                            style={{
+                              width: '26px',
+                              height: '26px',
+                              borderRadius: '50%',
+                              marginLeft: tIdx > 0 ? '-6px' : '0',
+                              border: '2px solid #ffffff',
+                              overflow: 'hidden',
+                              background: '#e2e8f0',
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                              fontSize: '0.6rem',
+                              fontWeight: 700,
+                              color: '#2563EB',
+                              boxShadow: '0 1px 3px rgba(0,0,0,0.1)'
+                            }}
+                          >
+                            {(tm.photo || tm.avatar) ? (
+                              <img src={tm.photo || tm.avatar} alt={tm.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                            ) : (
+                              tm.name ? tm.name.slice(0, 1) : '?'
+                            )}
+                          </div>
+                        ))}
+                        {team.members && team.members.length > 4 && (
+                          <div
+                            style={{
+                              width: '26px',
+                              height: '26px',
+                              borderRadius: '50%',
+                              marginLeft: '-6px',
+                              border: '2px solid #ffffff',
+                              background: badgeColor,
+                              color: '#ffffff',
+                              fontSize: '0.6rem',
+                              fontWeight: 800,
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center'
+                            }}
+                          >
+                            +{team.members.length - 4}
+                          </div>
+                        )}
+                      </div>
 
-                <div
-                  style={{
-                    marginTop: '2rem',
-                    borderTop: '1px solid var(--border, #E2E8F0)',
-                    paddingTop: '1.25rem',
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center'
-                  }}
-                >
-                  <span style={{ fontFamily: 'Space Grotesk, monospace', fontSize: '0.78rem', color: 'var(--light-text, #64748B)' }}>
-                    {team.teammates?.length || 0} Core Members
-                  </span>
+                      <span style={{ fontFamily: 'Space Grotesk, monospace', fontSize: '0.76rem', fontWeight: 700, color: 'var(--heading, #0F172A)' }}>
+                        {memberCount} Team Members
+                      </span>
+                    </div>
 
-                  <button
-                    type="button"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleOpenLeaderModal(team);
-                    }}
-                    style={{
-                      background: 'none',
-                      border: 'none',
-                      color: 'var(--primary, #2563EB)',
-                      fontFamily: 'Space Grotesk, sans-serif',
-                      fontSize: '0.84rem',
-                      fontWeight: 600,
-                      cursor: 'pointer',
-                      padding: 0
-                    }}
-                  >
-                    Inspect Domain Roster &rarr;
-                  </button>
-                </div>
-              </TiltCard>
-            ))}
+                    <div
+                      style={{
+                        borderTop: '1px solid var(--border, #E2E8F0)',
+                        paddingTop: '1rem',
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: 'center'
+                      }}
+                    >
+                      <span style={{ fontFamily: 'Space Grotesk, monospace', fontSize: '0.76rem', color: 'var(--light-text, #64748B)' }}>
+                        <i className="fa-solid fa-users" style={{ marginRight: '6px', color: badgeColor }}></i>
+                        {memberCount} Members
+                      </span>
+
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleOpenLeaderModal(team);
+                        }}
+                        style={{
+                          background: 'none',
+                          border: 'none',
+                          color: badgeColor,
+                          fontFamily: 'Space Grotesk, sans-serif',
+                          fontSize: '0.84rem',
+                          fontWeight: 700,
+                          cursor: 'pointer',
+                          padding: 0,
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: '4px'
+                        }}
+                      >
+                        <span>Inspect Domain Roster</span>
+                        <span>&rarr;</span>
+                      </button>
+                    </div>
+                  </div>
+                </TiltCard>
+              );
+            })}
           </div>
         </div>
       </section>

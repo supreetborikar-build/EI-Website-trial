@@ -2500,3 +2500,190 @@ button {
   margin-bottom: 0.75rem;
 }
 
+/* ==========================================================================
+   13. EXECUTIVE COMMITTEE ON-PAGE DOMAIN SECTIONS & ROSTER
+   ========================================================================== */
+.committee-domain-section {
+  margin-bottom: 4.5rem;
+  scroll-margin-top: 110px;
+  position: relative;
+  width: 100%;
+}
+
+.domain-section-header-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  padding: 1.5rem 2rem;
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  overflow: hidden;
+}
+
+.domain-section-title-wrap {
+  flex: 1;
+  min-width: 280px;
+}
+
+.domain-section-badge-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.4rem;
+}
+
+.domain-section-tag {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.75rem;
+  border-radius: 14px;
+  border: 1px solid;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.domain-section-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 0.15rem 0 0.35rem;
+  line-height: 1.2;
+}
+
+.domain-section-desc {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  max-width: 720px;
+  margin: 0;
+}
+
+.domain-section-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.domain-section-count-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.4rem 0.9rem;
+  border-radius: 20px;
+  background: var(--bg-badge);
+  border: 1px solid var(--border-color);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+}
+
+.domain-section-count-pill i {
+  color: var(--primary, #2563EB);
+}
+
+.domain-section-modal-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.45rem 1rem;
+  border-radius: 20px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--primary, #2563EB);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: var(--shadow-sm);
+}
+
+.domain-section-modal-btn:hover {
+  background: var(--primary, #2563EB);
+  color: #ffffff;
+  border-color: var(--primary, #2563EB);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+/* On-Page Responsive Domain Member Grid */
+.domain-roster-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  width: 100%;
+}
+
+@media (max-width: 1200px) {
+  .domain-roster-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.35rem;
+  }
+}
+
+@media (max-width: 860px) {
+  .domain-roster-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+}
+
+@media (max-width: 560px) {
+  .domain-roster-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+  .domain-section-header-card {
+    padding: 1.25rem 1.25rem;
+  }
+}
+
+/* Individual Executive Member Card on Page */
+.executive-roster-card {
+  position: relative;
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 20px;
+  padding: 1.5rem 1.25rem 1.25rem;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-md);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  transition: transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1), 
+              box-shadow 0.3s ease, 
+              border-color 0.3s ease;
+}
+
+.executive-roster-card:hover {
+  transform: translateY(-6px) scale(1.015);
+  box-shadow: 0 16px 36px -8px rgba(37, 99, 235, 0.22);
+  border-color: rgba(37, 99, 235, 0.5);
+  background: var(--bg-card-hover);
+}
+
+.executive-roster-card.is-head {
+  border-color: rgba(245, 158, 11, 0.45);
+  background: linear-gradient(180deg, rgba(245, 158, 11, 0.05) 0%, var(--bg-card) 100%);
+}
+
+.executive-roster-card.is-cohead {
+  border-color: rgba(59, 130, 246, 0.45);
+  background: linear-gradient(180deg, rgba(59, 130, 246, 0.05) 0%, var(--bg-card) 100%);
+}
+
+

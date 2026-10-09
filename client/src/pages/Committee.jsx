@@ -1,6 +1,12 @@
 import React, { useEffect, useMemo, useState, useRef, useCallback } from 'react';
 import { api } from '../services/api';
-import { OFFICIAL_COMMITTEE_DOMAINS, OFFICIAL_ALL_MEMBERS } from '../data/committeeData';
+import {
+  OFFICIAL_COMMITTEE_DOMAINS,
+  OFFICIAL_ALL_MEMBERS,
+  UNRESOLVED_EXECUTIVE_PROFILES,
+  normalizeLinkedInUrl,
+  normalizeGitHubUrl
+} from '../data/committeeData';
 import TiltCard from '../components/TiltCard';
 import useScrollReveal from '../hooks/useScrollReveal';
 import '../styles/committee-page.css';
@@ -11,13 +17,6 @@ const getInitials = (name = '') => {
   if (parts.length === 0) return '?';
   if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
   return `${parts[0][0]}${parts[parts.length - 1][0]}`.toUpperCase();
-};
-
-// Utility helper for external social URLs
-const normalizeUrl = (url = '') => {
-  if (!url) return '';
-  if (url.startsWith('http://') || url.startsWith('https://')) return url;
-  return `https://${url}`;
 };
 
 // Helper to reliably get all members for a selected domain
@@ -37,7 +36,7 @@ export const getMembersByDomain = (selectedDomain, allDomains = [], allMembersLi
 };
 
 /* ==========================================================================
-   1. MEMBER CARD COMPONENT (Used inside MemberGrid)
+   1. MEMBER CARD COMPONENT (Used on Page & Inside Modals)
    ========================================================================== */
 export function MemberCard({
   photo,
@@ -51,24 +50,31 @@ export function MemberCard({
   github,
   linkedin,
   isHead,
-  isCoHead
+  isCoHead,
+  domainColor = '#2563EB',
+  className = ''
 }) {
   const imgSrc = photo || avatar;
-  const linkedinUrl = normalizeUrl(linkedin);
-  const githubUrl = normalizeUrl(github);
+  const linkedinUrl = normalizeLinkedInUrl(linkedin);
+  const githubUrl = normalizeGitHubUrl(github);
+  const isCoHeadRole = isCoHead || /co-head|co-coordinator/i.test(role || '');
+  const isHeadRole = isHead || (/head/i.test(role || '') && !isCoHeadRole);
 
   return (
-    <article className={`modal-member-card ${isCoHead ? 'is-cohead' : ''} ${isHead ? 'is-head' : ''}`}>
+    <article
+      className={`modal-member-card executive-roster-card ${isCoHeadRole ? 'is-cohead' : ''} ${isHeadRole ? 'is-head' : ''} ${className}`}
+      id={`member-${uid || name.replace(/\s+/g, '-').toLowerCase()}`}
+    >
       {/* MEMBER PHOTO */}
       <div className="member-card-avatar-wrap">
         <div
           className="member-avatar-glow-ring"
           style={{
-            background: isCoHead
-              ? 'linear-gradient(135deg, #3b82f6, #06b6d4)'
-              : isHead
+            background: isHeadRole
               ? 'linear-gradient(135deg, #f59e0b, #e11d48)'
-              : 'linear-gradient(135deg, rgba(37, 99, 235, 0.35), rgba(56, 189, 248, 0.35))'
+              : isCoHeadRole
+              ? 'linear-gradient(135deg, #3b82f6, #06b6d4)'
+              : `linear-gradient(135deg, ${domainColor}55, rgba(56, 189, 248, 0.35))`
           }}
         ></div>
 
@@ -89,14 +95,19 @@ export function MemberCard({
           className="member-avatar-fallback-initials"
           style={{
             display: imgSrc ? 'none' : 'flex',
-            color: isCoHead ? '#3b82f6' : isHead ? '#f59e0b' : 'var(--primary, #2563EB)'
+            color: isHeadRole ? '#f59e0b' : isCoHeadRole ? '#3b82f6' : domainColor
           }}
           aria-hidden="true"
         >
           {getInitials(name)}
         </div>
 
-        {isCoHead && (
+        {isHeadRole && (
+          <span className="member-status-pill head">
+            <i className="fa-solid fa-crown" style={{ fontSize: '0.55rem' }}></i> Head
+          </span>
+        )}
+        {isCoHeadRole && (
           <span className="member-status-pill cohead">
             Co-Head
           </span>
@@ -107,7 +118,7 @@ export function MemberCard({
       <div className="modal-member-info">
         <h4 className="modal-member-name">{name}</h4>
 
-        <div className={`modal-member-role-tag ${isCoHead ? 'cohead-role' : isHead ? 'head-role' : ''}`}>
+        <div className={`modal-member-role-tag ${isHeadRole ? 'head-role' : isCoHeadRole ? 'cohead-role' : ''}`}>
           {role}
         </div>
 
@@ -164,47 +175,12 @@ export function MemberCard({
 }
 
 /* ==========================================================================
-   2. MEMBER GRID COMPONENT (Renders remaining team members in modal)
-   ========================================================================== */
-export function MemberGrid({ members = [] }) {
-  if (!members || members.length === 0) {
-    return (
-      <p className="no-additional-members-text">
-        No additional team members in this domain.
-      </p>
-    );
-  }
-
-  return (
-    <div className="modal-members-grid">
-      {members.map((member, idx) => (
-        <MemberCard
-          key={member.id || member.uid || member.name || idx}
-          photo={member.photo || member.avatar}
-          avatar={member.avatar || member.photo}
-          name={member.name}
-          role={member.role}
-          uid={member.uid}
-          year={member.year}
-          branch={member.branch}
-          tagline={member.tagline}
-          github={member.github}
-          linkedin={member.linkedin}
-          isHead={member.isHead}
-          isCoHead={member.isCoHead}
-        />
-      ))}
-    </div>
-  );
-}
-
-/* ==========================================================================
-   3. DOMAIN HEAD SPOTLIGHT COMPONENT (Prominently featured inside modal)
+   2. DOMAIN HEAD SPOTLIGHT COMPONENT (Used inside modal)
    ========================================================================== */
 export function DomainHead({ head = {}, domainName = '', badgeColor = '#2563EB', icon = 'fa-user-tie' }) {
   const imgSrc = head.photo || head.avatar;
-  const linkedinUrl = normalizeUrl(head.linkedin);
-  const githubUrl = normalizeUrl(head.github);
+  const linkedinUrl = normalizeLinkedInUrl(head.linkedin);
+  const githubUrl = normalizeGitHubUrl(head.github);
 
   return (
     <section className="modal-head-spotlight-section">
@@ -321,7 +297,7 @@ export function DomainHead({ head = {}, domainName = '', badgeColor = '#2563EB',
 }
 
 /* ==========================================================================
-   4. DOMAIN TEAM MODAL COMPONENT (Reusable single modal for any selected domain)
+   3. DOMAIN TEAM MODAL COMPONENT (Full interactive popup for any domain)
    ========================================================================== */
 export function DomainTeamModal({
   selectedDomain,
@@ -336,15 +312,15 @@ export function DomainTeamModal({
 
   // Resolve current active domain object and all its members
   const currentDomain = domains.find((d) => d.id === selectedDomain.id) || selectedDomain;
-  const domainMembers = getMembersByDomain(currentDomain, domains, allMembers);
+  const domainMembers = currentDomain.members || getMembersByDomain(currentDomain, domains, allMembers);
 
   // Identify the domain head
   const head = currentDomain.head || domainMembers.find((m) => m.isHead) || domainMembers[0] || {};
 
-  // Filter out head from the remaining members grid to avoid duplication
+  // Filter out head from the remaining members grid to avoid duplication in modal
   const remainingMembers = domainMembers.filter((m) => {
-    if (m.uid && head.uid) return m.uid !== head.uid;
-    if (m.id && head.id) return m.id !== head.id;
+    if (m.id && head.id && m.id === head.id) return false;
+    if (m.uid && head.uid && m.uid === head.uid && m.name === head.name) return false;
     return m.name?.trim().toLowerCase() !== head.name?.trim().toLowerCase();
   });
 
@@ -355,6 +331,7 @@ export function DomainTeamModal({
       role="dialog"
       aria-modal="true"
       aria-labelledby="modal-domain-title"
+      id="domainTeamModal"
     >
       <div
         className="domain-modal-container blueprint-sheet-card cad-frame-wrap"
@@ -375,13 +352,12 @@ export function DomainTeamModal({
           ref={closeBtnRef}
           aria-label="Close modal (Escape)"
           title="Close modal (Escape)"
+          id="modalCloseButton"
         >
           <i className="fa-solid fa-xmark"></i>
         </button>
 
-        {/* ==========================================================
-            MODAL FIXED HEADER
-        =========================================================== */}
+        {/* MODAL FIXED HEADER */}
         <header className="modal-header-hero">
           <div className="modal-header-badge-row">
             <span
@@ -408,47 +384,67 @@ export function DomainTeamModal({
 
           <p className="modal-domain-subtext">
             {currentDomain.description ||
-              `Meet the team driving ${currentDomain.domainName} operations, vision, and campus execution.`}
+              `Meet the complete team driving ${currentDomain.domainName} operations, vision, and campus execution.`}
           </p>
         </header>
 
-        {/* ==========================================================
-            MODAL SCROLLABLE CONTENT BODY
-        =========================================================== */}
-        <div className="modal-scroll-body">
+        {/* MODAL SCROLLABLE CONTENT BODY */}
+        <div className="modal-scroll-body" tabIndex={0}>
           {/* 1. DOMAIN HEAD SPOTLIGHT AT TOP */}
-          <DomainHead
-            head={head}
-            domainName={currentDomain.domainName}
-            badgeColor={currentDomain.badgeColor || '#2563EB'}
-            icon={currentDomain.icon || 'fa-user-tie'}
-          />
+          {head && head.name && (
+            <DomainHead
+              head={head}
+              domainName={currentDomain.domainName}
+              badgeColor={currentDomain.badgeColor || '#2563EB'}
+              icon={currentDomain.icon || 'fa-user-tie'}
+            />
+          )}
 
-          {/* 2. REMAINING TEAM MEMBERS SECTION */}
-          <section className="modal-team-members-section">
-            <div className="section-divider-label">
-              <span>
-                {currentDomain.shortName || currentDomain.domainName} TEAM MEMBERS ({remainingMembers.length})
-              </span>
-            </div>
+          {/* 2. TEAM MEMBERS SECTION */}
+          {remainingMembers.length > 0 && (
+            <section className="modal-team-members-section">
+              <div className="section-divider-label">
+                <span>
+                  {currentDomain.shortName || currentDomain.domainName} TEAM MEMBERS ({remainingMembers.length})
+                </span>
+              </div>
 
-            <MemberGrid members={remainingMembers} />
-          </section>
+              <div className="modal-members-grid">
+                {remainingMembers.map((member, idx) => (
+                  <MemberCard
+                    key={member.id || `${currentDomain.id}-${member.uid || idx}-${member.name}`}
+                    photo={member.photo || member.avatar}
+                    avatar={member.avatar || member.photo}
+                    name={member.name}
+                    role={member.role}
+                    uid={member.uid}
+                    year={member.year}
+                    branch={member.branch}
+                    tagline={member.tagline}
+                    github={member.github}
+                    linkedin={member.linkedin}
+                    isHead={member.isHead}
+                    isCoHead={member.isCoHead}
+                    domainColor={currentDomain.badgeColor}
+                  />
+                ))}
+              </div>
+            </section>
+          )}
         </div>
 
-        {/* ==========================================================
-            MODAL FOOTER ACTION
-        =========================================================== */}
+        {/* MODAL FOOTER ACTION */}
         <footer className="modal-footer-bar">
           <div className="modal-footer-domain-info">
             <i className={`fa-solid ${currentDomain.icon || 'fa-users'}`}></i>
-            <span>Engineering India – SVPCET // {currentDomain.domainName}</span>
+            <span>Engineering India – SVPCET // {currentDomain.domainName} Domain</span>
           </div>
 
           <button
             type="button"
             className="modal-footer-close-btn"
             onClick={closeModal}
+            id="modalFooterCloseButton"
           >
             <i className="fa-solid fa-xmark"></i>
             <span>Close</span>
@@ -460,163 +456,101 @@ export function DomainTeamModal({
 }
 
 /* ==========================================================================
-   5. DOMAIN HEAD CARD COMPONENT (Main Page Card)
+   4. DOMAIN SECTION COMPONENT (Directly Rendered on Page)
    ========================================================================== */
-export function DomainHeadCard({
+export function DomainSection({
   domain,
   index,
-  onSelect
+  onOpenModal
 }) {
-  const head = domain.head || {};
-  const isTechnical = domain.id === 'technical';
-  const memberCount = domain.memberCount || domain.members?.length || 0;
-  const imgSrc = head.photo || head.avatar;
+  const members = domain.members || [];
+  const head = domain.head || members.find((m) => m.isHead) || members[0] || {};
+  const badgeColor = domain.badgeColor || '#2563EB';
+  const icon = domain.icon || 'fa-users';
 
   return (
-    <TiltCard
-      as="article"
-      className={`domain-head-card-premium blueprint-sheet-card cad-frame-wrap ${isTechnical ? 'is-technical-head-card' : ''}`}
-      onClick={() => onSelect(domain)}
-      role="button"
-      tabIndex={0}
-      aria-haspopup="dialog"
-      aria-label={`${domain.domainName} - Head: ${head.name}. Click to view full team.`}
-      onKeyDown={(e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          onSelect(domain);
-        }
-      }}
+    <section
+      className="committee-domain-section"
+      id={`domain-section-${domain.id}`}
+      aria-labelledby={`domain-heading-${domain.id}`}
+      data-reveal="fade-up"
     >
-      {/* CAD CORNERS */}
-      <div className="cad-corner-marker tl" />
-      <div className="cad-corner-marker tr" />
-      <div className="cad-corner-marker bl" />
-      <div className="cad-corner-marker br" />
+      {/* SECTION HEADER CARD */}
+      <div className="domain-section-header-card blueprint-sheet-card cad-frame-wrap">
+        <div className="cad-corner-marker tl" />
+        <div className="cad-corner-marker tr" />
+        <div className="cad-corner-marker bl" />
+        <div className="cad-corner-marker br" />
 
-      {/* CARD TOP BADGE */}
-      <div className="head-card-top-tag">
-        <span className="head-card-index">DOMAIN 0{index + 1}</span>
-        <span
-          className="head-domain-pill"
-          style={{
-            color: domain.badgeColor || '#2563EB',
-            backgroundColor: `${domain.badgeColor || '#2563EB'}15`,
-            borderColor: `${domain.badgeColor || '#2563EB'}35`
-          }}
-        >
-          <i className={`fa-solid ${domain.icon || 'fa-user-tie'}`}></i>
-          {domain.domainName}
-        </span>
-      </div>
-
-      {/* HEAD PHOTO */}
-      <div className="head-avatar-wrapper">
-        <div
-          className="head-avatar-ring"
-          style={{
-            background: `linear-gradient(135deg, ${domain.badgeColor || '#2563EB'}, #38bdf8, #f59e0b)`
-          }}
-        ></div>
-
-        {imgSrc ? (
-          <img
-            src={imgSrc}
-            alt={head.name}
-            className="head-avatar-img"
-            onError={(e) => {
-              e.currentTarget.style.display = 'none';
-              const fallback = e.currentTarget.parentElement.querySelector('.head-avatar-fallback');
-              if (fallback) fallback.style.display = 'flex';
-            }}
-          />
-        ) : null}
-
-        <div
-          className="head-avatar-fallback"
-          style={{
-            display: imgSrc ? 'none' : 'flex',
-            color: domain.badgeColor || '#2563EB'
-          }}
-          aria-hidden="true"
-        >
-          {getInitials(head.name)}
-        </div>
-
-        <span className="head-crown-badge">
-          <i className="fa-solid fa-crown"></i> Head
-        </span>
-      </div>
-
-      {/* HEAD INFORMATION */}
-      <div className="head-info-block">
-        <h3 className="head-member-name">{head.name}</h3>
-        <div className="head-member-role">{head.role}</div>
-
-        <div className="head-academic-pill">
-          {head.year && <span>{head.year} Year</span>}
-          {head.year && head.branch && <span className="dot-sep">•</span>}
-          {head.branch && <span>{head.branch}</span>}
-        </div>
-
-        {head.uid && (
-          <div className="head-uid-text">
-            <i className="fa-solid fa-id-card"></i> UID: {head.uid}
+        <div className="domain-section-title-wrap">
+          <div className="domain-section-badge-row">
+            <span
+              className="domain-section-tag"
+              style={{
+                color: badgeColor,
+                backgroundColor: `${badgeColor}12`,
+                borderColor: `${badgeColor}35`
+              }}
+            >
+              <i className={`fa-solid ${icon}`}></i>
+              DOMAIN 0{index + 1} // {domain.domainName.toUpperCase()}
+            </span>
           </div>
-        )}
-      </div>
 
-      {/* TEAM MEMBERS PREVIEW INSIDE HEAD CARD */}
-      <div className="head-teammates-preview">
-        <div className="teammates-avatar-stack">
-          {(domain.members || []).slice(0, 4).map((tm, tIdx) => {
-            const tmImg = tm.photo || tm.avatar;
-            return (
-              <div
-                key={tm.id || tIdx}
-                className="head-teammate-avatar-item"
-                title={`${tm.name} (${tm.role})`}
-              >
-                {tmImg ? (
-                  <img src={tmImg} alt={tm.name} />
-                ) : (
-                  <div className="head-teammate-avatar-fallback">
-                    {getInitials(tm.name)}
-                  </div>
-                )}
-              </div>
-            );
-          })}
-          {domain.members && domain.members.length > 4 && (
-            <div className="head-teammate-avatar-more">
-              +{domain.members.length - 4}
-            </div>
-          )}
+          <h2 id={`domain-heading-${domain.id}`} className="domain-section-title">
+            {domain.domainName}
+          </h2>
+
+          <p className="domain-section-desc">
+            {domain.description || `Managing ${domain.domainName} initiatives and student projects.`}
+          </p>
         </div>
 
-        <span className="head-teammates-summary-text">
-          {memberCount} Team Members
-        </span>
+        <div className="domain-section-actions">
+          <span className="domain-section-count-pill">
+            <i className="fa-solid fa-users"></i>
+            {members.length} Members
+          </span>
+
+          <button
+            type="button"
+            className="domain-section-modal-btn"
+            onClick={() => onOpenModal(domain)}
+            title={`Open ${domain.domainName} Dossier Modal`}
+          >
+            <i className="fa-solid fa-expand"></i>
+            <span>View Dossier</span>
+          </button>
+        </div>
       </div>
 
-      {/* ACTION FOOTER */}
-      <div className="head-card-cta-bar">
-        <div className="head-team-counter">
-          <i className="fa-solid fa-users"></i>
-          <span>{memberCount} Members</span>
-        </div>
-
-        <div className="head-view-team-btn">
-          <span>View Team</span>
-          <i className="fa-solid fa-arrow-right arrow-icon"></i>
-        </div>
+      {/* MEMBER CARDS RESPONSIVE GRID (Directly Rendered on Page) */}
+      <div className="domain-roster-grid">
+        {members.map((member, idx) => (
+          <MemberCard
+            key={member.id || `${domain.id}-${member.uid || idx}-${member.name}`}
+            photo={member.photo || member.avatar}
+            avatar={member.avatar || member.photo}
+            name={member.name}
+            role={member.role}
+            uid={member.uid}
+            year={member.year}
+            branch={member.branch}
+            tagline={member.tagline}
+            github={member.github}
+            linkedin={member.linkedin}
+            isHead={member.isHead}
+            isCoHead={member.isCoHead}
+            domainColor={badgeColor}
+          />
+        ))}
       </div>
-    </TiltCard>
+    </section>
   );
 }
 
 /* ==========================================================================
-   6. MAIN EXECUTIVE COMMITTEE PAGE COMPONENT
+   5. MAIN EXECUTIVE COMMITTEE PAGE COMPONENT
    ========================================================================== */
 export default function Committee() {
   const [domains, setDomains] = useState(OFFICIAL_COMMITTEE_DOMAINS);
@@ -633,16 +567,16 @@ export default function Committee() {
     api.getCommittee()
       .then((res) => {
         if (res.domains && res.domains.length > 0) {
+          // Merge API domain metadata while preserving complete roster members
           const mergedDomains = OFFICIAL_COMMITTEE_DOMAINS.map((officialDom) => {
             const apiDom = res.domains.find(
-              (d) => d.id === officialDom.id || d.domainName === officialDom.domainName
+              (d) => d.id === officialDom.id || d.domainName?.toLowerCase() === officialDom.domainName?.toLowerCase()
             );
-            if (apiDom && apiDom.members && apiDom.members.length > 0) {
+            if (apiDom && apiDom.members && apiDom.members.length >= officialDom.members.length) {
               return {
                 ...officialDom,
                 ...apiDom,
-                memberCount: apiDom.members.length >= officialDom.memberCount ? apiDom.members.length : officialDom.memberCount,
-                members: apiDom.members.length >= officialDom.members.length ? apiDom.members : officialDom.members
+                members: apiDom.members
               };
             }
             return officialDom;
@@ -699,6 +633,14 @@ export default function Committee() {
     }
   }, [selectedDomain, closeModal]);
 
+  // Smooth scroll helper for quick domain navigation
+  const scrollToDomain = (domainId) => {
+    const el = document.getElementById(`domain-section-${domainId}`);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   // Filtered members when searching
   const searchResults = useMemo(() => {
     const query = searchQuery.trim().toLowerCase();
@@ -710,6 +652,7 @@ export default function Committee() {
       const branch = member.branch?.toLowerCase() || '';
       const year = member.year?.toLowerCase() || '';
       const uid = member.uid?.toLowerCase() || '';
+      const tagline = member.tagline?.toLowerCase() || '';
       const domainName = domains.find((d) => d.id === member.domainId)?.domainName?.toLowerCase() || '';
 
       return (
@@ -718,6 +661,7 @@ export default function Committee() {
         branch.includes(query) ||
         year.includes(query) ||
         uid.includes(query) ||
+        tagline.includes(query) ||
         domainName.includes(query)
       );
     });
@@ -737,7 +681,7 @@ export default function Committee() {
       <div className="blueprint-ruler-top">
         <span>03 // ARCHITECTURAL ROSTER // EXECUTIVE COMMITTEE</span>
         <span>SYS_STATUS: VERIFIED</span>
-        <span>OFFICIAL_DOMAINS: {domains.length || 7} // TOTAL_MEMBERS: {allMembers.length || 48}</span>
+        <span>OFFICIAL_DOMAINS: {domains.length} // TOTAL_MEMBERS: {allMembers.length}</span>
       </div>
 
       {/* ================================================================
@@ -754,7 +698,7 @@ export default function Committee() {
 
           <div className="hero-pill">
             <i className="fa-solid fa-graduation-cap"></i>
-            Engineering India – SVPCET Student Team
+            Engineering India – SVPCET Student Executive Committee
           </div>
 
           <h1
@@ -768,11 +712,11 @@ export default function Committee() {
           </h1>
 
           <p className="hero-description editorial-lead">
-            Meet the leaders behind the team — driving vision, coordination and execution across all 7 official domains.
+            Meet all {allMembers.length} members across {domains.length} official domains — driving vision, coordination, and technical execution.
           </p>
 
           {/* ============================================================
-              SEARCH BOX & QUICK PILLS
+              SEARCH BOX & QUICK NAVIGATION PILLS
           ============================================================= */}
           <div
             className="controls-wrapper"
@@ -785,7 +729,7 @@ export default function Committee() {
               <input
                 type="text"
                 id="searchInput"
-                placeholder="Search any member (e.g. Sharwari, Documentation, AI, Secretary)..."
+                placeholder="Search any member (e.g. Purva, Supreet, AI, PR, 24006068)..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 autoComplete="off"
@@ -812,8 +756,9 @@ export default function Committee() {
                   key={dom.id}
                   type="button"
                   className="domain-jump-pill"
-                  onClick={() => openDomainModal(dom)}
-                  title={`Open ${dom.domainName} team modal`}
+                  onClick={() => scrollToDomain(dom.id)}
+                  title={`Jump to ${dom.domainName} section`}
+                  id={`jump-pill-${dom.id}`}
                 >
                   <i className={`fa-solid ${dom.icon || 'fa-users'}`}></i>
                   <span>{dom.shortName || dom.domainName}</span>
@@ -826,7 +771,7 @@ export default function Committee() {
       </section>
 
       {/* ================================================================
-          MAIN DIRECTORY
+          MAIN DIRECTORY (ALL DOMAIN SECTIONS DIRECTLY ON PAGE)
       ================================================================= */}
       <main className="main-container">
         {loading ? (
@@ -851,185 +796,31 @@ export default function Committee() {
                 className="reset-search-link"
                 onClick={() => setSearchQuery('')}
               >
-                <i className="fa-solid fa-arrow-left"></i> Back to Domain Heads
+                <i className="fa-solid fa-arrow-left"></i> Back to Full Roster
               </button>
             </div>
 
             {searchResults.length > 0 ? (
-              <div className="teams-grid" style={{ display: 'grid' }}>
+              <div className="domain-roster-grid">
                 {searchResults.map((member, idx) => {
                   const memberDomain = domains.find((d) => d.id === member.domainId);
-                  const linkedinUrl = normalizeUrl(member.linkedin);
-                  const githubUrl = normalizeUrl(member.github);
-                  const imgSrc = member.photo || member.avatar;
-
                   return (
-                    <TiltCard
-                      as="article"
-                      key={member.id || idx}
-                      className={`team-card blueprint-sheet-card cad-frame-wrap committee-member-card ${member.isHead ? 'is-domain-head-card' : ''}`}
-                      onClick={() => memberDomain && openDomainModal(memberDomain)}
-                      style={{ cursor: memberDomain ? 'pointer' : 'default' }}
-                      title={memberDomain ? `Click to view full ${memberDomain.domainName} team` : ''}
-                    >
-                      <div className="cad-corner-marker tl" />
-                      <div className="cad-corner-marker tr" />
-                      <div className="cad-corner-marker bl" />
-                      <div className="cad-corner-marker br" />
-
-                      <div className="blueprint-spec-header">
-                        <span>
-                          {memberDomain ? memberDomain.shortName.toUpperCase() : 'COMMITTEE'}
-                        </span>
-                        <span>
-                          {member.isHead ? '★ DOMAIN HEAD' : member.isCoHead ? '◆ CO-HEAD' : 'MEMBER'}
-                        </span>
-                      </div>
-
-                      <div className="leader-profile-section" style={{ textAlign: 'center', paddingTop: '8px' }}>
-                        <div
-                          className="avatar-ring-wrap"
-                          style={{
-                            position: 'relative',
-                            margin: '0 auto 16px',
-                            width: '108px',
-                            height: '108px'
-                          }}
-                        >
-                          <div
-                            className="avatar-ring"
-                            style={{
-                              background: member.isHead
-                                ? 'linear-gradient(135deg, #f59e0b, #3b82f6)'
-                                : 'linear-gradient(135deg, rgba(37,99,235,0.4), rgba(56,189,248,0.4))'
-                            }}
-                          ></div>
-
-                          {imgSrc ? (
-                            <img
-                              src={imgSrc}
-                              alt={member.name}
-                              className="leader-avatar"
-                              style={{
-                                width: '92px',
-                                height: '92px',
-                                objectFit: 'cover',
-                                borderRadius: '50%',
-                                display: 'block',
-                                margin: '8px auto 0',
-                                position: 'relative',
-                                zIndex: 2
-                              }}
-                              onError={(e) => {
-                                e.currentTarget.style.display = 'none';
-                                const fallback = e.currentTarget.parentElement.querySelector('.committee-avatar-fallback');
-                                if (fallback) fallback.style.display = 'flex';
-                              }}
-                            />
-                          ) : null}
-
-                          <div
-                            className="committee-avatar-fallback"
-                            style={{
-                              width: '92px',
-                              height: '92px',
-                              borderRadius: '50%',
-                              margin: '8px auto 0',
-                              background: 'linear-gradient(135deg, rgba(37, 99, 235, 0.18), rgba(15, 23, 42, 0.12))',
-                              border: '2px solid rgba(37, 99, 235, 0.3)',
-                              color: 'var(--primary, #2563EB)',
-                              display: imgSrc ? 'none' : 'flex',
-                              alignItems: 'center',
-                              justifyContent: 'center',
-                              fontFamily: 'Space Grotesk, sans-serif',
-                              fontSize: '1.35rem',
-                              fontWeight: 800,
-                              position: 'relative',
-                              zIndex: 2
-                            }}
-                            aria-hidden="true"
-                          >
-                            {getInitials(member.name)}
-                          </div>
-
-                          {member.isHead && (
-                            <span className="leader-badge" style={{ background: 'linear-gradient(135deg, #f59e0b, #d97706)' }}>
-                              <i className="fa-solid fa-crown" style={{ fontSize: '0.65rem' }}></i> Head
-                            </span>
-                          )}
-                          {member.isCoHead && (
-                            <span className="leader-badge" style={{ background: 'linear-gradient(135deg, #3b82f6, #1d4ed8)' }}>
-                              Co-Head
-                            </span>
-                          )}
-                        </div>
-
-                        <h3 className="leader-name" style={{ marginBottom: '4px' }}>
-                          {member.name}
-                        </h3>
-
-                        <div className="member-role-badge">
-                          {member.role}
-                        </div>
-
-                        <div className="member-academic-tag">
-                          {member.year && <span>{member.year} Year</span>}
-                          {member.year && member.branch && <span className="dot-divider">•</span>}
-                          {member.branch && <span>{member.branch}</span>}
-                        </div>
-
-                        {member.uid && (
-                          <div className="member-uid-tag">
-                            <i className="fa-solid fa-id-card"></i> UID: {member.uid}
-                          </div>
-                        )}
-
-                        {member.tagline && (
-                          <p className="modal-member-tagline" style={{ marginTop: '0.4rem' }}>
-                            "{member.tagline}"
-                          </p>
-                        )}
-
-                        {(linkedinUrl || githubUrl) && (
-                          <div className="member-social-links" onClick={(e) => e.stopPropagation()}>
-                            {linkedinUrl && (
-                              <a
-                                href={linkedinUrl}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="member-social-btn"
-                                aria-label={`LinkedIn of ${member.name}`}
-                              >
-                                <i className="fa-brands fa-linkedin"></i>
-                              </a>
-                            )}
-                            {githubUrl && (
-                              <a
-                                href={githubUrl}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="member-social-btn"
-                                aria-label={`GitHub of ${member.name}`}
-                              >
-                                <i className="fa-brands fa-github"></i>
-                              </a>
-                            )}
-                          </div>
-                        )}
-                      </div>
-
-                      <div className="card-domain-footer">
-                        <span className="domain-pill-small">
-                          <i className={`fa-solid ${memberDomain?.icon || 'fa-users'}`}></i>
-                          {memberDomain?.domainName || 'Domain Member'}
-                        </span>
-                        {memberDomain && (
-                          <span className="search-view-domain-cta">
-                            View Team <i className="fa-solid fa-arrow-right"></i>
-                          </span>
-                        )}
-                      </div>
-                    </TiltCard>
+                    <MemberCard
+                      key={member.id || `${member.domainId}-${member.uid || idx}`}
+                      photo={member.photo || member.avatar}
+                      avatar={member.avatar || member.photo}
+                      name={member.name}
+                      role={member.role}
+                      uid={member.uid}
+                      year={member.year}
+                      branch={member.branch}
+                      tagline={member.tagline}
+                      github={member.github}
+                      linkedin={member.linkedin}
+                      isHead={member.isHead}
+                      isCoHead={member.isCoHead}
+                      domainColor={memberDomain?.badgeColor}
+                    />
                   );
                 })}
               </div>
@@ -1050,36 +841,23 @@ export default function Committee() {
           </div>
         ) : (
           /* ================================================================
-              DEFAULT STATE: 7 DOMAIN HEADS PROFILE CARDS ONLY
+              DEFAULT VIEW: ALL 6 DOMAIN SECTIONS WITH 48 MEMBERS ON PAGE
           ================================================================= */
-          <div className="domain-heads-container" data-reveal="fade-up">
-            <div className="domain-heads-intro">
-              <span className="section-kicker">STUDENT EXECUTIVE ROSTER</span>
-              <h2 className="domain-section-heading">
-                Meet The <span className="highlight-gradient">Domain Heads</span>
-              </h2>
-              <p className="domain-section-sub">
-                Click on any domain head card below to open the complete interactive team roster.
-              </p>
-            </div>
-
-            {/* THE 7 DOMAIN HEADS GRID */}
-            <div className="domain-heads-grid-clean">
-              {domains.map((dom, idx) => (
-                <DomainHeadCard
-                  key={dom.id}
-                  domain={dom}
-                  index={idx}
-                  onSelect={openDomainModal}
-                />
-              ))}
-            </div>
+          <div className="all-domains-container">
+            {domains.map((dom, idx) => (
+              <DomainSection
+                key={dom.id}
+                domain={dom}
+                index={idx}
+                onOpenModal={openDomainModal}
+              />
+            ))}
           </div>
         )}
       </main>
 
       {/* ================================================================
-          REUSABLE SINGLE DOMAIN TEAM MODAL COMPONENT
+          REUSABLE SINGLE DOMAIN TEAM MODAL POPUP
       ================================================================= */}
       {selectedDomain && (
         <DomainTeamModal

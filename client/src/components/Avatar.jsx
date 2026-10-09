@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 /**
  * High-Reliability Avatar with Gradient Initials Fallback
@@ -6,6 +6,10 @@
  */
 export default function Avatar({ src, alt = '', size = 44, className = '', style = {} }) {
   const [hasError, setHasError] = useState(false);
+
+  useEffect(() => {
+    setHasError(false);
+  }, [src]);
 
   const getInitials = (name) => {
     if (!name) return 'EI';

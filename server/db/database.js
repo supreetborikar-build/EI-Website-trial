@@ -354,48 +354,31 @@ function seedData() {
     insertMany(initialNews);
   }
 
-  // Official Engineering India - SVPCET Domain Structure & Members
+  // Official Engineering India - SVPCET Domain Structure & Members (6 Domains, 48 Members)
   const officialCommitteeDomains = [
     {
-      id: 'event-coordination',
-      domain_name: 'Event Coordination',
-      short_name: 'Event Coord.',
-      description: 'Leading, scheduling, and orchestrating flagship student events and inter-collegiate hackathons.',
-      icon: 'fa-calendar-check',
-      badge_color: '#3b82f6',
-      leader_name: 'Mrunmayee Chaudhari',
-      leader_title: 'Event Coordinator',
-      leader_avatar: '',
-      leader_year: '3rd',
-      leader_branch: 'IT',
-      leader_uid: '24010060',
-      teammates: JSON.stringify([
-        { name: 'Vedant Chamat', year: '3rd', branch: 'IIoT', role: 'Event Co-coordinator', avatar: '', uid: '24009033', isCoHead: true }
-      ]),
-      members: [
-        { name: 'Mrunmayee Chaudhari', year: '3rd', branch: 'IT', role: 'Event Coordinator', avatar: '', uid: '24010060', isHead: true, isCoHead: false },
-        { name: 'Vedant Chamat', year: '3rd', branch: 'IIoT', role: 'Event Co-coordinator', avatar: '', uid: '24009033', isHead: false, isCoHead: true }
-      ]
-    },
-    {
-      id: 'secretariat',
-      domain_name: 'Secretariat',
+      id: 'secretary',
+      domain_name: 'Secretary',
       short_name: 'Secretariat',
       description: 'Managing committee governance, official documentation, record keeping, and student body administration.',
       icon: 'fa-file-signature',
       badge_color: '#6366f1',
-      leader_name: 'Nimish Chamat',
+      leader_name: 'Vedant Chamat',
       leader_title: 'Secretary',
-      leader_avatar: '',
+      leader_avatar: '/assets_committee/EI-Photo/Vedant%20Chamat.jpeg',
       leader_year: '3rd',
-      leader_branch: 'Civil',
-      leader_uid: '240002023',
+      leader_branch: 'Industrial IoT',
+      leader_uid: '24009033',
       teammates: JSON.stringify([
-        { name: 'Palak Dongre', year: '3rd', branch: 'ET', role: 'Secretary', avatar: '', uid: '24008055' }
+        { name: 'Mrunmayee Chaudhari', year: '3rd', branch: 'Information Technology', role: 'Secretary', avatar: '/assets_committee/EI-Photo/Mrunmayee%20Chaudhrai.jpeg', uid: '24010060' },
+        { name: 'Nimish Chamat', year: '3rd', branch: 'Civil Engineering', role: 'Secretary', avatar: '', uid: '24002023' },
+        { name: 'Palak Dongre', year: '3rd', branch: 'Electronics and Telecommunication', role: 'Secretary', avatar: '', uid: '24008055' }
       ]),
       members: [
-        { name: 'Nimish Chamat', year: '3rd', branch: 'Civil', role: 'Secretary', avatar: '', uid: '240002023', isHead: true, isCoHead: false },
-        { name: 'Palak Dongre', year: '3rd', branch: 'ET', role: 'Secretary', avatar: '', uid: '24008055', isHead: false, isCoHead: false }
+        { name: 'Vedant Chamat', year: '3rd', branch: 'Industrial IoT', role: 'Secretary', avatar: '/assets_committee/EI-Photo/Vedant%20Chamat.jpeg', uid: '24009033', isHead: true, isCoHead: false, tagline: 'A BOY WITH A DREAM.', linkedin: 'https://www.linkedin.com/in/vedant-chamat-9989ab328', github: '' },
+        { name: 'Mrunmayee Chaudhari', year: '3rd', branch: 'Information Technology', role: 'Secretary', avatar: '/assets_committee/EI-Photo/Mrunmayee%20Chaudhrai.jpeg', uid: '24010060', isHead: false, isCoHead: false, tagline: '', linkedin: '', github: '' },
+        { name: 'Nimish Chamat', year: '3rd', branch: 'Civil Engineering', role: 'Secretary', avatar: '', uid: '24002023', isHead: false, isCoHead: false, tagline: '', linkedin: '', github: '' },
+        { name: 'Palak Dongre', year: '3rd', branch: 'Electronics and Telecommunication', role: 'Secretary', avatar: '', uid: '24008055', isHead: false, isCoHead: false, tagline: 'Welcome To MULTIVERSE OF MADNESS!!!', linkedin: 'https://www.linkedin.com/in/palakdongre05', github: '' }
       ]
     },
     {
@@ -409,28 +392,28 @@ function seedData() {
       leader_title: 'Documentation Head',
       leader_avatar: '',
       leader_year: '3rd',
-      leader_branch: 'IIoT',
+      leader_branch: 'Industrial IoT',
       leader_uid: '24009038',
       teammates: JSON.stringify([
-        { name: 'Roopam Zade', year: '3rd', branch: 'IIoT', role: 'Documentation Co-head', avatar: '/assets_committee/Roopam_Zade.png', uid: '24009041', isCoHead: true },
-        { name: 'Ayush Chauhan', year: '2nd', branch: 'AI', role: 'Documentation', avatar: '', uid: '25001043' },
-        { name: 'Hariom Shrinath', year: '3rd', branch: 'ET', role: 'Documentation', avatar: '/assets_committee/Hariom Shrinath.jpg', uid: '25108006' },
+        { name: 'Roopam Zade', year: '3rd', branch: 'Industrial IoT', role: 'Documentation Co-head', avatar: '/assets_committee/EI-Photo/Roopam_Zade.png', uid: '24009041', isCoHead: true },
+        { name: 'Ayush Chauhan', year: '2nd', branch: 'Artificial Intelligence', role: 'Documentation', avatar: '', uid: '25001043' },
+        { name: 'Hariom Shrinath', year: '3rd', branch: 'Electronics and Telecommunication', role: 'Documentation', avatar: '/assets_committee/EI-Photo/Hariom%20Shrinath.jpg', uid: '25108006' },
         { name: 'Antariksh Pilare', year: '2nd', branch: 'Civil', role: 'Documentation', avatar: '', uid: '25002050' },
-        { name: 'Pranay Mune', year: '2nd', branch: 'CSE', role: 'Documentation', avatar: '/assets_committee/Pranay Mune.jpg', uid: '25013120' },
-        { name: 'Vaibhavi Purohit', year: '2nd', branch: 'RAI', role: 'Documentation', avatar: '/assets_committee/Vaibhavi.jpg', uid: '25012027' },
-        { name: 'Lakshita Bisen', year: '2nd', branch: 'IT', role: 'Documentation', avatar: '/assets_committee/Lakshita Bisen.jpeg', uid: '25010032' },
-        { name: 'Jennifer Joseph', year: '3rd', branch: 'IT', role: 'Documentation', avatar: '', uid: '24010002' }
+        { name: 'Pranay Mune', year: '2nd', branch: 'CSE', role: 'Documentation', avatar: '/assets_committee/EI-Photo/Pranay%20Mune.jpg', uid: '25013120' },
+        { name: 'Vaibhavi Purohit', year: '2nd', branch: 'Robotics and Artificial Intelligence', role: 'Documentation', avatar: '/assets_committee/EI-Photo/Vaibhavi.jpg', uid: '25012027' },
+        { name: 'Lakshita Bisen', year: '2nd', branch: 'Information Technology', role: 'Documentation', avatar: '/assets_committee/EI-Photo/Lakshita%20Bisen.jpeg', uid: '25010032' },
+        { name: 'Jennifer Joseph', year: '3rd', branch: 'Information Technology', role: 'Documentation', avatar: '', uid: '24010002' }
       ]),
       members: [
-        { name: 'Apurva Mohite', year: '3rd', branch: 'IIoT', role: 'Documentation Head', avatar: '', uid: '24009038', isHead: true, isCoHead: false },
-        { name: 'Roopam Zade', year: '3rd', branch: 'IIoT', role: 'Documentation Co-head', avatar: '/assets_committee/Roopam_Zade.png', uid: '24009041', isHead: false, isCoHead: true },
-        { name: 'Ayush Chauhan', year: '2nd', branch: 'AI', role: 'Documentation', avatar: '', uid: '25001043', isHead: false, isCoHead: false },
-        { name: 'Hariom Shrinath', year: '3rd', branch: 'ET', role: 'Documentation', avatar: '/assets_committee/Hariom Shrinath.jpg', uid: '25108006', isHead: false, isCoHead: false },
-        { name: 'Antariksh Pilare', year: '2nd', branch: 'Civil', role: 'Documentation', avatar: '', uid: '25002050', isHead: false, isCoHead: false },
-        { name: 'Pranay Mune', year: '2nd', branch: 'CSE', role: 'Documentation', avatar: '/assets_committee/Pranay Mune.jpg', uid: '25013120', isHead: false, isCoHead: false },
-        { name: 'Vaibhavi Purohit', year: '2nd', branch: 'RAI', role: 'Documentation', avatar: '/assets_committee/Vaibhavi.jpg', uid: '25012027', isHead: false, isCoHead: false },
-        { name: 'Lakshita Bisen', year: '2nd', branch: 'IT', role: 'Documentation', avatar: '/assets_committee/Lakshita Bisen.jpeg', uid: '25010032', isHead: false, isCoHead: false },
-        { name: 'Jennifer Joseph', year: '3rd', branch: 'IT', role: 'Documentation', avatar: '', uid: '24010002', isHead: false, isCoHead: false }
+        { name: 'Apurva Mohite', year: '3rd', branch: 'Industrial IoT', role: 'Documentation Head', avatar: '', uid: '24009038', isHead: true, isCoHead: false, tagline: '', linkedin: 'https://www.linkedin.com/in/apurva-mohite-24b869332', github: '' },
+        { name: 'Roopam Zade', year: '3rd', branch: 'Industrial IoT', role: 'Documentation Co-head', avatar: '/assets_committee/EI-Photo/Roopam_Zade.png', uid: '24009041', isHead: false, isCoHead: true, tagline: 'Still figuring it out. Still moving forward.', linkedin: 'https://www.linkedin.com/in/roopam-zade-1a32b13b6', github: 'https://github.com/roopamzade1902-tech' },
+        { name: 'Ayush Chauhan', year: '2nd', branch: 'Artificial Intelligence', role: 'Documentation', avatar: '', uid: '25001043', isHead: false, isCoHead: false, tagline: '', linkedin: '', github: '' },
+        { name: 'Hariom Shrinath', year: '3rd', branch: 'Electronics and Telecommunication', role: 'Documentation', avatar: '/assets_committee/EI-Photo/Hariom%20Shrinath.jpg', uid: '25108006', isHead: false, isCoHead: false, tagline: 'Work in silence. Let progress speak.', linkedin: 'https://www.linkedin.com/in/hariom-shrinath-a579693a1/', github: '' },
+        { name: 'Antariksh Pilare', year: '2nd', branch: 'Civil', role: 'Documentation', avatar: '', uid: '25002050', isHead: false, isCoHead: false, tagline: 'Courage in the heart, fire in the soul.', linkedin: 'https://www.linkedin.com/in/antariksh-pilare-a763a437b', github: '' },
+        { name: 'Pranay Mune', year: '2nd', branch: 'CSE', role: 'Documentation', avatar: '/assets_committee/EI-Photo/Pranay%20Mune.jpg', uid: '25013120', isHead: false, isCoHead: false, tagline: 'Learning to build, building to learn', linkedin: 'https://www.linkedin.com/in/pranay-mune-40333338b', github: 'https://github.com/pranaymune04-sketch' },
+        { name: 'Vaibhavi Purohit', year: '2nd', branch: 'Robotics and Artificial Intelligence', role: 'Documentation', avatar: '/assets_committee/EI-Photo/Vaibhavi.jpg', uid: '25012027', isHead: false, isCoHead: false, tagline: 'Turning Ideas into Impact, One Initiative at a Time.', linkedin: 'https://www.linkedin.com/in/vaibhavi-purohit-3b999b441', github: '' },
+        { name: 'Lakshita Bisen', year: '2nd', branch: 'Information Technology', role: 'Documentation', avatar: '/assets_committee/EI-Photo/Lakshita%20Bisen.jpeg', uid: '25010032', isHead: false, isCoHead: false, tagline: 'Opportunities to Learn. Experiences to Grow.', linkedin: 'https://www.linkedin.com/in/lakshita-bisen-95ba183b4', github: 'https://github.com/lakshitabisen01' },
+        { name: 'Jennifer Joseph', year: '3rd', branch: 'Information Technology', role: 'Documentation', avatar: '', uid: '24010002', isHead: false, isCoHead: false, tagline: '', linkedin: '', github: '' }
       ]
     },
     {
@@ -444,38 +427,38 @@ function seedData() {
       leader_title: 'Event Management Head',
       leader_avatar: '',
       leader_year: '3rd',
-      leader_branch: 'ET',
+      leader_branch: 'Electronics and Telecommunication',
       leader_uid: '24008968',
       teammates: JSON.stringify([
         { name: 'Bhavesh Gotmare', year: '2nd', branch: 'Civil', role: 'Event Management Co-head', avatar: '', uid: '25002023', isCoHead: true },
-        { name: 'Vedant Nasare', year: '2nd', branch: 'IT', role: 'Event Management', avatar: '/assets_committee/Vedant Nasare.png', uid: '25010007' },
-        { name: 'Jai Sagulale', year: '2nd', branch: 'AI', role: 'Event Management', avatar: '/assets_committee/Jai Sagulale.png', uid: '25001048' },
-        { name: 'Tejasvi Bondre', year: '2nd', branch: 'EE', role: 'Event Management', avatar: '/assets_committee/Tejasvi Bondre.jpg', uid: '25007031' },
-        { name: 'Sharvari Lohakare', year: '3rd', branch: 'IT', role: 'Event Management', avatar: '', uid: '24010062' },
-        { name: 'Charvi Mohite', year: '3rd', branch: 'IT', role: 'Event Management', avatar: '', uid: '24010059' },
-        { name: 'Arshpreet Kaur Sandhu', year: '2nd', branch: 'EE', role: 'Event Management', avatar: '/assets_committee/arshpreet.jpg', uid: '25007028' },
-        { name: 'Aditya Devhare', year: '2nd', branch: 'AI', role: 'Event Management', avatar: '/assets_committee/Aditya Devhare.jpeg', uid: '25001056' },
-        { name: 'Chaitanya Lambat', year: '2nd', branch: 'AI', role: 'Event Management', avatar: '', uid: '25001023' },
-        { name: 'Tanmay Gudadhe', year: '2nd', branch: 'CSE-DS', role: 'Event Management', avatar: '/assets_committee/Tanmay Gudadhe..png.jpeg', uid: '25006036' },
-        { name: 'Purva Gadkari', year: '2nd', branch: 'CSE-DS', role: 'Event Management', avatar: '/assets_committee/Purva Gadkari.jpeg', uid: '25006027' },
-        { name: 'Ankush Gawate', year: '2nd', branch: 'EE', role: 'Event Management', avatar: '/assets_committee/Ankush Gawate_.jpg', uid: '25007025' },
-        { name: 'Srushti Shahade', year: '2nd', branch: 'AI', role: 'Event Management', avatar: '/assets_committee/SRUSHTI SHAHADE_.jpg', uid: '25001026' }
+        { name: 'Vedant Nasare', year: '2nd', branch: 'Information Technology', role: 'Event Management', avatar: '/assets_committee/EI-Photo/Vedant%20Nasare.png', uid: '25010007' },
+        { name: 'Jai Sagulale', year: '2nd', branch: 'Artificial Intelligence', role: 'Event Management', avatar: '/assets_committee/EI-Photo/Jai%20Sagulale.png', uid: '25001048' },
+        { name: 'Tejasvi Bondre', year: '2nd', branch: 'Electrical', role: 'Event Management', avatar: '/assets_committee/EI-Photo/Tejasvi%20Bondre.jpg', uid: '25007031' },
+        { name: 'Sharwari Lohakare', year: '3rd', branch: 'Information Technology', role: 'Event Management', avatar: '', uid: '24010062' },
+        { name: 'Charvi Mohite', year: '3rd', branch: 'Information Technology', role: 'Event Management', avatar: '', uid: '24010059' },
+        { name: 'Arshpreet Kaur Sandhu', year: '2nd', branch: 'Electrical', role: 'Event Management', avatar: '/assets_committee/EI-Photo/arshpreet.jpg', uid: '25007028' },
+        { name: 'Aditya Devhare', year: '2nd', branch: 'Artificial Intelligence', role: 'Event Management', avatar: '/assets_committee/EI-Photo/Aditya%20Devhare.jpeg', uid: '25001056' },
+        { name: 'Chaitanya Lambat', year: '2nd', branch: 'Artificial Intelligence', role: 'Event Management', avatar: '/assets_committee/EI-Photo/Chaitanya%20Lambat.jpg', uid: '25001023' },
+        { name: 'Tanmay Gudadhe', year: '2nd', branch: 'Data Science', role: 'Event Management', avatar: '/assets_committee/EI-Photo/Tanmay%20Gudadhe..png.jpeg', uid: '25006036' },
+        { name: 'Purva Gadkari', year: '2nd', branch: 'Data Science', role: 'Event Management', avatar: '/assets_committee/EI-Photo/Purva%20Gadkari.jpeg', uid: '25006027' },
+        { name: 'Ankush Gawate', year: '2nd', branch: 'Electrical Engineering', role: 'Event Management', avatar: '/assets_committee/EI-Photo/Ankush%20Gawate_.jpg', uid: '25007025' },
+        { name: 'Srushti Shahade', year: '2nd', branch: 'Artificial Intelligence', role: 'Event Management', avatar: '', uid: '25001026' }
       ]),
       members: [
-        { name: 'Vishwaja Pinjarkar', year: '3rd', branch: 'ET', role: 'Event Management Head', avatar: '', uid: '24008968', isHead: true, isCoHead: false },
-        { name: 'Bhavesh Gotmare', year: '2nd', branch: 'Civil', role: 'Event Management Co-head', avatar: '', uid: '25002023', isHead: false, isCoHead: true },
-        { name: 'Vedant Nasare', year: '2nd', branch: 'IT', role: 'Event Management', avatar: '/assets_committee/Vedant Nasare.png', uid: '25010007', isHead: false, isCoHead: false },
-        { name: 'Jai Sagulale', year: '2nd', branch: 'AI', role: 'Event Management', avatar: '/assets_committee/Jai Sagulale.png', uid: '25001048', isHead: false, isCoHead: false },
-        { name: 'Tejasvi Bondre', year: '2nd', branch: 'EE', role: 'Event Management', avatar: '/assets_committee/Tejasvi Bondre.jpg', uid: '25007031', isHead: false, isCoHead: false },
-        { name: 'Sharvari Lohakare', year: '3rd', branch: 'IT', role: 'Event Management', avatar: '', uid: '24010062', isHead: false, isCoHead: false },
-        { name: 'Charvi Mohite', year: '3rd', branch: 'IT', role: 'Event Management', avatar: '', uid: '24010059', isHead: false, isCoHead: false },
-        { name: 'Arshpreet Kaur Sandhu', year: '2nd', branch: 'EE', role: 'Event Management', avatar: '/assets_committee/arshpreet.jpg', uid: '25007028', isHead: false, isCoHead: false },
-        { name: 'Aditya Devhare', year: '2nd', branch: 'AI', role: 'Event Management', avatar: '/assets_committee/Aditya Devhare.jpeg', uid: '25001056', isHead: false, isCoHead: false },
-        { name: 'Chaitanya Lambat', year: '2nd', branch: 'AI', role: 'Event Management', avatar: '', uid: '25001023', isHead: false, isCoHead: false },
-        { name: 'Tanmay Gudadhe', year: '2nd', branch: 'CSE-DS', role: 'Event Management', avatar: '/assets_committee/Tanmay Gudadhe..png.jpeg', uid: '25006036', isHead: false, isCoHead: false },
-        { name: 'Purva Gadkari', year: '2nd', branch: 'CSE-DS', role: 'Event Management', avatar: '/assets_committee/Purva Gadkari.jpeg', uid: '25006027', isHead: false, isCoHead: false },
-        { name: 'Ankush Gawate', year: '2nd', branch: 'EE', role: 'Event Management', avatar: '/assets_committee/Ankush Gawate_.jpg', uid: '25007025', isHead: false, isCoHead: false },
-        { name: 'Srushti Shahade', year: '2nd', branch: 'AI', role: 'Event Management', avatar: '/assets_committee/SRUSHTI SHAHADE_.jpg', uid: '25001026', isHead: false, isCoHead: false }
+        { name: 'Vishwaja Pinjarkar', year: '3rd', branch: 'Electronics and Telecommunication', role: 'Event Management Head', avatar: '', uid: '24008968', isHead: true, isCoHead: false, tagline: 'Too curious to overlook, too creative to copy, too particular to settle.', linkedin: 'https://www.linkedin.com/in/vishwaja-pinjarkar/', github: 'https://github.com/v1shwaja' },
+        { name: 'Bhavesh Gotmare', year: '2nd', branch: 'Civil', role: 'Event Management Co-head', avatar: '', uid: '25002023', isHead: false, isCoHead: true, tagline: 'Sketching the future, building the foundation', linkedin: 'https://www.linkedin.com/in/bhavesh-gotmare-8104ab42a', github: '' },
+        { name: 'Vedant Nasare', year: '2nd', branch: 'Information Technology', role: 'Event Management', avatar: '/assets_committee/EI-Photo/Vedant%20Nasare.png', uid: '25010007', isHead: false, isCoHead: false, tagline: 'Turning Small Efforts into Bigger Impact', linkedin: 'https://www.linkedin.com/in/vedant-nasare-24b6393b1/', github: 'https://github.com/vedantnasare8-alt' },
+        { name: 'Jai Sagulale', year: '2nd', branch: 'Artificial Intelligence', role: 'Event Management', avatar: '/assets_committee/EI-Photo/Jai%20Sagulale.png', uid: '25001048', isHead: false, isCoHead: false, tagline: 'Too rare to be understood, too real to be forgotten.', linkedin: 'https://www.linkedin.com/in/jai-sagulale-8597383ab', github: 'https://github.com/jaisagulale18-png' },
+        { name: 'Tejasvi Bondre', year: '2nd', branch: 'Electrical', role: 'Event Management', avatar: '/assets_committee/EI-Photo/Tejasvi%20Bondre.jpg', uid: '25007031', isHead: false, isCoHead: false, tagline: 'Dreams to Goals, Goals to Achievements', linkedin: 'https://www.linkedin.com/in/tejasvi-bondre-9807abc', github: '' },
+        { name: 'Sharwari Lohakare', year: '3rd', branch: 'Information Technology', role: 'Event Management', avatar: '', uid: '24010062', isHead: false, isCoHead: false, tagline: '', linkedin: '', github: '' },
+        { name: 'Charvi Mohite', year: '3rd', branch: 'Information Technology', role: 'Event Management', avatar: '', uid: '24010059', isHead: false, isCoHead: false, tagline: '', linkedin: '', github: '' },
+        { name: 'Arshpreet Kaur Sandhu', year: '2nd', branch: 'Electrical', role: 'Event Management', avatar: '/assets_committee/EI-Photo/arshpreet.jpg', uid: '25007028', isHead: false, isCoHead: false, tagline: 'Focused on growth, committed to excellence.', linkedin: 'https://www.linkedin.com/in/arshpreet-kaur-sandhu-1820843b0', github: '' },
+        { name: 'Aditya Devhare', year: '2nd', branch: 'Artificial Intelligence', role: 'Event Management', avatar: '/assets_committee/EI-Photo/Aditya%20Devhare.jpeg', uid: '25001056', isHead: false, isCoHead: false, tagline: 'Question Everything. Create Anything.', linkedin: 'https://www.linkedin.com/in/aditya-devhare-4570323b4/', github: 'https://github.com/Adityadevhare' },
+        { name: 'Chaitanya Lambat', year: '2nd', branch: 'Artificial Intelligence', role: 'Event Management', avatar: '/assets_committee/EI-Photo/Chaitanya%20Lambat.jpg', uid: '25001023', isHead: false, isCoHead: false, tagline: 'Everything is Impossible, Until someone does it.', linkedin: 'https://www.linkedin.com/in/chaitanya-lambat-a1aa46369/', github: 'https://github.com/Sai-1903-art' },
+        { name: 'Tanmay Gudadhe', year: '2nd', branch: 'Data Science', role: 'Event Management', avatar: '/assets_committee/EI-Photo/Tanmay%20Gudadhe..png.jpeg', uid: '25006036', isHead: false, isCoHead: false, tagline: 'Ye dil mange more', linkedin: 'https://www.linkedin.com/in/tanmay-gudadhe-3878902bb', github: 'https://github.com/tanmaygudadhe18-lang' },
+        { name: 'Purva Gadkari', year: '2nd', branch: 'Data Science', role: 'Event Management', avatar: '/assets_committee/EI-Photo/Purva%20Gadkari.jpeg', uid: '25006027', isHead: false, isCoHead: false, tagline: 'Turning ‘what if?’ into ‘why not?’', linkedin: 'https://www.linkedin.com/in/purva-gadkari-4696293b0/', github: 'https://github.com/purvagadkari10-pg' },
+        { name: 'Ankush Gawate', year: '2nd', branch: 'Electrical Engineering', role: 'Event Management', avatar: '/assets_committee/EI-Photo/Ankush%20Gawate_.jpg', uid: '25007025', isHead: false, isCoHead: false, tagline: "♞♜♘There's still a best move how bad ur thing's ar", linkedin: 'https://www.linkedin.com/in/ankush-gawate-04621942b', github: '' },
+        { name: 'Srushti Shahade', year: '2nd', branch: 'Artificial Intelligence', role: 'Event Management', avatar: '', uid: '25001026', isHead: false, isCoHead: false, tagline: '', linkedin: '', github: '' }
       ]
     },
     {
@@ -492,17 +475,17 @@ function seedData() {
       leader_branch: 'AI',
       leader_uid: '25001011',
       teammates: JSON.stringify([
-        { name: 'Vinit Manoj Paturkar', year: '2nd', branch: 'AI', role: 'Media Co-head', avatar: '/assets_committee/Vinit Paturkar.jpg', uid: '25001025', isCoHead: true },
-        { name: 'Suzan Francis', year: '2nd', branch: 'CSE', role: 'Media', avatar: '/assets_committee/Suzan Francis_.jpg', uid: '25031004' },
-        { name: 'Ratan Ingle', year: '2nd', branch: 'AI', role: 'Media', avatar: '/assets_committee/Ratan Ingle.jpg', uid: '25001022' },
-        { name: 'Soham Giradkar', year: '2nd', branch: 'AI', role: 'Media', avatar: '/assets_committee/Soham Giradkar.jpg', uid: '25001028' }
+        { name: 'Vinit Manoj Paturkar', year: '2nd', branch: 'Artificial Intelligence', role: 'Media Co-head', avatar: '/assets_committee/EI-Photo/Vinit%20Paturkar.jpg', uid: '25001025', isCoHead: true },
+        { name: 'Suzan Francis', year: '2nd', branch: 'Computer Science and Engineering', role: 'Media', avatar: '/assets_committee/EI-Photo/Suzan%20Francis_.jpg', uid: '25013104' },
+        { name: 'Ratan Ingle', year: '2nd', branch: 'Artificial Intelligence', role: 'Media', avatar: '/assets_committee/EI-Photo/Ratan%20Ingle.png', uid: '25001022' },
+        { name: 'Soham Giradkar', year: '2nd', branch: 'Artificial Intelligence', role: 'Media', avatar: '/assets_committee/EI-Photo/Soham%20Giradkar.jpg', uid: '25001028' }
       ]),
       members: [
-        { name: 'Ansh Samuel', year: '2nd', branch: 'AI', role: 'Media Head', avatar: '', uid: '25001011', isHead: true, isCoHead: false },
-        { name: 'Vinit Manoj Paturkar', year: '2nd', branch: 'AI', role: 'Media Co-head', avatar: '/assets_committee/Vinit Paturkar.jpg', uid: '25001025', isHead: false, isCoHead: true },
-        { name: 'Suzan Francis', year: '2nd', branch: 'CSE', role: 'Media', avatar: '/assets_committee/Suzan Francis_.jpg', uid: '25031004', isHead: false, isCoHead: false },
-        { name: 'Ratan Ingle', year: '2nd', branch: 'AI', role: 'Media', avatar: '/assets_committee/Ratan Ingle.jpg', uid: '25001022', isHead: false, isCoHead: false },
-        { name: 'Soham Giradkar', year: '2nd', branch: 'AI', role: 'Media', avatar: '/assets_committee/Soham Giradkar.jpg', uid: '25001028', isHead: false, isCoHead: false }
+        { name: 'Ansh Samuel', year: '2nd', branch: 'Artificial Intelligence', role: 'Media Head', avatar: '', uid: '25001011', isHead: true, isCoHead: false, tagline: '', linkedin: '', github: '' },
+        { name: 'Vinit Manoj Paturkar', year: '2nd', branch: 'Artificial Intelligence', role: 'Media Co-head', avatar: '/assets_committee/EI-Photo/Vinit%20Paturkar.jpg', uid: '25001025', isHead: false, isCoHead: true, tagline: 'Driven by Curiosity, Defined by Creativity.', linkedin: 'https://www.linkedin.com/in/vinit-paturkar/', github: 'https://github.com/Therock1037X' },
+        { name: 'Suzan Francis', year: '2nd', branch: 'Computer Science and Engineering', role: 'Media', avatar: '/assets_committee/EI-Photo/Suzan%20Francis_.jpg', uid: '25013104', isHead: false, isCoHead: false, tagline: 'Romanticizing the journey, conquering the destination.', linkedin: 'https://www.linkedin.com/in/suzan-francis-96a19a3a7', github: '' },
+        { name: 'Ratan Ingle', year: '2nd', branch: 'Artificial Intelligence', role: 'Media', avatar: '/assets_committee/EI-Photo/Ratan%20Ingle.png', uid: '25001022', isHead: false, isCoHead: false, tagline: '', linkedin: '', github: '' },
+        { name: 'Soham Giradkar', year: '2nd', branch: 'Artificial Intelligence', role: 'Media', avatar: '/assets_committee/EI-Photo/Soham%20Giradkar.jpg', uid: '25001028', isHead: false, isCoHead: false, tagline: "As long as I'm alive, there are infinite chances!", linkedin: 'https://www.linkedin.com/in/soham-giradkar-106a07384', github: 'https://github.com/sohamgiradkar' }
       ]
     },
     {
@@ -516,24 +499,24 @@ function seedData() {
       leader_title: 'PR Head',
       leader_avatar: '',
       leader_year: '3rd',
-      leader_branch: 'CSE-DS',
+      leader_branch: 'Data Science',
       leader_uid: '24006068',
       teammates: JSON.stringify([
-        { name: 'Vaiga Nair', year: '3rd', branch: 'ET', role: 'PR Co-head', avatar: '/assets_committee/VaigaNair.jpeg', uid: '24008061', isCoHead: true },
-        { name: 'Mrunali Sakharkar', year: '3rd', branch: 'CSE-DS', role: 'PR', avatar: '/assets_committee/Mrunali Sakharkar .jpeg', uid: '25106002' },
-        { name: 'Anushka Hirlurkar', year: '2nd', branch: 'CSBS', role: 'PR', avatar: '', uid: '25005007' },
-        { name: 'Shrawani Akre', year: '3rd', branch: 'ET', role: 'PR', avatar: '/assets_committee/Shrawani Akre.png', uid: '25108003' },
-        { name: 'Trusha Dhole', year: '2nd', branch: 'AI', role: 'PR', avatar: '/assets_committee/Trusha_Dhole.jpeg', uid: '25001030' },
-        { name: 'Aishita Balpande', year: '2nd', branch: 'AI', role: 'PR', avatar: '/assets_committee/Aishita_Balpande.jpg', uid: '25001040' }
+        { name: 'Vaiga Nair', year: '3rd', branch: 'Electronics and Telecommunication', role: 'PR Co-head', avatar: '/assets_committee/EI-Photo/VaigaNair.jpeg', uid: '24008061', isCoHead: true },
+        { name: 'Mrunali Sakharkar', year: '3rd', branch: 'Data Science', role: 'PR', avatar: '/assets_committee/EI-Photo/Mrunali%20Sakharkar%20.jpeg', uid: '25106002' },
+        { name: 'Anushka Hirulkar', year: '2nd', branch: 'CSBS', role: 'PR', avatar: '', uid: '25005007' },
+        { name: 'Shrawani Akre', year: '3rd', branch: 'Electronics and Telecommunication', role: 'PR', avatar: '/assets_committee/EI-Photo/Shrawani%20Akre.png', uid: '25108003' },
+        { name: 'Trusha Dhole', year: '2nd', branch: 'Artificial Intelligence', role: 'PR', avatar: '/assets_committee/EI-Photo/Trusha_Dhole.jpeg', uid: '25001030' },
+        { name: 'Aishita Balpande', year: '2nd', branch: 'Artificial Intelligence', role: 'PR', avatar: '/assets_committee/EI-Photo/Aishita_Balpande.jpg', uid: '25001040' }
       ]),
       members: [
-        { name: 'Purva Mohature', year: '3rd', branch: 'CSE-DS', role: 'PR Head', avatar: '', uid: '24006068', isHead: true, isCoHead: false },
-        { name: 'Vaiga Nair', year: '3rd', branch: 'ET', role: 'PR Co-head', avatar: '/assets_committee/VaigaNair.jpeg', uid: '24008061', isHead: false, isCoHead: true },
-        { name: 'Mrunali Sakharkar', year: '3rd', branch: 'CSE-DS', role: 'PR', avatar: '/assets_committee/Mrunali Sakharkar .jpeg', uid: '25106002', isHead: false, isCoHead: false },
-        { name: 'Anushka Hirlurkar', year: '2nd', branch: 'CSBS', role: 'PR', avatar: '', uid: '25005007', isHead: false, isCoHead: false },
-        { name: 'Shrawani Akre', year: '3rd', branch: 'ET', role: 'PR', avatar: '/assets_committee/Shrawani Akre.png', uid: '25108003', isHead: false, isCoHead: false },
-        { name: 'Trusha Dhole', year: '2nd', branch: 'AI', role: 'PR', avatar: '/assets_committee/Trusha_Dhole.jpeg', uid: '25001030', isHead: false, isCoHead: false },
-        { name: 'Aishita Balpande', year: '2nd', branch: 'AI', role: 'PR', avatar: '/assets_committee/Aishita_Balpande.jpg', uid: '25001040', isHead: false, isCoHead: false }
+        { name: 'Purva Mohature', year: '3rd', branch: 'Data Science', role: 'PR Head', avatar: '', uid: '24006068', isHead: true, isCoHead: false, tagline: '', linkedin: '', github: '' },
+        { name: 'Vaiga Nair', year: '3rd', branch: 'Electronics and Telecommunication', role: 'PR Co-head', avatar: '/assets_committee/EI-Photo/VaigaNair.jpeg', uid: '24008061', isHead: false, isCoHead: true, tagline: '', linkedin: '', github: '' },
+        { name: 'Mrunali Sakharkar', year: '3rd', branch: 'Data Science', role: 'PR', avatar: '/assets_committee/EI-Photo/Mrunali%20Sakharkar%20.jpeg', uid: '25106002', isHead: false, isCoHead: false, tagline: 'Curious enough to question. Bold enough to build.', linkedin: 'https://www.linkedin.com/in/mrunali-sakharkar-83b65242a', github: 'https://github.com/mrunali0248' },
+        { name: 'Anushka Hirulkar', year: '2nd', branch: 'CSBS', role: 'PR', avatar: '', uid: '25005007', isHead: false, isCoHead: false, tagline: '', linkedin: '', github: '' },
+        { name: 'Shrawani Akre', year: '3rd', branch: 'Electronics and Telecommunication', role: 'PR', avatar: '/assets_committee/EI-Photo/Shrawani%20Akre.png', uid: '25108003', isHead: false, isCoHead: false, tagline: 'Creating. Connecting. Evolving', linkedin: 'https://www.linkedin.com/in/shrawani-akre-578784267', github: '' },
+        { name: 'Trusha Dhole', year: '2nd', branch: 'Artificial Intelligence', role: 'PR', avatar: '/assets_committee/EI-Photo/Trusha_Dhole.jpeg', uid: '25001030', isHead: false, isCoHead: false, tagline: 'Build by Ambition, forged by discipline.', linkedin: 'https://www.linkedin.com/in/trusha-dhole-190208382', github: 'https://github.com/trushadhole-hue' },
+        { name: 'Aishita Balpande', year: '2nd', branch: 'Artificial Intelligence', role: 'PR', avatar: '/assets_committee/EI-Photo/Aishita_Balpande.jpg', uid: '25001040', isHead: false, isCoHead: false, tagline: 'Ideas with purpose, actions with impact.', linkedin: 'https://www.linkedin.com/in/aishita-balpande-5434b4386/', github: 'https://github.com/aishitabalpande13' }
       ]
     },
     {
@@ -545,30 +528,30 @@ function seedData() {
       badge_color: '#10b981',
       leader_name: 'Supreet Borikar',
       leader_title: 'Technical Head',
-      leader_avatar: '',
+      leader_avatar: '/assets_committee/EI-Photo/Supreet%20Borikar.jpeg',
       leader_year: '3rd',
-      leader_branch: 'AI',
+      leader_branch: 'Artificial Intelligence',
       leader_uid: '24001055',
       teammates: JSON.stringify([
-        { name: 'Mayuri Atkar', year: '3rd', branch: 'IT', role: 'Technical Co-Head', avatar: '/assets_committee/mayuri_atkar.jpeg', uid: '24010020', isCoHead: true },
-        { name: 'Anushka Mankar', year: '2nd', branch: 'CSE-DS', role: 'Technical', avatar: '/assets_committee/Anushka Mankar.jpeg', uid: '25006018' },
-        { name: 'Sharwari Dhandale', year: '2nd', branch: 'AI', role: 'Technical', avatar: '/assets_committee/Sharwari Dhandale.jpg', uid: '25001034' },
-        { name: 'Parth Janai', year: '3rd', branch: 'IIoT', role: 'Technical', avatar: '/assets_committee/Parth Janai.png', uid: '25109007' },
-        { name: 'Samruddhi Warudkar', year: '2nd', branch: 'AI', role: 'Technical', avatar: '/assets_committee/SAMRUDDHI WARUDKAR_.png', uid: '25001046' },
-        { name: 'Priyal P. Raut', year: '2nd', branch: 'AI', role: 'Technical', avatar: '/assets_committee/Priyal_Raut.jpeg', uid: '25001013' },
-        { name: 'Samiksha Hedaou', year: '3rd', branch: 'ET', role: 'Technical', avatar: '/assets_committee/samiksha_hedaou.jpeg', uid: '24008045' },
-        { name: 'Sakshi Bute', year: '3rd', branch: 'IT', role: 'Technical', avatar: '', uid: '24010002' }
+        { name: 'Mayuri Atkar', year: '3rd', branch: 'Information Technology', role: 'Technical Co-Head', avatar: '/assets_committee/EI-Photo/mayuri_atkar.jpeg', uid: '24010020', isCoHead: true },
+        { name: 'Anushka Mankar', year: '2nd', branch: 'Data Science', role: 'Technical', avatar: '/assets_committee/EI-Photo/Anushka%20Mankar.jpeg', uid: '25006018' },
+        { name: 'Sharwari Dhandale', year: '2nd', branch: 'Artificial Intelligence', role: 'Technical', avatar: '/assets_committee/EI-Photo/Sharwari%20dhandale.jpeg', uid: '25001034' },
+        { name: 'Parth Janai', year: '3rd', branch: 'Industrial IoT', role: 'Technical', avatar: '/assets_committee/EI-Photo/Parth%20Janai.png', uid: '25109007' },
+        { name: 'Samruddhi Warudkar', year: '2nd', branch: 'Artificial Intelligence', role: 'Technical', avatar: '/assets_committee/EI-Photo/SAMRUDDHI%20WARUDKAR_.png', uid: '25001046' },
+        { name: 'Priyal P. Raut', year: '2nd', branch: 'Artificial Intelligence', role: 'Technical', avatar: '/assets_committee/EI-Photo/Priyal_Raut.jpeg', uid: '25001013' },
+        { name: 'Samiksha Hedaou', year: '3rd', branch: 'Electronics and Telecommunication', role: 'Technical', avatar: '/assets_committee/EI-Photo/samiksha_hedaou.jpeg', uid: '24008045' },
+        { name: 'Sakshi Bute', year: '3rd', branch: 'Information Technology', role: 'Technical', avatar: '', uid: '24010002' }
       ]),
       members: [
-        { name: 'Supreet Borikar', year: '3rd', branch: 'AI', role: 'Technical Head', avatar: '', uid: '24001055', isHead: true, isCoHead: false },
-        { name: 'Mayuri Atkar', year: '3rd', branch: 'IT', role: 'Technical Co-Head', avatar: '/assets_committee/mayuri_atkar.jpeg', uid: '24010020', isHead: false, isCoHead: true },
-        { name: 'Anushka Mankar', year: '2nd', branch: 'CSE-DS', role: 'Technical', avatar: '/assets_committee/Anushka Mankar.jpeg', uid: '25006018', isHead: false, isCoHead: false },
-        { name: 'Sharwari Dhandale', year: '2nd', branch: 'AI', role: 'Technical', avatar: '/assets_committee/Sharwari Dhandale.jpg', uid: '25001034', isHead: false, isCoHead: false },
-        { name: 'Parth Janai', year: '3rd', branch: 'IIoT', role: 'Technical', avatar: '/assets_committee/Parth Janai.png', uid: '25109007', isHead: false, isCoHead: false },
-        { name: 'Samruddhi Warudkar', year: '2nd', branch: 'AI', role: 'Technical', avatar: '/assets_committee/SAMRUDDHI WARUDKAR_.png', uid: '25001046', isHead: false, isCoHead: false },
-        { name: 'Priyal P. Raut', year: '2nd', branch: 'AI', role: 'Technical', avatar: '/assets_committee/Priyal_Raut.jpeg', uid: '25001013', isHead: false, isCoHead: false },
-        { name: 'Samiksha Hedaou', year: '3rd', branch: 'ET', role: 'Technical', avatar: '/assets_committee/samiksha_hedaou.jpeg', uid: '24008045', isHead: false, isCoHead: false },
-        { name: 'Sakshi Bute', year: '3rd', branch: 'IT', role: 'Technical', avatar: '', uid: '24010002', isHead: false, isCoHead: false }
+        { name: 'Supreet Borikar', year: '3rd', branch: 'Artificial Intelligence', role: 'Technical Head', avatar: '/assets_committee/EI-Photo/Supreet%20Borikar.jpeg', uid: '24001055', isHead: true, isCoHead: false, tagline: '', linkedin: '', github: '' },
+        { name: 'Mayuri Atkar', year: '3rd', branch: 'Information Technology', role: 'Technical Co-Head', avatar: '/assets_committee/EI-Photo/mayuri_atkar.jpeg', uid: '24010020', isHead: false, isCoHead: true, tagline: 'Growing through every version of me', linkedin: 'https://www.linkedin.com/in/mayuri-atkar-3913b6343', github: 'https://github.com/mayuriatkar5-lgtm' },
+        { name: 'Anushka Mankar', year: '2nd', branch: 'Data Science', role: 'Technical', avatar: '/assets_committee/EI-Photo/Anushka%20Mankar.jpeg', uid: '25006018', isHead: false, isCoHead: false, tagline: 'Tastes like heaven, burns like hell', linkedin: 'https://www.linkedin.com/in/anushka-mankar-4378153aa/', github: 'https://github.com/anushkamankar49-dotcom' },
+        { name: 'Sharwari Dhandale', year: '2nd', branch: 'Artificial Intelligence', role: 'Technical', avatar: '/assets_committee/EI-Photo/Sharwari%20dhandale.jpeg', uid: '25001034', isHead: false, isCoHead: false, tagline: 'Turning ambition into architecture', linkedin: 'https://www.linkedin.com/in/sharwari-dhandale-820a262b8', github: 'https://github.com/Sharwari-2007' },
+        { name: 'Parth Janai', year: '3rd', branch: 'Industrial IoT', role: 'Technical', avatar: '/assets_committee/EI-Photo/Parth%20Janai.png', uid: '25109007', isHead: false, isCoHead: false, tagline: 'Creating today. Inspiring tomorrow', linkedin: 'https://www.linkedin.com/in/parth-janai-85569b334', github: 'https://github.com/parthjanai24-Master' },
+        { name: 'Samruddhi Warudkar', year: '2nd', branch: 'Artificial Intelligence', role: 'Technical', avatar: '/assets_committee/EI-Photo/SAMRUDDHI%20WARUDKAR_.png', uid: '25001046', isHead: false, isCoHead: false, tagline: 'Rooted in calm, reaching for more.', linkedin: 'https://www.linkedin.com/in/samruddhi-warudkar-58752a393', github: 'https://github.com/samruddhiwarudkar577-prog' },
+        { name: 'Priyal P. Raut', year: '2nd', branch: 'Artificial Intelligence', role: 'Technical', avatar: '/assets_committee/EI-Photo/Priyal_Raut.jpeg', uid: '25001013', isHead: false, isCoHead: false, tagline: 'Curious by Nature, Relentless by Choice', linkedin: 'https://www.linkedin.com/in/priyal-raut-30283937b', github: 'https://github.com/priyalraut703' },
+        { name: 'Samiksha Hedaou', year: '3rd', branch: 'Electronics and Telecommunication', role: 'Technical', avatar: '/assets_committee/EI-Photo/samiksha_hedaou.jpeg', uid: '24008045', isHead: false, isCoHead: false, tagline: 'Curious. Unfiltered. Becoming.', linkedin: 'https://www.linkedin.com/in/samiksha-hedaou', github: 'https://github.com/Samiksha-tech-e/On-mobile-vibe-coding-/tree/main' },
+        { name: 'Sakshi Bute', year: '3rd', branch: 'Information Technology', role: 'Technical', avatar: '', uid: '24010002', isHead: false, isCoHead: false, tagline: '', linkedin: '', github: '' }
       ]
     }
   ];
