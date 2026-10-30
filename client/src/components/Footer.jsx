@@ -150,12 +150,7 @@ export default function Footer() {
                   <span style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.72rem', opacity: 0.5 }}>04 //</span> Events Catalog
                 </Link>
               </li>
-              <li>
-                <Link to="/news" style={{ color: 'var(--heading, #111315)', fontFamily: 'Space Grotesk, sans-serif', fontSize: '0.9rem', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                  <span style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.72rem', opacity: 0.5 }}>05 //</span> Journal &amp; News
-                </Link>
-              </li>
-              <li>
+<li>
                 <Link to="/contact" style={{ color: 'var(--heading, #111315)', fontFamily: 'Space Grotesk, sans-serif', fontSize: '0.9rem', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                   <span style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '0.72rem', opacity: 0.5 }}>06 //</span> Contact Gateway
                 </Link>

@@ -8,7 +8,6 @@ import KineticCounter from '../components/KineticCounter';
 import MarqueeText from '../components/MarqueeText';
 import HorizontalScrollEvents from '../components/HorizontalScrollEvents';
 import EventRegisterModal from '../components/EventRegisterModal';
-import NewsReaderModal from '../components/NewsReaderModal';
 import LeaderModal from '../components/LeaderModal';
 import Avatar from '../components/Avatar';
 import TypographyMaskPortal from '../components/TypographyMaskPortal';
@@ -25,16 +24,12 @@ const HERO_IMAGES = [
 export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [events, setEvents] = useState([]);
-  const [news, setNews] = useState([]);
   const [committeeTeams, setCommitteeTeams] = useState(OFFICIAL_COMMITTEE_DOMAINS);
   const [scrollRatio, setScrollRatio] = useState(0);
 
   // Modals state
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [isEventModalOpen, setIsEventModalOpen] = useState(false);
-
-  const [selectedArticle, setSelectedArticle] = useState(null);
-  const [isArticleModalOpen, setIsArticleModalOpen] = useState(false);
 
   const [selectedDomain, setSelectedDomain] = useState(null);
   const [isLeaderModalOpen, setIsLeaderModalOpen] = useState(false);
@@ -54,15 +49,12 @@ export default function Home() {
     return () => clearInterval(timer);
   }, []);
 
-  // Fetch preview data for events, news, and committee
+  // Fetch preview data for events and committee
   useEffect(() => {
     api.getEvents()
       .then((res) => setEvents(res.data || []))
       .catch(() => {});
 
-    api.getAnnouncements()
-      .then((res) => setNews(res.data || []))
-      .catch(() => {});
 
     api.getCommittee()
       .then((res) => {
@@ -113,18 +105,12 @@ export default function Home() {
     setIsEventModalOpen(true);
   };
 
-  const handleOpenArticleModal = (article) => {
-    setSelectedArticle(article);
-    setIsArticleModalOpen(true);
-  };
 
   const handleOpenLeaderModal = (team) => {
     setSelectedDomain(team);
     setIsLeaderModalOpen(true);
   };
 
-  const featuredNews = news.find((n) => n.is_featured) || news[0];
-  const secondaryNews = news.filter((n) => n.id !== featuredNews?.id).slice(0, 4);
 
   return (
     <div className="home-page-cinematic" style={{ position: 'relative', width: '100%', overflowX: 'clip' }}>
@@ -900,24 +886,6 @@ export default function Home() {
           onClose={() => setIsEventModalOpen(false)}
           onSuccess={() => {
             addToast('Registration confirmed for event!', 'success');
-          }}
-        />
-      )}
-
-      {selectedArticle && (
-        <NewsReaderModal
-          item={selectedArticle}
-          isOpen={isArticleModalOpen}
-          onClose={() => setIsArticleModalOpen(false)}
-          onLike={(id) => {
-            api.likeAnnouncement(id)
-              .then((res) => {
-                setNews((prev) =>
-                  prev.map((item) => (item.id === id ? { ...item, likes: res.likes } : item))
-                );
-                setSelectedArticle((prev) => (prev ? { ...prev, likes: res.likes } : null));
-              })
-              .catch(() => {});
           }}
         />
       )}

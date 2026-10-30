@@ -38,25 +38,6 @@ export const api = {
     return result;
   },
 
-  // Announcements
-  async getAnnouncements(category = 'all', search = '', sort = 'trending') {
-    const params = new URLSearchParams();
-    if (category && category !== 'all') params.append('category', category);
-    if (search) params.append('search', search);
-    if (sort) params.append('sort', sort);
-
-    const res = await fetch(`${API_BASE}/announcements?${params.toString()}`);
-    if (!res.ok) throw new Error('Failed to fetch announcements');
-    return res.json();
-  },
-
-  async likeAnnouncement(id) {
-    const res = await fetch(`${API_BASE}/announcements/${id}/like`, {
-      method: 'POST'
-    });
-    if (!res.ok) throw new Error('Failed to like announcement');
-    return res.json();
-  },
 
   // Committee
   async getCommittee() {

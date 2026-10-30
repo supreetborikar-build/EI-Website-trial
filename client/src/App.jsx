@@ -12,7 +12,6 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Committee from './pages/Committee';
 import Events from './pages/Events';
-import News from './pages/News';
 import Contact from './pages/Contact';
 import Admin from './pages/Admin';
 
@@ -28,7 +27,6 @@ function AnimatedRoutes() {
         <Route path="/about" element={<About />} />
         <Route path="/committee" element={<Committee />} />
         <Route path="/events" element={<Events />} />
-        <Route path="/news" element={<News />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="*" element={<Home />} />

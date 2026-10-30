@@ -95,14 +95,9 @@ export default function Navbar() {
                 <span className="nav-idx">04</span> Events
               </NavLink>
             </li>
-            <li>
-              <NavLink to="/news" className={({ isActive }) => (isActive ? 'active' : '')}>
-                <span className="nav-idx">05</span> News &amp; Announcements
-              </NavLink>
-            </li>
-            <li>
+<li>
               <NavLink to="/contact" className={({ isActive }) => (isActive ? 'active' : '')}>
-                <span className="nav-idx">06</span> Contact Us
+                <span className="nav-idx">05</span> Contact Us
               </NavLink>
             </li>
           </ul>

@@ -11,7 +11,6 @@ import './styles/shared-navbar.css';
 import './styles/hero.css';
 import './styles/about.css';
 import './styles/events.css';
-import './styles/news.css';
 import './styles/contact.css';
 import './styles/footer.css';
 import './styles/responsive.css';
